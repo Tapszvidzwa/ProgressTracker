@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_tasks_layout"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tasks_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/daily_tasks_fragment"
+        android:textColor="@color/colorAnnounce"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:id="@+id/percentage_completed"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/percentage_completed"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/progress_outer_bar"
+        android:background="@android:color/darker_gray"
+        >
+
+        <LinearLayout
+            android:id="@+id/progress_inner_bar"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignStart="@+id/progress_outer_bar"
+            android:layout_alignTop="@+id/progress_outer_bar"
+            android:background="@android:color/holo_blue_light"
+            android:orientation="horizontal"></LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ListView
+        android:id="@+id/goals_lstV"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+   >
+
+
+    </ListView>
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@android:drawable/picture_frame"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        android:id="@+id/resting_dude"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_goals_text"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="You have no goals set"
+        android:layout_below="@id/resting_dude"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_task"
+            android:src="@drawable/ic_white_add"
+            app:backgroundTint="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingBottom="16dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

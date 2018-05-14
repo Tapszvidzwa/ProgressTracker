@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.example.tapiwa.todoapp.CreateAccountActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/create_new_account_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/username_EdtTxt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/curved_background"
+        android:gravity="center_vertical"
+        android:hint="Username" />
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email_address_EdtTxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@+id/textInputEditText"
+            android:layout_below="@+id/textInputEditText"
+            android:background="@drawable/curved_background"
+            android:gravity="center_vertical"
+            android:hint="Email address" />
+
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/password_EdtTxt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/textInputEditText2"
+        android:layout_below="@+id/textInputEditText2"
+        android:background="@drawable/curved_background"
+        android:gravity="center_vertical"
+        android:hint="Password" />
+
+
+        <Button
+            android:id="@+id/create_account_Button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:text="CREATE ACCOUNT"
+            android:textColor="@android:color/white"
+            android:background="@color/colorAccent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:text="By signing up you agree to the terms of service and privacy policy"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

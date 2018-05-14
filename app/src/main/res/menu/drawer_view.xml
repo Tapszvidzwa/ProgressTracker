@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/daily_tasks"
+            android:icon="@drawable/ic_daily_calendar_day_14"
+            android:title="Daily Goals" />
+        <item
+            android:id="@+id/weekly_tasks"
+            android:icon="@drawable/ic_week_calendar"
+            android:title="Weekly Goals" />
+        <item
+        android:id="@+id/yearly_goals"
+        android:icon="@drawable/ic_yearly_calendar"
+        android:title="Yearly Goals" />
+
+        <item
+            android:id="@+id/five_year_goals"
+            android:icon="@drawable/ic_5_year"
+            android:title="Five Year Goals" />
+
+    </group>
+</menu>

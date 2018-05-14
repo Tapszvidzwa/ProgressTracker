@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "836661685834",
+    "firebase_url": "https://todoapp-4c960.firebaseio.com",
+    "project_id": "todoapp-4c960",
+    "storage_bucket": "todoapp-4c960.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836661685834:android:f7c4a19579f33545",
+        "android_client_info": {
+          "package_name": "com.myprojects.tapiwa.todoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836661685834-r8v4ao5ambhpkprlf6vgkomkjk4k7b4e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myprojects.tapiwa.todoapp",
+            "certificate_hash": "6b0f85d8bea41ae7698e68dc38e6d0bfaa3de269"
+          }
+        },
+        {
+          "client_id": "836661685834-q7lg0t04eoq90obuvg1qj39n9agqhqnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myprojects.tapiwa.todoapp",
+            "certificate_hash": "ced0fd3a49109e3da26661e23d759103e9e18a33"
+          }
+        },
+        {
+          "client_id": "836661685834-m4gaqasbbobbvfsq3o1vgvmstrm6hnld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myprojects.tapiwa.todoapp",
+            "certificate_hash": "1827d333342d27848a32276d6aa021a068cef869"
+          }
+        },
+        {
+          "client_id": "836661685834-e4app72i2l5t9ip4tta8i0e46fek1ccg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8qjcdMkLMeMF76Vn1EEO7Bdtgs7Z4_xk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836661685834-e4app72i2l5t9ip4tta8i0e46fek1ccg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

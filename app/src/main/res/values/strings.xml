@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">TodoApp</string>
+
+    //file namess
+    <string name="Tasks_file">daily_tasks.json</string>
+    <string name="Weekly_tasks_file">weekly_tasks.json</string>
+    <string name="Yearly_tasks_file">yearly_tasks.json</string>
+    <string name="Five_year_tasks_file">five_year_tasks.json</string>
+
+    <string name="congratulatory_msg">Congratulations! You hvae finished all your tasks</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="add_new_task">Create a new task</string>
+
+
+    //Error messages
+    <string name="no_task_entered">Please enter a task</string>
+    <string name="failed_file_creation">Something went wrong in saving your tasks</string>
+    <string name="failed_file_loading">Something went wrong in loading tasks</string>
+
+
+    //Fragment names
+    <string name="daily_tasks_fragment">Daily Goals</string>
+    <string name="weekly_tasks_fragment">Weekly Goals</string>
+    <string name="yearly_tasks_fragment">Yearly Goals</string>
+    <string name="five_year_fragment">Five Year Goals</string>
+
+</resources>
