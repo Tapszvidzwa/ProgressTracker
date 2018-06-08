@@ -1,7 +1,5 @@
-package com.example.tapiwa.todoapp;
+package com.example.tapiwa.todoapp.home;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +10,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.tapiwa.todoapp.longTermGoals.longTermGoals;
+import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.oneYearGoals.oneYearFragment;
+import com.example.tapiwa.todoapp.dailyProjects.DailyTasksFragment;
+import com.example.tapiwa.todoapp.personalProjects.PersonalProjectsFragment;
+import com.example.tapiwa.todoapp.sharedProjects.SharedProjectsFragment;
+import com.example.tapiwa.todoapp.weeklyGoals.WeeklyTasksFragment;
 
 public class MainActivty extends AppCompatActivity {
 
@@ -110,10 +116,16 @@ public class MainActivty extends AppCompatActivity {
                 fragment = new WeeklyTasksFragment();
                 break;
             case R.id.yearly_goals:
-                fragment = new YearlyTasksFragment();
+                fragment = new oneYearFragment();
                 break;
             case R.id.five_year_goals:
-                fragment = new FiveYearTasksFragment();
+                fragment = new longTermGoals();
+                break;
+            case R.id.personal_projects:
+                fragment = new PersonalProjectsFragment();
+                break;
+            case R.id.shared_projects:
+                fragment = new SharedProjectsFragment();
                 break;
             default:
                 fragment = new DailyTasksFragment();

@@ -9,6 +9,7 @@ import java.util.LinkedList;
 public class TaskList {
 
     LinkedList<Task> taskList;
+    String name;
 
     public TaskList() {
     }
@@ -19,6 +20,14 @@ public class TaskList {
 
     public void setTaskList(LinkedList<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

@@ -1,15 +1,13 @@
-package com.example.tapiwa.todoapp;
+package com.example.tapiwa.todoapp.dailyProjects;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tapiwa.todoapp.CompletionBar;
+import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.TaskAdapter;
+import com.example.tapiwa.todoapp.TaskList;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -29,6 +31,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -36,12 +39,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 
-public class YearlyTasksFragment extends Fragment {
+public class DailyTasksFragment extends Fragment {
 
     private ListView goalsList;
     public static ImageView restingDude;
-    public static TextView noGoalsText;
-    private LinearLayout progressBar, progressBarBorder;
+    public static TextView noGoalsText, date;
     private View tasksPageView;
     private CompletionBar completionBar;
     private TextView percentageTxtV;
@@ -49,6 +51,7 @@ public class YearlyTasksFragment extends Fragment {
     private TaskAdapter adapter;
     private LinearLayout parentLayout;
     private FloatingActionButton addTask;
+    private String CURRENT_DATE;
 
 
     private final String GOALS = "Goals";
@@ -57,40 +60,34 @@ public class YearlyTasksFragment extends Fragment {
     private int uncompletedTasks;
     private int initialBarlength;
 
-    public YearlyTasksFragment() {
+
+    public DailyTasksFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.yearly_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.yearly_add_task);
-
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        initialBarlength = display.getWidth();
-
+        tasksPageView = inflater.inflate(R.layout.daily_tasks_fragment, container, false);
+        addTask = tasksPageView.findViewById(R.id.add_task);
+        CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
         initializeViews();
         initializeVariables();
         getGoals();
-
+        calculatePercentage();
         return tasksPageView;
     }
-
 
     private void initializeVariables() {
         tasksList = new LinkedList<>();
         uncompletedTasks = 0;
     }
 
-
     private void getGoals() {
-
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Yearly_tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.DailyGoalsFile));
             //create new file if the file does not exist
             tasksFile.createNewFile();
 
@@ -104,13 +101,10 @@ public class YearlyTasksFragment extends Fragment {
                 tasksList = list.getTaskList();
                 adapter = new TaskAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, tasksList);
                 goalsList.setAdapter(adapter);
-                totalTasks = tasksList.size();
-                uncompletedTasks = countUncompletedTasks();
-                updateCompletionBar();
             }
 
         } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
+            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
             e.printStackTrace();
         }
     }
@@ -118,18 +112,14 @@ public class YearlyTasksFragment extends Fragment {
 
     private void initializeViews() {
 
-        percentageTxtV = tasksPageView.findViewById(R.id.yearly_percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.yearly_resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.yearly_no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.yearly_fragment_tasks_layout);
-
-        progressBar = tasksPageView.findViewById(R.id.yearly_progress_inner_bar);
-        progressBarBorder = tasksPageView.findViewById(R.id.yearly_progress_outer_bar);
-        goalsList = tasksPageView.findViewById(R.id.yearly_goals_lstV);
+        percentageTxtV = tasksPageView.findViewById(R.id.percentage_completed);
+        restingDude = tasksPageView.findViewById(R.id.resting_dude);
+        noGoalsText = tasksPageView.findViewById(R.id.no_goals_text);
+        parentLayout = tasksPageView.findViewById(R.id.fragment_tasks_layout);
+        date = tasksPageView.findViewById(R.id.current_date);
+        date.setText(CURRENT_DATE);
+        goalsList = tasksPageView.findViewById(R.id.goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
-        completionBar = new CompletionBar();
-        updateCompletionBar();
-
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +127,6 @@ public class YearlyTasksFragment extends Fragment {
                 addNewTask();
             }
         });
-
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -148,67 +137,39 @@ public class YearlyTasksFragment extends Fragment {
                     updatedTask.setStatus("completed");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
-                    --uncompletedTasks;
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-                        dg.setTitleText(getString(R.string.congratulations)).setContentText(getString(R.string.congratulatory_msg));
+                        dg.setTitleText("Congratulations!").setContentText("Congratulations on finishing all your tasks");
                         dg.show();
-
-
-                        new CountDownTimer(2000, 1000) {
-
-                            public void onTick(long millisUntilFinished) {
-                            }
-
-                            public void onFinish() {
-                                permissionClearTasks();
-                            }
-
-                        }.start();
-
+                        tasksList.clear();
                     }
 
                 } else {
-
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
-                    ++uncompletedTasks;
-
                 }
-                updateCompletionBar();
+
+                calculatePercentage();
             }
         });
     }
 
+    private void calculatePercentage() {
+        percentageTxtV.setTextColor(Color.rgb(208,35,35));
 
-    public void permissionClearTasks(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
-        alertDialogBuilder.setPositiveButton("yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        totalTasks = 0;
-                        uncompletedTasks = 0;
-                        tasksList.clear();
-                        updateCompletionBar();
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-
-        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        if(tasksList.size() == 0) {
+            percentageTxtV.setText(Integer.toString(0));
+            return;
+        } else {
+            int completedTasks = countCompletedTasks();
+            int percentage = (int) Math.floor(((double) completedTasks / tasksList.size()) * 100);
+            percentageTxtV.setText(Integer.toString(percentage) + "%");
+            checkTasksCompletion();
+            return;
+        }
     }
-
 
     private boolean checkTasksCompletion() {
         Iterator iter = tasksList.iterator();
@@ -221,29 +182,13 @@ public class YearlyTasksFragment extends Fragment {
         return true;
     }
 
-    private void updateCompletionBar() {
-
-        int total = totalTasks;
-        int uncompleted = uncompletedTasks;
-
-        completionBar.updateCompletionBar(
-                total - uncompleted,
-                uncompleted,
-                initialBarlength,
-                progressBar,
-                percentageTxtV
-        );
-    }
-
-
-    private int countUncompletedTasks() {
-
+    private int countCompletedTasks() {
         Iterator iter = tasksList.iterator();
         int i = 0;
 
         while(iter.hasNext()) {
             Task task = (Task) iter.next();
-            if(task.getStatus().equals("uncompleted")) {
+            if(task.getStatus().equals("completed")) {
                 ++i;
             }
         }
@@ -251,12 +196,11 @@ public class YearlyTasksFragment extends Fragment {
         return i;
     }
 
-
-
     public void addNewTask() {
 
         //Get title of new task
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //builder.setIcon(R.drawable.ic_keyboard_black_24px);
         builder.setTitle("Add a new task");
 
         int maxLength = 200;
@@ -282,12 +226,10 @@ public class YearlyTasksFragment extends Fragment {
                     //add it to the tasks list
                     tasksList.add(newTask);
                     adapter.notifyDataSetChanged();
-
                     totalTasks = tasksList.size();
-                    uncompletedTasks = countUncompletedTasks();
-                    updateCompletionBar();
+                    calculatePercentage();
                 } else {
-                    Toasty.info(getActivity().getApplicationContext(), getString(R.string.no_task_entered), Toast.LENGTH_SHORT).show();
+                    Toasty.info(getActivity().getApplicationContext(), "Please provide a task description", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }
@@ -299,14 +241,14 @@ public class YearlyTasksFragment extends Fragment {
                 dialog.cancel();
             }
         });
+
         builder.show();
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        initialBarlength = display.getWidth();
+        getGoals();
     }
 
     @Override
@@ -323,7 +265,7 @@ public class YearlyTasksFragment extends Fragment {
         FileOutputStream fos = null;
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Yearly_tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.DailyGoalsFile));
             //create new file if the file does not exist
             tasksFile.createNewFile();
             //save/write the tasks to the tasks.json file
@@ -333,7 +275,7 @@ public class YearlyTasksFragment extends Fragment {
             fos.flush();
 
         } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_creation), Toast.LENGTH_SHORT);
+            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
             return;
         } finally {
 

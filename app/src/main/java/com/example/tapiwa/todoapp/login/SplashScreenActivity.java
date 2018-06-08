@@ -1,24 +1,19 @@
-package com.example.tapiwa.todoapp;
+package com.example.tapiwa.todoapp.login;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
-import com.example.tapiwa.zimsecprep.Activities.GlobalActivities.FrontPageActivity;
-import com.example.tapiwa.zimsecprep.LoadFiles.LoadFiles;
+import com.example.tapiwa.todoapp.home.MainActivty;
+import com.example.tapiwa.todoapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 
 
 public class SplashScreenActivity extends Activity {
@@ -46,33 +41,29 @@ public class SplashScreenActivity extends Activity {
         animatorSet.start();
 
         //app logo fade in
-        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_logo);
-        mAppNameTxtV.startAnimation(myFadeInAnimation);
+       /* Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_logo);
+        mAppNameTxtV.startAnimation(myFadeInAnimation); */
 
 
         Thread myThread = new Thread() {
             @Override
             public void run() {
                 try {
-                    sleep(2800);
+                    sleep(2000);
                        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
                         @Override
                         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                             FirebaseUser user =  firebaseAuth.getCurrentUser();
+
                             if(user != null) {
-                                Intent openFrontPage = new Intent(SplashScreenActivity.this,FrontPageActivity.class);
+                                Intent openFrontPage = new Intent(SplashScreenActivity.this, MainActivty.class);
                                 startActivity(openFrontPage);
                                 thisActivity.finish();
                             } else {
-
-                                Intent openFrontPage = new Intent(SplashScreenActivity.this,FrontPageActivity.class);
+                                Intent openFrontPage = new Intent(SplashScreenActivity.this, CreateAccountActivity.class);
                                 startActivity(openFrontPage);
                                 thisActivity.finish();
-
-                              /*Intent openRegistrationPage = new Intent(SplashScreenActivity.this, LoginActivity.class);
-                                startActivity(openRegistrationPage);
-                                thisActivity.finish(); */
-                            }
+                           }
                         }
                     });
 
@@ -81,13 +72,6 @@ public class SplashScreenActivity extends Activity {
                 }
             }
         };
-
         myThread.start();
     }
-
-
-
-
-
-
 }

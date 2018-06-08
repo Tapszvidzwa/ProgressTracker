@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp;
+package com.example.tapiwa.todoapp.sharedProjects;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -18,10 +18,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tapiwa.todoapp.CompletionBar;
+import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.TaskAdapter;
+import com.example.tapiwa.todoapp.TaskList;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -36,7 +40,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 
-public class WeeklyTasksFragment extends Fragment {
+public class SharedProjectsFragment extends Fragment {
 
     private ListView goalsList;
     public static ImageView restingDude;
@@ -49,7 +53,7 @@ public class WeeklyTasksFragment extends Fragment {
     private TaskAdapter adapter;
     private LinearLayout parentLayout;
     private FloatingActionButton addTask;
-
+    private TextView taskTypeLabelTxtV;
 
     private final String GOALS = "Goals";
 
@@ -57,7 +61,7 @@ public class WeeklyTasksFragment extends Fragment {
     private int uncompletedTasks;
     private int initialBarlength;
 
-    public WeeklyTasksFragment() {
+    public SharedProjectsFragment() {
         // Required empty public constructor
     }
 
@@ -66,8 +70,12 @@ public class WeeklyTasksFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.weekly_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.weekly_add_task);
+        tasksPageView = inflater.inflate(R.layout.five_year_tasks_fragment, container, false);
+        addTask = tasksPageView.findViewById(R.id.five_year_weekly_add_task);
+        taskTypeLabelTxtV= tasksPageView.findViewById(R.id.five_year_tasks_type_label);
+
+
+        taskTypeLabelTxtV.setText(getString(R.string.five_year_fragment));
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         initialBarlength = display.getWidth();
@@ -90,23 +98,28 @@ public class WeeklyTasksFragment extends Fragment {
 
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Weekly_tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Five_year_tasks_file));
             //create new file if the file does not exist
             tasksFile.createNewFile();
 
-            BufferedReader br = new BufferedReader(new FileReader(tasksFile));
+            if(tasksFile.exists()) {
 
-            Gson gson = new Gson();
+                BufferedReader br = new BufferedReader(new FileReader(tasksFile));
 
-            TaskList list = gson.fromJson(br, TaskList.class);
+                Gson gson = new Gson();
 
-            if(list != null) {
-                tasksList = list.getTaskList();
-                adapter = new TaskAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, tasksList);
-                goalsList.setAdapter(adapter);
-                totalTasks = tasksList.size();
-                uncompletedTasks = countUncompletedTasks();
-                updateCompletionBar();
+                TaskList list = gson.fromJson(br, TaskList.class);
+
+                if (list != null) {
+                    tasksList = list.getTaskList();
+                    adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
+                    goalsList.setAdapter(adapter);
+                    totalTasks = tasksList.size();
+                    uncompletedTasks = countUncompletedTasks();
+                    updateCompletionBar();
+                }
+            } else {
+                getGoals();
             }
 
         } catch (IOException e) {
@@ -117,14 +130,14 @@ public class WeeklyTasksFragment extends Fragment {
 
 
     private void initializeViews() {
-        percentageTxtV = tasksPageView.findViewById(R.id.weekly_percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.weekly_resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.weekly_no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.weekly_fragment_tasks_layout);
+        percentageTxtV = tasksPageView.findViewById(R.id.five_year_percentage_completed);
+        restingDude = tasksPageView.findViewById(R.id.five_year_resting_dude);
+        noGoalsText = tasksPageView.findViewById(R.id.five_year_no_goals_text);
+        parentLayout = tasksPageView.findViewById(R.id.five_year_fragment_tasks_layout);
 
-        progressBar = tasksPageView.findViewById(R.id.weekly_progress_inner_bar);
-        progressBarBorder = tasksPageView.findViewById(R.id.weekly_progress_outer_bar);
-        goalsList = tasksPageView.findViewById(R.id.weekly_goals_lstV);
+        progressBar = tasksPageView.findViewById(R.id.five_year_progress_inner_bar);
+        progressBarBorder = tasksPageView.findViewById(R.id.five_year_progress_outer_bar);
+        goalsList = tasksPageView.findViewById(R.id.five_year_goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
         completionBar = new CompletionBar();
         updateCompletionBar();
@@ -140,6 +153,7 @@ public class WeeklyTasksFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Task updatedTask = tasksList.get(i);
+
                 if(!updatedTask.getStatus().equals("completed")) {
                     updatedTask.setStatus("completed");
                     tasksList.set(i, updatedTask);
@@ -167,14 +181,14 @@ public class WeeklyTasksFragment extends Fragment {
 
                 } else {
 
-                    updatedTask.setStatus("uncompleted");
-                    tasksList.set(i, updatedTask);
-                    adapter.notifyDataSetChanged();
-                    ++uncompletedTasks;
+                        updatedTask.setStatus("uncompleted");
+                        tasksList.set(i, updatedTask);
+                        adapter.notifyDataSetChanged();
+                        ++uncompletedTasks;
 
                 }
-                updateCompletionBar();
-            }
+                    updateCompletionBar();
+                }
         });
     }
 
@@ -182,32 +196,28 @@ public class WeeklyTasksFragment extends Fragment {
     public void permissionClearTasks(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
-        alertDialogBuilder.setPositiveButton("yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        totalTasks = 0;
-                        uncompletedTasks = 0;
-                        tasksList.clear();
-                        updateCompletionBar();
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+                alertDialogBuilder.setPositiveButton("yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                totalTasks = 0;
+                                uncompletedTasks = 0;
+                               tasksList.clear();
+                               updateCompletionBar();
+                               adapter.notifyDataSetChanged();
+                            }
+                        });
 
         alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                return;
+               return;
             }
         });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
-
-
-
 
 
     private boolean checkTasksCompletion() {
@@ -304,6 +314,7 @@ public class WeeklyTasksFragment extends Fragment {
         builder.show();
     }
 
+
     @Override
     public void onResume(){
         super.onResume();
@@ -325,7 +336,7 @@ public class WeeklyTasksFragment extends Fragment {
         FileOutputStream fos = null;
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Weekly_tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Five_year_tasks_file));
             //create new file if the file does not exist
             tasksFile.createNewFile();
             //save/write the tasks to the tasks.json file

@@ -1,9 +1,10 @@
-package com.example.tapiwa.todoapp;
+package com.example.tapiwa.todoapp.weeklyGoals;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
@@ -21,9 +22,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.tapiwa.todoapp.CompletionBar;
+import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.TaskAdapter;
+import com.example.tapiwa.todoapp.TaskList;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -38,7 +41,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 
-public class DailyTasksFragment extends Fragment {
+public class WeeklyTasksFragment extends Fragment {
 
     private ListView goalsList;
     public static ImageView restingDude;
@@ -59,7 +62,7 @@ public class DailyTasksFragment extends Fragment {
     private int uncompletedTasks;
     private int initialBarlength;
 
-    public DailyTasksFragment() {
+    public WeeklyTasksFragment() {
         // Required empty public constructor
     }
 
@@ -68,12 +71,11 @@ public class DailyTasksFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.daily_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.add_task);
+        tasksPageView = inflater.inflate(R.layout.weekly_tasks_fragment, container, false);
+        addTask = tasksPageView.findViewById(R.id.weekly_add_task);
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         initialBarlength = display.getWidth();
-
 
         initializeViews();
         initializeVariables();
@@ -93,7 +95,7 @@ public class DailyTasksFragment extends Fragment {
 
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Weekly_tasks_file));
             //create new file if the file does not exist
             tasksFile.createNewFile();
 
@@ -113,26 +115,24 @@ public class DailyTasksFragment extends Fragment {
             }
 
         } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
+            Toasty.error(getActivity().getApplicationContext(),getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
             e.printStackTrace();
         }
     }
 
 
     private void initializeViews() {
+        percentageTxtV = tasksPageView.findViewById(R.id.weekly_percentage_completed);
+        restingDude = tasksPageView.findViewById(R.id.weekly_resting_dude);
+        noGoalsText = tasksPageView.findViewById(R.id.weekly_no_goals_text);
+        parentLayout = tasksPageView.findViewById(R.id.weekly_fragment_tasks_layout);
 
-        percentageTxtV = tasksPageView.findViewById(R.id.percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.fragment_tasks_layout);
-
-        progressBar = tasksPageView.findViewById(R.id.progress_inner_bar);
-        progressBarBorder = tasksPageView.findViewById(R.id.progress_outer_bar);
-        goalsList = tasksPageView.findViewById(R.id.goals_lstV);
+        progressBar = tasksPageView.findViewById(R.id.weekly_progress_inner_bar);
+        progressBarBorder = tasksPageView.findViewById(R.id.weekly_progress_outer_bar);
+        goalsList = tasksPageView.findViewById(R.id.weekly_goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
         completionBar = new CompletionBar();
         updateCompletionBar();
-
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,12 +141,10 @@ public class DailyTasksFragment extends Fragment {
             }
         });
 
-
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Task updatedTask = tasksList.get(i);
-
                 if(!updatedTask.getStatus().equals("completed")) {
                     updatedTask.setStatus("completed");
                     tasksList.set(i, updatedTask);
@@ -155,27 +153,67 @@ public class DailyTasksFragment extends Fragment {
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-                        dg.setTitleText("Congratulations!").setContentText("Congratulations on finishing all your tasks");
+                        dg.setTitleText(getString(R.string.congratulations)).setContentText(getString(R.string.congratulatory_msg));
                         dg.show();
-                        tasksList.clear();
-                        totalTasks = 0;
-                        uncompletedTasks = 0;
+
+
+                        new CountDownTimer(2000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                            }
+
+                            public void onFinish() {
+                                permissionClearTasks();
+                            }
+
+                        }.start();
+
                     }
 
                 } else {
+
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                     ++uncompletedTasks;
+
                 }
                 updateCompletionBar();
+            }
+        });
+    }
 
-                }
 
+    public void permissionClearTasks(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        totalTasks = 0;
+                        uncompletedTasks = 0;
+                        tasksList.clear();
+                        updateCompletionBar();
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
         });
 
-
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
+
+
+
+
+
 
     private boolean checkTasksCompletion() {
         Iterator iter = tasksList.iterator();
@@ -225,7 +263,7 @@ public class DailyTasksFragment extends Fragment {
         //Get title of new task
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     //    builder.setIcon(R.drawable.ic_keyboard_black_24px);
-        builder.setTitle("Add a new task");
+        builder.setTitle(getString(R.string.add_new_task));
 
         int maxLength = 200;
         final EditText givenTitle = new EditText(getActivity().getApplicationContext());
@@ -255,7 +293,7 @@ public class DailyTasksFragment extends Fragment {
                     uncompletedTasks = countUncompletedTasks();
                     updateCompletionBar();
                 } else {
-                    Toasty.info(getActivity().getApplicationContext(), "Please provide a task description", Toast.LENGTH_SHORT).show();
+                    Toasty.info(getActivity().getApplicationContext(), getString(R.string.no_task_entered), Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }
@@ -274,10 +312,8 @@ public class DailyTasksFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         initialBarlength = display.getWidth();
-
     }
 
     @Override
@@ -294,7 +330,7 @@ public class DailyTasksFragment extends Fragment {
         FileOutputStream fos = null;
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Weekly_tasks_file));
             //create new file if the file does not exist
             tasksFile.createNewFile();
             //save/write the tasks to the tasks.json file
@@ -304,7 +340,7 @@ public class DailyTasksFragment extends Fragment {
             fos.flush();
 
         } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
+            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_creation), Toast.LENGTH_SHORT);
             return;
         } finally {
 

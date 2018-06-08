@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp;
+package com.example.tapiwa.todoapp.oneYearGoals;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -18,9 +18,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tapiwa.todoapp.CompletionBar;
+import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.TaskAdapter;
+import com.example.tapiwa.todoapp.TaskList;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -35,7 +41,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 
-public class FiveYearTasksFragment extends Fragment {
+public class oneYearFragment extends Fragment {
 
     private ListView goalsList;
     public static ImageView restingDude;
@@ -48,7 +54,6 @@ public class FiveYearTasksFragment extends Fragment {
     private TaskAdapter adapter;
     private LinearLayout parentLayout;
     private FloatingActionButton addTask;
-    private TextView taskTypeLabelTxtV;
 
 
     private final String GOALS = "Goals";
@@ -57,7 +62,7 @@ public class FiveYearTasksFragment extends Fragment {
     private int uncompletedTasks;
     private int initialBarlength;
 
-    public FiveYearTasksFragment() {
+    public oneYearFragment() {
         // Required empty public constructor
     }
 
@@ -66,12 +71,8 @@ public class FiveYearTasksFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.five_year_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.five_year_weekly_add_task);
-        taskTypeLabelTxtV= tasksPageView.findViewById(R.id.five_year_tasks_type_label);
-
-
-        taskTypeLabelTxtV.setText(getString(R.string.five_year_fragment));
+        tasksPageView = inflater.inflate(R.layout.yearly_tasks_fragment, container, false);
+        addTask = tasksPageView.findViewById(R.id.yearly_add_task);
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         initialBarlength = display.getWidth();
@@ -94,49 +95,46 @@ public class FiveYearTasksFragment extends Fragment {
 
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Five_year_tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Yearly_tasks_file));
             //create new file if the file does not exist
             tasksFile.createNewFile();
 
-            if(tasksFile.exists()) {
+            BufferedReader br = new BufferedReader(new FileReader(tasksFile));
 
-                BufferedReader br = new BufferedReader(new FileReader(tasksFile));
+            Gson gson = new Gson();
 
-                Gson gson = new Gson();
+            TaskList list = gson.fromJson(br, TaskList.class);
 
-                TaskList list = gson.fromJson(br, TaskList.class);
-
-                if (list != null) {
-                    tasksList = list.getTaskList();
-                    adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
-                    goalsList.setAdapter(adapter);
-                    totalTasks = tasksList.size();
-                    uncompletedTasks = countUncompletedTasks();
-                    updateCompletionBar();
-                }
-            } else {
-                getGoals();
+            if(list != null) {
+                tasksList = list.getTaskList();
+                adapter = new TaskAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, tasksList);
+                goalsList.setAdapter(adapter);
+                totalTasks = tasksList.size();
+                uncompletedTasks = countUncompletedTasks();
+                updateCompletionBar();
             }
 
         } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(),getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
+            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
             e.printStackTrace();
         }
     }
 
 
     private void initializeViews() {
-        percentageTxtV = tasksPageView.findViewById(R.id.five_year_percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.five_year_resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.five_year_no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.five_year_fragment_tasks_layout);
 
-        progressBar = tasksPageView.findViewById(R.id.five_year_progress_inner_bar);
-        progressBarBorder = tasksPageView.findViewById(R.id.five_year_progress_outer_bar);
-        goalsList = tasksPageView.findViewById(R.id.five_year_goals_lstV);
+        percentageTxtV = tasksPageView.findViewById(R.id.yearly_percentage_completed);
+        restingDude = tasksPageView.findViewById(R.id.yearly_resting_dude);
+        noGoalsText = tasksPageView.findViewById(R.id.yearly_no_goals_text);
+        parentLayout = tasksPageView.findViewById(R.id.yearly_fragment_tasks_layout);
+
+        progressBar = tasksPageView.findViewById(R.id.yearly_progress_inner_bar);
+        progressBarBorder = tasksPageView.findViewById(R.id.yearly_progress_outer_bar);
+        goalsList = tasksPageView.findViewById(R.id.yearly_goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
         completionBar = new CompletionBar();
         updateCompletionBar();
+
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +142,7 @@ public class FiveYearTasksFragment extends Fragment {
                 addNewTask();
             }
         });
+
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -177,14 +176,14 @@ public class FiveYearTasksFragment extends Fragment {
 
                 } else {
 
-                        updatedTask.setStatus("uncompleted");
-                        tasksList.set(i, updatedTask);
-                        adapter.notifyDataSetChanged();
-                        ++uncompletedTasks;
+                    updatedTask.setStatus("uncompleted");
+                    tasksList.set(i, updatedTask);
+                    adapter.notifyDataSetChanged();
+                    ++uncompletedTasks;
 
                 }
-                    updateCompletionBar();
-                }
+                updateCompletionBar();
+            }
         });
     }
 
@@ -192,22 +191,22 @@ public class FiveYearTasksFragment extends Fragment {
     public void permissionClearTasks(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
-                alertDialogBuilder.setPositiveButton("yes",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                totalTasks = 0;
-                                uncompletedTasks = 0;
-                               tasksList.clear();
-                               updateCompletionBar();
-                               adapter.notifyDataSetChanged();
-                            }
-                        });
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        totalTasks = 0;
+                        uncompletedTasks = 0;
+                        tasksList.clear();
+                        updateCompletionBar();
+                        adapter.notifyDataSetChanged();
+                    }
+                });
 
         alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               return;
+                return;
             }
         });
 
@@ -263,8 +262,7 @@ public class FiveYearTasksFragment extends Fragment {
 
         //Get title of new task
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    //    builder.setIcon(R.drawable.ic_keyboard_black_24px);
-        builder.setTitle(getString(R.string.add_new_task));
+        builder.setTitle("Add a new task");
 
         int maxLength = 200;
         final EditText givenTitle = new EditText(getActivity().getApplicationContext());
@@ -306,7 +304,6 @@ public class FiveYearTasksFragment extends Fragment {
                 dialog.cancel();
             }
         });
-
         builder.show();
     }
 
@@ -331,7 +328,7 @@ public class FiveYearTasksFragment extends Fragment {
         FileOutputStream fos = null;
         try {
             //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Five_year_tasks_file));
+            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Yearly_tasks_file));
             //create new file if the file does not exist
             tasksFile.createNewFile();
             //save/write the tasks to the tasks.json file

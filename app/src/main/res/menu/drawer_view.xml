@@ -15,9 +15,18 @@
         android:title="Yearly Goals" />
 
         <item
-            android:id="@+id/five_year_goals"
-            android:icon="@drawable/ic_5_year"
-            android:title="Five Year Goals" />
+        android:id="@+id/five_year_goals"
+        android:icon="@drawable/ic_5_year"
+        android:title="Five Year Goals" />
 
+        <item
+        android:id="@+id/personal_projects"
+        android:icon="@drawable/ic_single_person"
+        android:title="Personal Projects" />
+
+        <item
+            android:id="@+id/shared_projects"
+            android:icon="@drawable/ic_network"
+            android:title="Shared Projects" />
     </group>
 </menu>

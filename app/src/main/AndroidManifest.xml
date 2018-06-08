@@ -15,16 +15,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        tools:replace="android:icon">
-        <activity android:name=".LoginActivity">
+        tools:replace="icon">
+
+        <activity android:name=".login.LoginActivity"></activity>
+
+        <activity android:name=".login.CreateAccountActivity"></activity>
+
+        <activity android:name=".home.MainActivty"></activity>
+
+        <activity android:name=".login.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateAccountActivity"></activity>
-        <activity android:name=".MainActivty"></activity>
+
     </application>
+
+
+
+
+
 
 </manifest>

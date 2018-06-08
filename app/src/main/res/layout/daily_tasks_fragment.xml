@@ -6,11 +6,40 @@
     android:id="@+id/fragment_tasks_layout"
     android:orientation="vertical">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="55dp"
+        android:layout_height="70dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/current_date"
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Wednesday Oct 24"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
     <TextView
         android:id="@+id/tasks_type_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
         android:layout_gravity="center_horizontal"
         android:text="@string/daily_tasks_fragment"
         android:textColor="@color/colorAnnounce"
@@ -20,33 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
+        android:text="20%"
         android:layout_marginTop="4dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@android:color/black"
         android:id="@+id/percentage_completed"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="2dp"
-        android:layout_below="@id/percentage_completed"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:id="@+id/progress_outer_bar"
-        android:background="@android:color/darker_gray"
-        >
-
-        <LinearLayout
-            android:id="@+id/progress_inner_bar"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_alignStart="@+id/progress_outer_bar"
-            android:layout_alignTop="@+id/progress_outer_bar"
-            android:background="@android:color/holo_blue_light"
-            android:orientation="horizontal"></LinearLayout>
-
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,8 +65,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
    >
-
-
     </ListView>
 
     <ImageView

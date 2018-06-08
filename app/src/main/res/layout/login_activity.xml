@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.example.tapiwa.todoapp.CreateAccountActivity">
+    tools:context="com.example.tapiwa.todoapp.login.CreateAccountActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/login_toolbar"

@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/create_account_bkgrnd"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.example.tapiwa.todoapp.CreateAccountActivity">
+    tools:context="com.example.tapiwa.todoapp.login.CreateAccountActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/create_new_account_toolbar"
@@ -40,6 +41,7 @@
             android:id="@+id/email_address_EdtTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:inputType="textAutoComplete"
             android:layout_marginTop="10dp"
             android:layout_alignStart="@+id/textInputEditText"
             android:layout_below="@+id/textInputEditText"
@@ -52,6 +54,7 @@
         android:id="@+id/password_EdtTxt"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:inputType="textPassword"
         android:layout_marginTop="10dp"
         android:layout_alignStart="@+id/textInputEditText2"
         android:layout_below="@+id/textInputEditText2"
@@ -59,11 +62,23 @@
         android:gravity="center_vertical"
         android:hint="Password" />
 
-
-        <Button
-            android:id="@+id/create_account_Button"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password_confirm_EdtTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:layout_alignStart="@+id/textInputEditText2"
+            android:layout_below="@+id/password_EdtTxt"
+            android:background="@drawable/curved_background"
+            android:gravity="center_vertical"
+            android:hint="Confirm Password" />
+
+        <Button
+            android:id="@+id/create_account_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
             android:layout_marginTop="50dp"
             android:text="CREATE ACCOUNT"
             android:textColor="@android:color/white"
@@ -76,7 +91,13 @@
             android:layout_marginTop="10dp"
             android:text="By signing up you agree to the terms of service and privacy policy"/>
 
-
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/login_progress_circle"
+        style="?android:attr/progressBarStyle"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
