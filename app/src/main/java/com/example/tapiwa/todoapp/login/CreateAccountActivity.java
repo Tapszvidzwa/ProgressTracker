@@ -2,11 +2,11 @@ package com.example.tapiwa.todoapp.login;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,8 +20,14 @@ import com.google.android.gms.tasks.*;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
+
+import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
 
 public class CreateAccountActivity extends AppCompatActivity  {
 
@@ -59,16 +65,18 @@ public class CreateAccountActivity extends AppCompatActivity  {
             public void onClick(View v) {
 
                 Log.d(TAG, "butn clicked");
-                if(checkValidity()) {
-                    attemptLogin(passwordEdtTxt.getText().toString().trim(),
-                            emailEdtTxt.getText().toString().trim());
+                if(isUserCredentialsValid()) {
+                    attemptLogin(
+                            passwordEdtTxt.getText().toString().trim(),
+                            emailEdtTxt.getText().toString().trim(),
+                            usernameEdtTxt.getText().toString().trim());
                 }
             }
         });
 
     }
 
-    private boolean checkValidity() {
+    private boolean isUserCredentialsValid() {
 
         mProgressBar.setVisibility(View.VISIBLE);
         mBackground.getBackground().setAlpha(100);
@@ -108,6 +116,7 @@ public class CreateAccountActivity extends AppCompatActivity  {
 
     }
 
+    //Todo: fix this method, not yet working as expected
     private void dimBackground() {
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.dimAmount = 0.75f;
@@ -115,7 +124,37 @@ public class CreateAccountActivity extends AppCompatActivity  {
         getWindow().setAttributes(layoutParams);
     }
 
-   private void attemptLogin(String password, String email) {
+
+    private void registerUserToFirestore(String uid, String username, String email) {
+
+       User user = new User();
+       user.setEmail(email);
+       user.setUserName(username);
+       user.setUid(uid);
+       user.setDailyProjects("");
+       user.setWeeklyProjects("");
+       user.setLongTermProjects("");
+       user.setYearlyProjects("");
+       user.setSharedProjectKeys(new ArrayList<String>());
+       user.setPersonalProjects("");
+
+       FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+       db.document(USERS_DB_PATH + uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+           @Override
+           public void onSuccess(Void aVoid) {
+               Log.d(TAG, "DocumentSnapshot added");
+           }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               Log.w(TAG, "Error adding document", e);
+           }
+       });
+
+    }
+
+   private void attemptLogin(String password, final String email, final String username) {
 
         dimBackground();
 
@@ -123,6 +162,8 @@ public class CreateAccountActivity extends AppCompatActivity  {
            @Override
            public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()) {
+                   String uid = mAuth.getCurrentUser().getUid().toString();
+                   registerUserToFirestore(uid, username, email);
                    mProgressBar.setVisibility(View.INVISIBLE);
                    mBackground.getBackground().setAlpha(0);
                    //TODO: create a loading circle bar here

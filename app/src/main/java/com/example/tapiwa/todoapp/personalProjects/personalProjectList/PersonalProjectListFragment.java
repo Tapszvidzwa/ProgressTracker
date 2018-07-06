@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.dailyProjects;
+package com.example.tapiwa.todoapp.personalProjects.personalProjectList;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -8,166 +8,78 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tapiwa.todoapp.CompletionBar;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
-import com.example.tapiwa.todoapp.TaskAdapter;
-import com.example.tapiwa.todoapp.TaskList;
+import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.personalProjects.PersonalProjectListModel;
+import com.example.tapiwa.todoapp.personalProjects.PersonalProjectModel;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 
-public class DailyTasksFragment extends Fragment {
+public class PersonalProjectListFragment extends Fragment {
 
     private ListView goalsList;
     public static ImageView restingDude;
     public static TextView noGoalsText, date;
-    private View tasksPageView;
-    private CompletionBar completionBar;
+    private View personalProjectsPageView;
     private TextView percentageTxtV;
-    private LinkedList<Task> tasksList;
-    private TaskAdapter adapter;
-    private LinearLayout parentLayout;
+    private ArrayList<Task> personalProjectTasksList;
+    private PersonalProjectsListAdapter adapter;
     private FloatingActionButton addTask;
+    private PersonalProjectListModel allProjectsList;
     private String CURRENT_DATE;
+    private String PROJECT_NAME;
+    private FileHandler fileHandler;
 
-
-    private final String GOALS = "Goals";
-
-    private int totalTasks;
-    private int uncompletedTasks;
-    private int initialBarlength;
-
-
-    public DailyTasksFragment() {
+    public PersonalProjectListFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.daily_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.add_task);
-        CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
-        initializeViews();
+        personalProjectsPageView = inflater.inflate(R.layout.personal_project_todo_list_fragment, container, false);
         initializeVariables();
-        getGoals();
+        initializeViews();
         calculatePercentage();
-        return tasksPageView;
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        getGoals();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        TaskList list = new TaskList();
-
-        list.setTaskList(tasksList);
-
-        Gson gson = new Gson();
-        String tasksJson = gson.toJson(list);
-
-        FileOutputStream fos = null;
-        try {
-            //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.DailyGoalsFile));
-            //create new file if the file does not exist
-            tasksFile.createNewFile();
-            //save/write the tasks to the tasks.json file
-            fos = new FileOutputStream(tasksFile);
-            byte[] tasksFileBytes = tasksJson.getBytes();
-            fos.write(tasksFileBytes);
-            fos.flush();
-
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
-            return;
-        } finally {
-
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
+        return personalProjectsPageView;
     }
 
     private void initializeVariables() {
-        tasksList = new LinkedList<>();
-        uncompletedTasks = 0;
+        CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
+        Bundle args = getArguments();
+        PROJECT_NAME = args.getString("projectName");
+        allProjectsList = (PersonalProjectListModel) args.getSerializable("allProjects");
+       // personalProjectTasksList = allProjectsList.getProject(PROJECT_NAME).getProjectTask();
+        fileHandler = new FileHandler(getActivity().getApplicationContext());
     }
-
-    private void getGoals() {
-        try {
-            //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.DailyGoalsFile));
-            //create new file if the file does not exist
-            tasksFile.createNewFile();
-
-            BufferedReader br = new BufferedReader(new FileReader(tasksFile));
-
-            Gson gson = new Gson();
-
-            TaskList list = gson.fromJson(br, TaskList.class);
-
-            if(list != null) {
-                tasksList = list.getTaskList();
-                adapter = new TaskAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, tasksList);
-                goalsList.setAdapter(adapter);
-            }
-
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
-            e.printStackTrace();
-        }
-    }
-
 
     private void initializeViews() {
-
-        percentageTxtV = tasksPageView.findViewById(R.id.percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.fragment_tasks_layout);
-        date = tasksPageView.findViewById(R.id.current_date);
+        addTask = personalProjectsPageView.findViewById(R.id.add_task);
+        percentageTxtV = personalProjectsPageView.findViewById(R.id.percentage_completed);
+        restingDude = personalProjectsPageView.findViewById(R.id.resting_dude);
+        noGoalsText = personalProjectsPageView.findViewById(R.id.no_goals_text);
+        date = personalProjectsPageView.findViewById(R.id.current_date);
         date.setText(CURRENT_DATE);
-        goalsList = tasksPageView.findViewById(R.id.goals_lstV);
-        adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
+        goalsList = personalProjectsPageView.findViewById(R.id.goals_lstV);
+        adapter = new PersonalProjectsListAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, personalProjectTasksList);
 
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,40 +91,43 @@ public class DailyTasksFragment extends Fragment {
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Task updatedTask = tasksList.get(i);
+                Task updatedTask = personalProjectTasksList.get(i);
 
                 if(!updatedTask.getStatus().equals("completed")) {
                     updatedTask.setStatus("completed");
-                    tasksList.set(i, updatedTask);
+                    personalProjectTasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
                         dg.setTitleText("Congratulations!").setContentText("Congratulations on finishing all your tasks");
                         dg.show();
-                        tasksList.clear();
+                        personalProjectTasksList.clear();
                     }
 
                 } else {
                     updatedTask.setStatus("uncompleted");
-                    tasksList.set(i, updatedTask);
+                    personalProjectTasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                 }
 
                 calculatePercentage();
             }
         });
+
+        adapter = new PersonalProjectsListAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, personalProjectTasksList);
+        goalsList.setAdapter(adapter);
     }
 
     private void calculatePercentage() {
         percentageTxtV.setTextColor(Color.rgb(208,35,35));
 
-        if(tasksList.size() == 0) {
-            percentageTxtV.setText(Integer.toString(0));
+        if(personalProjectTasksList.size() == 0) {
+            percentageTxtV.setText(Integer.toString(0) + "%");
             return;
         } else {
             int completedTasks = countCompletedTasks();
-            int percentage = (int) Math.floor(((double) completedTasks / tasksList.size()) * 100);
+            int percentage = (int) Math.floor(((double) completedTasks / personalProjectTasksList.size()) * 100);
             percentageTxtV.setText(Integer.toString(percentage) + "%");
             checkTasksCompletion();
             return;
@@ -220,7 +135,7 @@ public class DailyTasksFragment extends Fragment {
     }
 
     private boolean checkTasksCompletion() {
-        Iterator iter = tasksList.iterator();
+        Iterator iter = personalProjectTasksList.iterator();
         while(iter.hasNext()) {
             Task task = (Task) iter.next();
             if(task.getStatus().equals("uncompleted")) {
@@ -231,7 +146,7 @@ public class DailyTasksFragment extends Fragment {
     }
 
     private int countCompletedTasks() {
-        Iterator iter = tasksList.iterator();
+        Iterator iter = personalProjectTasksList.iterator();
         int i = 0;
 
         while(iter.hasNext()) {
@@ -248,7 +163,6 @@ public class DailyTasksFragment extends Fragment {
 
         //Get title of new task
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //builder.setIcon(R.drawable.ic_keyboard_black_24px);
         builder.setTitle("Add a new task");
 
         int maxLength = 200;
@@ -272,9 +186,8 @@ public class DailyTasksFragment extends Fragment {
                     newTask.setStatus("uncompleted");
 
                     //add it to the tasks list
-                    tasksList.add(newTask);
+                    personalProjectTasksList.add(newTask);
                     adapter.notifyDataSetChanged();
-                    totalTasks = tasksList.size();
                     calculatePercentage();
                 } else {
                     Toasty.info(getActivity().getApplicationContext(), "Please provide a task description", Toast.LENGTH_SHORT).show();
@@ -293,5 +206,21 @@ public class DailyTasksFragment extends Fragment {
         builder.show();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        PersonalProjectModel currentProject = new PersonalProjectModel();
+        currentProject.setProjectTitle(PROJECT_NAME);
+      //  currentProject.setProjectTask(personalProjectTasksList);
+
+        allProjectsList.updateProject(currentProject);
+        Gson gson = new Gson();
+        String personalProjectsJson = gson.toJson(allProjectsList);
+        fileHandler.saveFile(getString(R.string.Personal_projects_file), personalProjectsJson);
+    }
 }

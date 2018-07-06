@@ -82,7 +82,7 @@
             android:layout_marginBottom="20dp"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/yearly_add_task"
                 android:src="@drawable/ic_white_add"
                 android:layout_width="wrap_content"

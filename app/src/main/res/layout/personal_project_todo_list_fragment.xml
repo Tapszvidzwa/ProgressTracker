@@ -6,7 +6,7 @@
     android:id="@+id/fragment_tasks_layout"
     android:orientation="vertical">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.appcompat.widget.CardView
         android:layout_width="match_parent"
         android:layout_marginTop="55dp"
         android:layout_height="70dp"
@@ -29,21 +29,9 @@
             android:textColor="@android:color/white"
             android:textSize="30sp" />
 
-
-
         </RelativeLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/tasks_type_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/daily_tasks_fragment"
-        android:textColor="@color/colorAnnounce"
-        android:textSize="18sp" />
+    </androidx.appcompat.widget.CardView>
 
     <TextView
         android:layout_width="wrap_content"

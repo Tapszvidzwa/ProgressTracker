@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.personalProjects;
+package com.example.tapiwa.todoapp.sharedProjects;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,27 +12,27 @@ import com.example.tapiwa.todoapp.R;
 import java.util.ArrayList;
 
 
-public class PersonalProjectsAdapter extends BaseAdapter {
+public class SharedProjectsAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
-    private ArrayList<PersonalProjectModel> personalProjectsList;
+    private ArrayList<String> sharedProjectsList;
 
 
-    public PersonalProjectsAdapter(Context context, int layout, ArrayList<PersonalProjectModel> personalProjectsList) {
+    public SharedProjectsAdapter(Context context, int layout, ArrayList<String> sharedProjectsList) {
         this.context = context;
         this.layout = layout;
-        this.personalProjectsList = personalProjectsList;
+        this.sharedProjectsList = sharedProjectsList;
     }
 
     @Override
     public int getCount() {
-        return personalProjectsList.size();
+        return sharedProjectsList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return personalProjectsList.get(position);
+        return sharedProjectsList.get(position);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PersonalProjectsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, final View view, ViewGroup viewGroup) {
 
-        final PersonalProjectModel project = personalProjectsList.get(position);
+        final String project = sharedProjectsList.get(position);
 
         View row = view;
         ViewHolder holder = new ViewHolder();
@@ -63,7 +63,7 @@ public class PersonalProjectsAdapter extends BaseAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        holder.projectTitle.setText(project.getProjectTitle());
+        holder.projectTitle.setText(project);
 
         return row;
     }

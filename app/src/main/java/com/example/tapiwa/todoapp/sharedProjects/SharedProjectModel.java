@@ -1,17 +1,17 @@
-package com.example.tapiwa.todoapp.personalProjects;
+package com.example.tapiwa.todoapp.sharedProjects;
 
-import com.example.tapiwa.todoapp.sharedProjects.SharedProjectTask;
+import com.example.tapiwa.todoapp.Task;
 
 import java.util.ArrayList;
 
-public class PersonalProjectModel {
+public class SharedProjectModel {
 
     private String projectTitle;
     private ArrayList<SharedProjectTask> projectTasks;
     private String lastModifiedtime;
     private String projectKey;
 
-    public PersonalProjectModel() {
+    public SharedProjectModel() {
     }
 
     public String getLastModifiedtime() {

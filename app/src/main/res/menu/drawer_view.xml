@@ -17,7 +17,7 @@
         <item
         android:id="@+id/five_year_goals"
         android:icon="@drawable/ic_5_year"
-        android:title="Five Year Goals" />
+        android:title="Long Term Goals" />
 
         <item
         android:id="@+id/personal_projects"
