@@ -61,18 +61,8 @@ public class ProjectsFragment extends Fragment {
     }
 
     private void initializeViews() {
-
-        addProjectFab = projectsPageView.findViewById(R.id.add_project);
         personalProjectsListView = projectsPageView.findViewById(R.id.personal_projects);
         sharedProjectsListView = projectsPageView.findViewById(R.id.shared_projects);
-
-        addProjectFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewProject();
-            }
-        });
-
     }
 
     private void getProjects() {

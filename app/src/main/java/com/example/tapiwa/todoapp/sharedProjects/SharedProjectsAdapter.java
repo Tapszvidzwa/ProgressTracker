@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.personalProjects.PersonalProjectModel;
+import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
 
 import java.util.ArrayList;
 
@@ -16,10 +18,10 @@ public class SharedProjectsAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
-    private ArrayList<String> sharedProjectsList;
+    private ArrayList<SharedProjectReference> sharedProjectsList;
 
 
-    public SharedProjectsAdapter(Context context, int layout, ArrayList<String> sharedProjectsList) {
+    public SharedProjectsAdapter(Context context, int layout, ArrayList<SharedProjectReference> sharedProjectsList) {
         this.context = context;
         this.layout = layout;
         this.sharedProjectsList = sharedProjectsList;
@@ -47,24 +49,21 @@ public class SharedProjectsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, final View view, ViewGroup viewGroup) {
 
-        final String project = sharedProjectsList.get(position);
+        final SharedProjectReference project = sharedProjectsList.get(position);
 
         View row = view;
         ViewHolder holder = new ViewHolder();
 
-
-        if(row == null) {
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
             holder.projectTitle = row.findViewById(R.id.project_name);
             row.setTag(holder);
-
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
-        holder.projectTitle.setText(project);
-
+        holder.projectTitle.setText(project.getProjectName());
         return row;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.tapiwa.todoapp.login;
 
-import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
+import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class User {
     String longTermProjects;
     String personalProjects;
     String yearlyProjects;
-    ArrayList<String> sharedProjectKeys;
+    ArrayList<SharedProjectReference> sharedProjectReferenceKeys;
 
     public User() {
         //required empty constructor
@@ -86,11 +86,11 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<String> getSharedProjectKeys() {
-        return sharedProjectKeys;
+    public ArrayList<SharedProjectReference> getSharedProjectReferenceKeys() {
+        return sharedProjectReferenceKeys;
     }
 
-    public void setSharedProjectKeys(ArrayList<String> sharedProjectKeys) {
-        this.sharedProjectKeys = sharedProjectKeys;
+    public void setSharedProjectReferenceKeys(ArrayList<SharedProjectReference> sharedProjectReferenceKeys) {
+        this.sharedProjectReferenceKeys = sharedProjectReferenceKeys;
     }
 }

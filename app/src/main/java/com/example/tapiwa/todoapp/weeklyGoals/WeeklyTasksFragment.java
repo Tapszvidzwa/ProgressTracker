@@ -2,27 +2,15 @@ package com.example.tapiwa.todoapp.weeklyGoals;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.app.AlertDialog;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tapiwa.todoapp.CompletionBar;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
@@ -37,6 +25,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import androidx.appcompat.app.AlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
@@ -44,23 +33,9 @@ import es.dmoral.toasty.Toasty;
 public class WeeklyTasksFragment extends Fragment {
 
     private ListView goalsList;
-    public static ImageView restingDude;
-    public static TextView noGoalsText;
-    private LinearLayout progressBar, progressBarBorder;
     private View tasksPageView;
-    private CompletionBar completionBar;
-    private TextView percentageTxtV;
-    private LinkedList<Task> tasksList;
-    private TaskAdapter adapter;
-    private LinearLayout parentLayout;
-    private FloatingActionButton addTask;
-
-
-    private final String GOALS = "Goals";
-
-    private int totalTasks;
-    private int uncompletedTasks;
-    private int initialBarlength;
+    private static LinkedList<Task> tasksList;
+    private static TaskAdapter adapter;
 
     public WeeklyTasksFragment() {
         // Required empty public constructor
@@ -69,14 +44,7 @@ public class WeeklyTasksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.weekly_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.weekly_add_task);
-
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        initialBarlength = display.getWidth();
-
+        tasksPageView = inflater.inflate(R.layout.fragment_weekly_tasks, container, false);
         initializeViews();
         initializeVariables();
         getGoals();
@@ -84,78 +52,51 @@ public class WeeklyTasksFragment extends Fragment {
         return tasksPageView;
     }
 
-
     private void initializeVariables() {
         tasksList = new LinkedList<>();
-        uncompletedTasks = 0;
     }
-
 
     private void getGoals() {
 
         try {
-            //open tasks file
             File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Weekly_tasks_file));
-            //create new file if the file does not exist
             tasksFile.createNewFile();
 
             BufferedReader br = new BufferedReader(new FileReader(tasksFile));
 
             Gson gson = new Gson();
-
             TaskList list = gson.fromJson(br, TaskList.class);
 
-            if(list != null) {
+            if (list != null) {
                 tasksList = list.getTaskList();
-                adapter = new TaskAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, tasksList);
+                adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
                 goalsList.setAdapter(adapter);
-                totalTasks = tasksList.size();
-                uncompletedTasks = countUncompletedTasks();
-                updateCompletionBar();
             }
 
         } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(),getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
+            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
             e.printStackTrace();
         }
     }
 
 
     private void initializeViews() {
-        percentageTxtV = tasksPageView.findViewById(R.id.weekly_percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.weekly_resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.weekly_no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.weekly_fragment_tasks_layout);
-
-        progressBar = tasksPageView.findViewById(R.id.weekly_progress_inner_bar);
-        progressBarBorder = tasksPageView.findViewById(R.id.weekly_progress_outer_bar);
         goalsList = tasksPageView.findViewById(R.id.weekly_goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
-        completionBar = new CompletionBar();
-        updateCompletionBar();
-
-        addTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addNewTask();
-            }
-        });
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Task updatedTask = tasksList.get(i);
-                if(!updatedTask.getStatus().equals("completed")) {
+                if (!updatedTask.getStatus().equals("completed")) {
                     updatedTask.setStatus("completed");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
-                    --uncompletedTasks;
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
                         dg.setTitleText(getString(R.string.congratulations)).setContentText(getString(R.string.congratulatory_msg));
                         dg.show();
-
 
                         new CountDownTimer(2000, 1000) {
 
@@ -167,39 +108,30 @@ public class WeeklyTasksFragment extends Fragment {
                             }
 
                         }.start();
-
                     }
-
                 } else {
-
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
-                    ++uncompletedTasks;
-
                 }
-                updateCompletionBar();
             }
         });
     }
 
 
-    public void permissionClearTasks(){
+    public void permissionClearTasks() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
         alertDialogBuilder.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        totalTasks = 0;
-                        uncompletedTasks = 0;
                         tasksList.clear();
-                        updateCompletionBar();
                         adapter.notifyDataSetChanged();
                     }
                 });
 
-        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 return;
@@ -211,109 +143,20 @@ public class WeeklyTasksFragment extends Fragment {
     }
 
 
-
-
-
-
     private boolean checkTasksCompletion() {
         Iterator iter = tasksList.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Task task = (Task) iter.next();
-            if(task.getStatus().equals("uncompleted")) {
+            if (task.getStatus().equals("uncompleted")) {
                 return false;
             }
         }
         return true;
     }
 
-    private void updateCompletionBar() {
-
-        int total = totalTasks;
-        int uncompleted = uncompletedTasks;
-
-        completionBar.updateCompletionBar(
-                total - uncompleted,
-                uncompleted,
-                initialBarlength,
-                progressBar,
-                percentageTxtV
-        );
-    }
-
-
-    private int countUncompletedTasks() {
-
-        Iterator iter = tasksList.iterator();
-        int i = 0;
-
-        while(iter.hasNext()) {
-            Task task = (Task) iter.next();
-            if(task.getStatus().equals("uncompleted")) {
-                ++i;
-            }
-        }
-
-        return i;
-    }
-
-
-
-    public void addNewTask() {
-
-        //Get title of new task
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    //    builder.setIcon(R.drawable.ic_keyboard_black_24px);
-        builder.setTitle(getString(R.string.add_new_task));
-
-        int maxLength = 200;
-        final EditText givenTitle = new EditText(getActivity().getApplicationContext());
-        givenTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
-        givenTitle.setInputType(InputType.TYPE_CLASS_TEXT);
-        givenTitle.setTextColor(Color.BLACK);
-        givenTitle.setVisibility(View.VISIBLE);
-        builder.setView(givenTitle);
-
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if(givenTitle.getText().toString().length() > 0) {
-
-                    //create the new task
-                    Task newTask = new Task();
-                    newTask.setTask(givenTitle.getText().toString());
-                    newTask.setStatus("uncompleted");
-
-                    //add it to the tasks list
-                    tasksList.add(newTask);
-                    adapter.notifyDataSetChanged();
-
-                    totalTasks = tasksList.size();
-                    uncompletedTasks = countUncompletedTasks();
-                    updateCompletionBar();
-                } else {
-                    Toasty.info(getActivity().getApplicationContext(), getString(R.string.no_task_entered), Toast.LENGTH_SHORT).show();
-                }
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        initialBarlength = display.getWidth();
     }
 
     @Override
@@ -351,7 +194,15 @@ public class WeeklyTasksFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
+    }
+
+    public static void addNewTask(String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+
+        tasksList.add(newTask);
+        adapter.notifyDataSetChanged();
     }
 }

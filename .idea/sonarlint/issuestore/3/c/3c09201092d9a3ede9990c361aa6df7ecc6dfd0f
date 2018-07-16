@@ -1,0 +1,6 @@
+
+[squid:S1068":Remove this unused "sharedProjectsListView" private field.(Š®™Ùýÿÿÿÿ8Œ‘í÷Æ,
+†squid:S1450"eRemove the "sharedProjectsListView" field and declare it as a local variable in the relevant methods.(Š®™Ùýÿÿÿÿ8Œ‘í÷Æ,
+asquid:S1858"@"getUid" returns a string, there's no need to call "toString()".(úÈÜØúÿÿÿÿ8Œ‘í÷Æ,
+vsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8Œ‘í÷Æ,
+Zsquid:S1155">Use isEmpty() to check whether the collection is empty or not.(ý÷ó£8Œ‘í÷Æ,

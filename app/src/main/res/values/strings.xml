@@ -13,19 +13,17 @@
     <string name="add_new_task">Create a new task</string>
     <string name="add_new_project">Create a new project</string>
 
-
     //Error messages
     <string name="no_task_entered">Please enter a task</string>
     <string name="failed_file_creation">Something went wrong in saving your tasks</string>
     <string name="failed_file_loading">Something went wrong in loading tasks</string>
 
-
     //Fragment names
-    <string name="daily_tasks_fragment">Daily Goals</string>
-    <string name="weekly_tasks_fragment">Weekly Goals</string>
-    <string name="yearly_tasks_fragment">Yearly Goals</string>
-    <string name="five_year_fragment">Five Year Goals</string>
+    <string name="daily_tasks_fragment_title">Daily Goals</string>
+    <string name="weekly_tasks_fragment_title">Weekly Goals</string>
+    <string name="yearly_tasks_fragment_title">Yearly Goals</string>
+    <string name="long_term_goals_title">Long Term Goals</string>
     <string name="personal_projects_fragment_title">Personal Projects</string>
-    <string name="shared_projects_fragment">Shared Projects</string>
+    <string name="shared_projects_fragment_title">Shared Projects</string>
 
 </resources>

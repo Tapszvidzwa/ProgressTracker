@@ -1,13 +1,7 @@
 package com.example.tapiwa.todoapp.personalProjects;
 
 import android.app.Fragment;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.app.AlertDialog;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -15,13 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.home.MainActivty;
 import com.example.tapiwa.todoapp.personalProjects.personalProjectList.PersonalProjectListFragment;
 import com.google.gson.Gson;
 
@@ -32,22 +25,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import es.dmoral.toasty.Toasty;
+;import es.dmoral.toasty.Toasty;
 
-;
+import static com.example.tapiwa.todoapp.personalProjects.PersonalProjectsFragment.InputRequestType.RENAME_PROJECT;
 
 public class PersonalProjectsFragment extends Fragment {
 
-    public static ImageView restingDude;
-    public static TextView noGoalsText;
-    private ListView personalProjectsListV;
     private View personalProjectsView;
-    private TextView percentageTxtV;
-    private ArrayList<PersonalProjectModel> personalProjectsList;
+    private static ArrayList<PersonalProjectModel> personalProjectsList;
     private PersonalProjectListModel personalProjectListModel;
-    private PersonalProjectsAdapter adapter;
-    private FloatingActionButton addProjectFab;
+    private static PersonalProjectsAdapter adapter;
     private TextView personalProjectsTitle;
+    private ListView personalProjectsListV;
+    public static int clickedProject;
+    public static InputRequestType inputRequestType;
 
     public PersonalProjectsFragment() {
         // Required empty public constructor
@@ -57,13 +48,12 @@ public class PersonalProjectsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        personalProjectsView = inflater.inflate(R.layout.personal_projects_fragment, container, false);
+        personalProjectsView = inflater.inflate(R.layout.fragment_personal_projects, container, false);
         initializeViews();
         initializeVariables();
-        getPersonalProjects();
+        getProjects();
         return personalProjectsView;
     }
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -72,16 +62,15 @@ public class PersonalProjectsFragment extends Fragment {
         inflater.inflate(R.menu.personal_projects_menu, menu);
     }
 
-
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        clickedProject = info.position;
 
         switch (item.getItemId()) {
             case R.id.rename_project:
-                getNewProjectTitleDialogue("renameProject", info.position);
-                adapter.notifyDataSetChanged();
+                inputRequestType = RENAME_PROJECT;
+                MainActivty.getInputForFragment(MainActivty.visibleFragment);
                 return true;
             case R.id.delete_project:
                 deleteProject(info.position);
@@ -95,7 +84,7 @@ public class PersonalProjectsFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-     /*   PersonalProjectListModel projectsList = new PersonalProjectListModel();
+        PersonalProjectListModel projectsList = new PersonalProjectListModel();
         projectsList.setProjects(personalProjectsList);
 
         Gson gson = new Gson();
@@ -124,26 +113,26 @@ public class PersonalProjectsFragment extends Fragment {
                 e.printStackTrace();
             }
 
-        } */
+        }
     }
 
     private void deleteProject(int pos) {
-       personalProjectsList.remove(pos);
-       adapter.notifyDataSetChanged();
+        personalProjectsList.remove(pos);
+        adapter.notifyDataSetChanged();
     }
 
     private void initializeVariables() {
         personalProjectsList = new ArrayList<>();
+        inputRequestType = InputRequestType.NONE;
+        clickedProject = 0;
     }
 
-    private void getPersonalProjects() {
+    private void getProjects() {
 
-    /*    BufferedReader br = null;
-
+        BufferedReader br = null;
         try {
             File personalProjectsFiles = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Personal_projects_file));
             personalProjectsFiles.createNewFile();
-
             br = new BufferedReader(new FileReader(personalProjectsFiles));
 
             Gson gson = new Gson();
@@ -166,94 +155,51 @@ public class PersonalProjectsFragment extends Fragment {
             } catch (IOException e) {
                 //TODO: handle appropriately
             }
-        } */
-
+        }
     }
 
     private void initializeViews() {
-     /*   personalProjectsListV = personalProjectsView.findViewById(R.id.personal_projects_lstV);
-        addProjectFab = personalProjectsView.findViewById(R.id.personal_projects_add_fab);
+        personalProjectsListV = personalProjectsView.findViewById(R.id.personal_projects_lstV);
         adapter = new PersonalProjectsAdapter(getActivity().getApplicationContext(), R.layout.item_project, personalProjectsList);
         registerForContextMenu(personalProjectsListV);
-
-        addProjectFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getNewProjectTitleDialogue("newProject", -1);
-            }
-        });
 
         personalProjectsListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                SharedProjectModel chosenProject = personalProjectsList.get(i);
-
-                Bundle bundle = new Bundle();
-                bundle.putString("projectName", chosenProject.getProjectTitle());
-                bundle.putSerializable("taskList", chosenProject.getProjectTask());
-                bundle.putSerializable("allProjects", personalProjectListModel);
-                android.app.Fragment projectTodoFragment = new PersonalProjectListFragment();
-                projectTodoFragment.setArguments(bundle);
-
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container_holder, projectTodoFragment).commit();
+                openProject(personalProjectsList.get(i));
             }
-        }); */
-
+        });
     }
 
-    public void getNewProjectTitleDialogue(final String requestType, final int pos) {
+    public static void addProject(final String projectName) {
+        PersonalProjectModel newProject = new PersonalProjectModel();
+        newProject.setProjectTitle(projectName);
+        personalProjectsList.add(newProject);
+        adapter.notifyDataSetChanged();
+    }
 
-     /*   //Get title of new project
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.add_new_project));
+    private void openProject(PersonalProjectModel chosenProject) {
+        Bundle bundle = new Bundle();
+        bundle.putString("projectName", chosenProject.getProjectTitle());
+        bundle.putSerializable("taskList", chosenProject.getProjectTasks());
+        bundle.putSerializable("allProjects", personalProjectListModel);
+        android.app.Fragment projectTodoFragment = new PersonalProjectListFragment();
+        projectTodoFragment.setArguments(bundle);
 
-        int maxLength = 200;
-        final EditText givenTitle = new EditText(getActivity().getApplicationContext());
-        givenTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
-        givenTitle.setInputType(InputType.TYPE_CLASS_TEXT);
-        givenTitle.setTextColor(Color.BLACK);
-        givenTitle.setVisibility(View.VISIBLE);
-        builder.setView(givenTitle);
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container_holder, projectTodoFragment).commit();
+    }
 
+    public static void renameProject(final String projectName) {
+        PersonalProjectModel projectModel = new PersonalProjectModel();
+        projectModel = personalProjectsList.get(clickedProject);
+        projectModel.setProjectTitle(projectName);
+        personalProjectsList.set(clickedProject, projectModel);
+        adapter.notifyDataSetChanged();
+    }
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if (givenTitle.getText().toString().length() > 0) {
-
-                    if(requestType.equals("renameProject")) {
-                        //Rename project
-                        SharedProjectModel projectModel = new SharedProjectModel();
-                        projectModel = personalProjectsList.get(pos);
-                        projectModel.setProjectTitle(givenTitle.getText().toString());
-                        personalProjectsList.set(pos, projectModel);
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        //Create a new project
-                        SharedProjectModel newProject = new SharedProjectModel();
-                        newProject.setProjectTitle(givenTitle.getText().toString());
-                        newProject.setProjectTask(null);
-                        personalProjectsList.add(newProject);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                } else {
-                    Toasty.info(getActivity().getApplicationContext(), getString(R.string.no_task_entered), Toast.LENGTH_SHORT).show();
-                }
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show(); */
+    public enum InputRequestType {
+        RENAME_PROJECT, CREATE_NEW_PROJECT, NONE;
     }
 
 }

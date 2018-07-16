@@ -1,28 +1,22 @@
 package com.example.tapiwa.todoapp.personalProjects.personalProjectList;
 
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.app.AlertDialog;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.personalProjects.PersonalProjectListModel;
 import com.example.tapiwa.todoapp.personalProjects.PersonalProjectModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
@@ -30,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import es.dmoral.toasty.Toasty;
 
 
 public class PersonalProjectListFragment extends Fragment {
@@ -40,8 +33,8 @@ public class PersonalProjectListFragment extends Fragment {
     public static TextView noGoalsText, date;
     private View personalProjectsPageView;
     private TextView percentageTxtV;
-    private ArrayList<Task> personalProjectTasksList;
-    private PersonalProjectsListAdapter adapter;
+    private static ArrayList<Task> personalProjectTasksList;
+    private static PersonalProjectsListAdapter adapter;
     private FloatingActionButton addTask;
     private PersonalProjectListModel allProjectsList;
     private String CURRENT_DATE;
@@ -67,12 +60,11 @@ public class PersonalProjectListFragment extends Fragment {
         Bundle args = getArguments();
         PROJECT_NAME = args.getString("projectName");
         allProjectsList = (PersonalProjectListModel) args.getSerializable("allProjects");
-       // personalProjectTasksList = allProjectsList.getProject(PROJECT_NAME).getProjectTask();
+        // personalProjectTasksList = allProjectsList.getProject(PROJECT_NAME).getProjectTask();
         fileHandler = new FileHandler(getActivity().getApplicationContext());
     }
 
     private void initializeViews() {
-        addTask = personalProjectsPageView.findViewById(R.id.add_task);
         percentageTxtV = personalProjectsPageView.findViewById(R.id.percentage_completed);
         restingDude = personalProjectsPageView.findViewById(R.id.resting_dude);
         noGoalsText = personalProjectsPageView.findViewById(R.id.no_goals_text);
@@ -81,19 +73,12 @@ public class PersonalProjectListFragment extends Fragment {
         goalsList = personalProjectsPageView.findViewById(R.id.goals_lstV);
         adapter = new PersonalProjectsListAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, personalProjectTasksList);
 
-        addTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addNewTask();
-            }
-        });
-
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Task updatedTask = personalProjectTasksList.get(i);
 
-                if(!updatedTask.getStatus().equals("completed")) {
+                if (!updatedTask.getStatus().equals("completed")) {
                     updatedTask.setStatus("completed");
                     personalProjectTasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
@@ -115,14 +100,14 @@ public class PersonalProjectListFragment extends Fragment {
             }
         });
 
-        adapter = new PersonalProjectsListAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, personalProjectTasksList);
+        adapter = new PersonalProjectsListAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, personalProjectTasksList);
         goalsList.setAdapter(adapter);
     }
 
     private void calculatePercentage() {
-        percentageTxtV.setTextColor(Color.rgb(208,35,35));
+        percentageTxtV.setTextColor(Color.rgb(208, 35, 35));
 
-        if(personalProjectTasksList.size() == 0) {
+        if (personalProjectTasksList.size() == 0) {
             percentageTxtV.setText(Integer.toString(0) + "%");
             return;
         } else {
@@ -136,9 +121,9 @@ public class PersonalProjectListFragment extends Fragment {
 
     private boolean checkTasksCompletion() {
         Iterator iter = personalProjectTasksList.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Task task = (Task) iter.next();
-            if(task.getStatus().equals("uncompleted")) {
+            if (task.getStatus().equals("uncompleted")) {
                 return false;
             }
         }
@@ -149,9 +134,9 @@ public class PersonalProjectListFragment extends Fragment {
         Iterator iter = personalProjectTasksList.iterator();
         int i = 0;
 
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Task task = (Task) iter.next();
-            if(task.getStatus().equals("completed")) {
+            if (task.getStatus().equals("completed")) {
                 ++i;
             }
         }
@@ -159,55 +144,17 @@ public class PersonalProjectListFragment extends Fragment {
         return i;
     }
 
-    public void addNewTask() {
+    public static void addNewTask(final String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
 
-        //Get title of new task
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add a new task");
-
-        int maxLength = 200;
-        final EditText givenTitle = new EditText(getActivity().getApplicationContext());
-        givenTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
-        givenTitle.setInputType(InputType.TYPE_CLASS_TEXT);
-        givenTitle.setTextColor(Color.BLACK);
-        givenTitle.setVisibility(View.VISIBLE);
-        builder.setView(givenTitle);
-
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if(givenTitle.getText().toString().length() > 0) {
-
-                    //create the new task
-                    Task newTask = new Task();
-                    newTask.setTask(givenTitle.getText().toString());
-                    newTask.setStatus("uncompleted");
-
-                    //add it to the tasks list
-                    personalProjectTasksList.add(newTask);
-                    adapter.notifyDataSetChanged();
-                    calculatePercentage();
-                } else {
-                    Toasty.info(getActivity().getApplicationContext(), "Please provide a task description", Toast.LENGTH_SHORT).show();
-                }
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
+        personalProjectTasksList.add(newTask);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
@@ -216,7 +163,7 @@ public class PersonalProjectListFragment extends Fragment {
         super.onPause();
         PersonalProjectModel currentProject = new PersonalProjectModel();
         currentProject.setProjectTitle(PROJECT_NAME);
-      //  currentProject.setProjectTask(personalProjectTasksList);
+        //  currentProject.setProjectTask(personalProjectTasksList);
 
         allProjectsList.updateProject(currentProject);
         Gson gson = new Gson();

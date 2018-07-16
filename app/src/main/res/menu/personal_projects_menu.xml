@@ -6,6 +6,6 @@
             android:title="Delete Project" />
         <item
             android:id="@+id/rename_project"
-            android:title="Rename Projectd" />
+            android:title="Rename Project" />
     </group>
 </menu>

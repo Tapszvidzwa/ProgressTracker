@@ -1,28 +1,16 @@
 package com.example.tapiwa.todoapp.dailyProjects;
 
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.app.AlertDialog;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tapiwa.todoapp.CompletionBar;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
@@ -44,24 +32,13 @@ import es.dmoral.toasty.Toasty;
 
 public class DailyTasksFragment extends Fragment {
 
-    private ListView goalsList;
-    public static ImageView restingDude;
-    public static TextView noGoalsText, date;
-    private View tasksPageView;
-    private CompletionBar completionBar;
-    private TextView percentageTxtV;
-    private LinkedList<Task> tasksList;
-    private TaskAdapter adapter;
-    private LinearLayout parentLayout;
-    private FloatingActionButton addTask;
-    private String CURRENT_DATE;
-
-
-    private final String GOALS = "Goals";
-
-    private int totalTasks;
-    private int uncompletedTasks;
-    private int initialBarlength;
+    private static ListView goalsList;
+    public static TextView date;
+    private static View tasksPageView;
+    private static TextView percentageTxtV;
+    private static LinkedList<Task> tasksList;
+    private static TaskAdapter adapter;
+    private static String CURRENT_DATE;
 
 
     public DailyTasksFragment() {
@@ -72,8 +49,7 @@ public class DailyTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        tasksPageView = inflater.inflate(R.layout.daily_tasks_fragment, container, false);
-        addTask = tasksPageView.findViewById(R.id.add_task);
+        tasksPageView = inflater.inflate(R.layout.fragment_daily_tasks, container, false);
         CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
         initializeViews();
         initializeVariables();
@@ -83,7 +59,7 @@ public class DailyTasksFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         getGoals();
     }
@@ -129,7 +105,6 @@ public class DailyTasksFragment extends Fragment {
 
     private void initializeVariables() {
         tasksList = new LinkedList<>();
-        uncompletedTasks = 0;
     }
 
     private void getGoals() {
@@ -145,9 +120,9 @@ public class DailyTasksFragment extends Fragment {
 
             TaskList list = gson.fromJson(br, TaskList.class);
 
-            if(list != null) {
+            if (list != null) {
                 tasksList = list.getTaskList();
-                adapter = new TaskAdapter(getActivity().getApplicationContext(),R.layout.item_goal_list, tasksList);
+                adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
                 goalsList.setAdapter(adapter);
             }
 
@@ -161,27 +136,17 @@ public class DailyTasksFragment extends Fragment {
     private void initializeViews() {
 
         percentageTxtV = tasksPageView.findViewById(R.id.percentage_completed);
-        restingDude = tasksPageView.findViewById(R.id.resting_dude);
-        noGoalsText = tasksPageView.findViewById(R.id.no_goals_text);
-        parentLayout = tasksPageView.findViewById(R.id.fragment_tasks_layout);
         date = tasksPageView.findViewById(R.id.current_date);
         date.setText(CURRENT_DATE);
         goalsList = tasksPageView.findViewById(R.id.goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
-
-        addTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addNewTask();
-            }
-        });
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Task updatedTask = tasksList.get(i);
 
-                if(!updatedTask.getStatus().equals("completed")) {
+                if (!updatedTask.getStatus().equals("completed")) {
                     updatedTask.setStatus("completed");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
@@ -198,16 +163,14 @@ public class DailyTasksFragment extends Fragment {
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                 }
-
                 calculatePercentage();
             }
         });
     }
 
     private void calculatePercentage() {
-        percentageTxtV.setTextColor(Color.rgb(208,35,35));
-
-        if(tasksList.size() == 0) {
+        percentageTxtV.setTextColor(Color.rgb(208, 35, 35));
+        if (tasksList.size() == 0) {
             percentageTxtV.setText(Integer.toString(0));
             return;
         } else {
@@ -221,9 +184,9 @@ public class DailyTasksFragment extends Fragment {
 
     private boolean checkTasksCompletion() {
         Iterator iter = tasksList.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Task task = (Task) iter.next();
-            if(task.getStatus().equals("uncompleted")) {
+            if (task.getStatus().equals("uncompleted")) {
                 return false;
             }
         }
@@ -234,9 +197,9 @@ public class DailyTasksFragment extends Fragment {
         Iterator iter = tasksList.iterator();
         int i = 0;
 
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Task task = (Task) iter.next();
-            if(task.getStatus().equals("completed")) {
+            if (task.getStatus().equals("completed")) {
                 ++i;
             }
         }
@@ -244,54 +207,12 @@ public class DailyTasksFragment extends Fragment {
         return i;
     }
 
-    public void addNewTask() {
+    public static void addTask(String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
 
-        //Get title of new task
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //builder.setIcon(R.drawable.ic_keyboard_black_24px);
-        builder.setTitle("Add a new task");
-
-        int maxLength = 200;
-        final EditText givenTitle = new EditText(getActivity().getApplicationContext());
-        givenTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
-        givenTitle.setInputType(InputType.TYPE_CLASS_TEXT);
-        givenTitle.setTextColor(Color.BLACK);
-        givenTitle.setVisibility(View.VISIBLE);
-        builder.setView(givenTitle);
-
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if(givenTitle.getText().toString().length() > 0) {
-
-                    //create the new task
-                    Task newTask = new Task();
-                    newTask.setTask(givenTitle.getText().toString());
-                    newTask.setStatus("uncompleted");
-
-                    //add it to the tasks list
-                    tasksList.add(newTask);
-                    adapter.notifyDataSetChanged();
-                    totalTasks = tasksList.size();
-                    calculatePercentage();
-                } else {
-                    Toasty.info(getActivity().getApplicationContext(), "Please provide a task description", Toast.LENGTH_SHORT).show();
-                }
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
+        tasksList.add(newTask);
+        adapter.notifyDataSetChanged();
     }
-
-
 }

@@ -1,63 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_tasks_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_tasks_layout"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="60dp"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/personal_textV"
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        android:text="Personal Projects" />
-
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/personal_textV"
-        android:id="@+id/personal_projects">
-    </ListView>
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/shared_textV"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:text="Shared Projects" />
+        <ListView
+            android:id="@+id/personal_projects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
 
-    <ListView
-        android:id="@+id/shared_projects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="88dp"></ListView>
-</LinearLayout>
+        <TextView
+            android:id="@+id/shared_textV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:text="Shared Projects" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_project"
-        android:src="@drawable/ic_pencil"
-        app:backgroundTint="@color/colorAccent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:clickable="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:paddingBottom="16dp" />
-
+        <ListView
+            android:id="@+id/shared_projects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="88dp"></ListView>
+    </LinearLayout>
 
 </RelativeLayout>

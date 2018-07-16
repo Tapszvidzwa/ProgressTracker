@@ -3,6 +3,8 @@ package com.example.tapiwa.todoapp.login;
 import android.content.Intent;
 import android.graphics.Color;
 import androidx.annotation.NonNull;
+
+import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +22,6 @@ import com.google.android.gms.tasks.*;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class CreateAccountActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.tapiwa.todoapp.R.layout.create_account_activity);
+        setContentView(com.example.tapiwa.todoapp.R.layout.activity_create_account);
 
         emailEdtTxt = findViewById(com.example.tapiwa.todoapp.R.id.email_address_EdtTxt);
         usernameEdtTxt = findViewById(com.example.tapiwa.todoapp.R.id.username_EdtTxt);
@@ -135,7 +136,7 @@ public class CreateAccountActivity extends AppCompatActivity  {
        user.setWeeklyProjects("");
        user.setLongTermProjects("");
        user.setYearlyProjects("");
-       user.setSharedProjectKeys(new ArrayList<String>());
+       user.setSharedProjectReferenceKeys(new ArrayList<SharedProjectReference>());
        user.setPersonalProjects("");
 
        FirebaseFirestore db = FirebaseFirestore.getInstance();

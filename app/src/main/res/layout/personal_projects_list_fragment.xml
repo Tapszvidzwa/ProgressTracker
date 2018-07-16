@@ -1,95 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/personal_project_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/personal_project_list_layout"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/resting_dude"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_centerInParent="true"
-        android:src="@android:drawable/picture_frame"
-        android:visibility="invisible" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/no_goals_text"
-        android:visibility="invisible"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="You have no goals set"
-        android:layout_below="@id/resting_dude"/>
-
-
-    <androidx.appcompat.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
-        android:id="@+id/info_bar_cardv"
-        android:layout_below="@id/percentage_completed"
-        android:layout_height="70dp"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/resting_dude"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_centerInParent="true"
+            android:src="@android:drawable/picture_frame"
+            android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/current_date"
+            android:id="@+id/no_goals_text"
             android:layout_width="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_height="wrap_content"
+            android:layout_below="@id/resting_dude"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="You have no goals set"
+            android:visibility="invisible" />
+
+
+        <androidx.appcompat.widget.CardView
+            android:id="@+id/info_bar_cardv"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/percentage_completed"
+            android:layout_marginTop="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/current_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:text="Wednesday Oct 24"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.CardView>
+
+        <TextView
+            android:id="@+id/percentage_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:text="Wednesday Oct 24"
-            android:layout_marginLeft="8dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="@android:color/white"
-            android:textSize="30sp" />
+            android:layout_marginTop="60dp"
+            android:text="20%"
+            android:textColor="@android:color/black"
+            android:textSize="22sp" />
 
-        </RelativeLayout>
+        <ListView
+            android:id="@+id/goals_lstV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/info_bar_cardv"></ListView>
 
-    </androidx.appcompat.widget.CardView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:text="20%"
-        android:layout_marginTop="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@android:color/black"
-        android:id="@+id/percentage_completed"/>
-
-    <ListView
-        android:id="@+id/goals_lstV"
-        android:layout_below="@id/info_bar_cardv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-   >
-    </ListView>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_task"
-            android:src="@drawable/ic_white_add"
-            app:backgroundTint="@color/colorAccent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:paddingBottom="16dp" />
     </RelativeLayout>
-
-
 </FrameLayout>

@@ -1,0 +1,5 @@
+
+‹squid:S1319"qThe return type of this method should be an interface such as "List" rather than the implementation "LinkedList".(Ü¶•šüÿÿÿÿ
+‰squid:S1319"tThe type of the "taskList" object should be an interface such as "List" rather than the implementation "LinkedList".(‹İ˜
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(òÖ‰á
+,squid:S1700"Rename field "taskList"(ó¾Ø

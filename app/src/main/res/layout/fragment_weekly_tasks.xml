@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/weekly_fragment_tasks_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/weekly_percentage_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/weekly_goals_lstV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="56dp">
+
+        </ListView>
+
+
+        <ImageView
+            android:id="@+id/weekly_resting_dude"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_centerInParent="true"
+            android:src="@android:drawable/picture_frame"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/weekly_no_goals_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/resting_dude"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="You have no goals set"
+            android:visibility="invisible" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"></RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,4 @@
+
+‡squid:UselessImportCheck"YRemove this unused import 'com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel'.(Ş¥ñÑúÿÿÿÿ8ÜÀÄÅ,
+‘squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(şı¼§úÿÿÿÿ8õ¼Å,
+˜squid:S1319"|The type of the "sharedProjectKeys" object should be an interface such as "List" rather than the implementation "ArrayList".(Ü§ı£8õ¼Å,
