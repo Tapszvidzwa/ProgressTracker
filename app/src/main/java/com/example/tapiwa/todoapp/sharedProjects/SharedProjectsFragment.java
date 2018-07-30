@@ -1,35 +1,46 @@
 package com.example.tapiwa.todoapp.sharedProjects;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
-import com.example.tapiwa.todoapp.home.MainActivty;
+import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.login.User;
-import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
 import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
+import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
 
 
-public class SharedProjectsFragment extends Fragment {
+public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
 
-    private View sharedProjectsView;
-    private FirebaseFirestore db;
+    private static View sharedProjectsView;
+    private static FirebaseFirestore db;
     public static SharedProjectsAdapter mAdapter;
     public static ArrayList<SharedProjectReference> sharedProjectsList;
     private static DatabaseHandler remoteDb;
-    private ListView sharedProjectsListV;
+    private static ListView sharedProjectsListV;
+    public static Activity activity;
+    public static Constants.InputRequestType inputRequestType;
+    public static int clickedProject;
 
     public SharedProjectsFragment() {
         // Required empty public constructor
@@ -42,35 +53,75 @@ public class SharedProjectsFragment extends Fragment {
         sharedProjectsView = inflater.inflate(R.layout.fragment_shared_projects, container, false);
         initializeVariables();
         initializeViews();
+        initializeListeners();
         return sharedProjectsView;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.shared_projects_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        clickedProject = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.rename_project:
+                inputRequestType = RENAME_PROJECT;
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_PROJECT);
+                return true;
+            case R.id.exit_project:
+                exitFromProject();
+                break;
+            default:
+                return super.onContextItemSelected(item);
+        }
+        return true;
     }
 
     private void initializeVariables() {
         db = FirebaseFirestore.getInstance();
         sharedProjectsList = new ArrayList<>();
         remoteDb = new DatabaseHandler();
-
+        activity = getActivity();
+        inputRequestType = NONE;
     }
 
     private void initializeViews() {
+        sharedProjectsListV = sharedProjectsView.findViewById(R.id.shared_projects_lstV);
         mAdapter = new SharedProjectsAdapter(getActivity().getApplicationContext(),
                 R.layout.item_shared_project,
                 sharedProjectsList);
-        sharedProjectsListV = sharedProjectsView.findViewById(R.id.shared_projects_lstV);
+        registerForContextMenu(sharedProjectsListV);
         sharedProjectsListV.setAdapter(mAdapter);
         loadProjectsFromDb();
     }
 
-    private void loadProjectsFromDb() {
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        db.document(USERS_DB_PATH + uid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    private void initializeListeners() {
+        sharedProjectsListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User userCredentials = documentSnapshot.toObject(User.class);
-                sharedProjectsList = userCredentials.getSharedProjectReferenceKeys();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                SharedProjectReference projectReference = sharedProjectsList.get(i);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("projectReference", projectReference);
+                MainActivity.switchToFragment(SINGLE_SHARED_PROJECT, bundle);
+            }
+        });
+    }
 
-                mAdapter = new SharedProjectsAdapter(getActivity().getApplicationContext(),
+    private static void loadProjectsFromDb() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        db.document(USERS_DB_PATH + uid).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                User userCredentials = documentSnapshot.toObject(User.class);
+                sharedProjectsList.clear();
+                sharedProjectsList = userCredentials.getSharedProjectReferenceKeys();
+                mAdapter = new SharedProjectsAdapter(activity.getApplicationContext(),
                         R.layout.item_shared_project,
                         sharedProjectsList);
                 sharedProjectsListV.setAdapter(mAdapter);
@@ -78,14 +129,21 @@ public class SharedProjectsFragment extends Fragment {
         });
     }
 
-    public static void refreshProjects() {
+    public static void addProject(final String projectName) {
+        remoteDb.addNewSharedProject(
+                MainActivity.activity.getApplicationContext(),
+                projectName);
+        loadProjectsFromDb();
         mAdapter.notifyDataSetChanged();
     }
 
-    public static void addProject(final String projectName) {
-                    remoteDb.addNewSharedProject(
-                            MainActivty.activity.getApplicationContext(),
-                            projectName);
-                    mAdapter.notifyDataSetChanged();
+    public static void renameProject(String projectName) {
+        SharedProjectReference projectReference = sharedProjectsList.get(clickedProject);
+        remoteDb.renameSharedProject(activity.getApplicationContext(), projectName, projectReference);
+    }
+
+    private void exitFromProject() {
+        SharedProjectReference projectReference = sharedProjectsList.get(clickedProject);
+        remoteDb.exitFromSharedProject(getContext(), projectReference);
     }
 }

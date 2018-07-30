@@ -1,6 +1,5 @@
 package com.example.tapiwa.todoapp.dailyProjects;
 
-import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,51 +8,56 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
+import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import es.dmoral.toasty.Toasty;
 
 
-public class DailyTasksFragment extends Fragment {
+public class DailyTasksFragment extends androidx.fragment.app.Fragment {
 
-    private static ListView goalsList;
     public static TextView date;
+    private static ListView goalsList;
     private static View tasksPageView;
     private static TextView percentageTxtV;
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
     private static String CURRENT_DATE;
+    private FileHandler fileHandler;
 
 
     public DailyTasksFragment() {
         // Required empty public constructor
     }
 
+    public static void addTask(String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+
+        tasksList.add(newTask);
+        goalsList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         tasksPageView = inflater.inflate(R.layout.fragment_daily_tasks, container, false);
         CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
         initializeViews();
         initializeVariables();
-        getGoals();
         calculatePercentage();
         return tasksPageView;
     }
@@ -61,77 +65,49 @@ public class DailyTasksFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getGoals();
+        retrieveSavedTasks();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        saveTasks();
+    }
 
-        TaskList list = new TaskList();
+    private void saveTasks() {
+        String tasksJson = convertTasksListToJsonString();
+        fileHandler.saveFile(getString(R.string.DAILY_TASKS_FILE), tasksJson);
+    }
 
-        list.setTaskList(tasksList);
+    private void retrieveSavedTasks() {
+        JSONObject tasksJson = fileHandler.readFile(getString(R.string.DAILY_TASKS_FILE));
+        populateTaskList(tasksJson);
+    }
 
+    private String convertTasksListToJsonString() {
         Gson gson = new Gson();
-        String tasksJson = gson.toJson(list);
-
-        FileOutputStream fos = null;
-        try {
-            //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.DailyGoalsFile));
-            //create new file if the file does not exist
-            tasksFile.createNewFile();
-            //save/write the tasks to the tasks.json file
-            fos = new FileOutputStream(tasksFile);
-            byte[] tasksFileBytes = tasksJson.getBytes();
-            fos.write(tasksFileBytes);
-            fos.flush();
-
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
-            return;
-        } finally {
-
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        return gson.toJson(list);
     }
 
     private void initializeVariables() {
         tasksList = new LinkedList<>();
+        fileHandler = new FileHandler(getContext());
     }
 
-    private void getGoals() {
-        try {
-            //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.DailyGoalsFile));
-            //create new file if the file does not exist
-            tasksFile.createNewFile();
-
-            BufferedReader br = new BufferedReader(new FileReader(tasksFile));
-
+    private void populateTaskList(JSONObject tasksJson) {
+        if (tasksJson != null) {
             Gson gson = new Gson();
+            TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
 
-            TaskList list = gson.fromJson(br, TaskList.class);
-
-            if (list != null) {
+            if (list != null && list.getTaskList().size() > 0) {
                 tasksList = list.getTaskList();
                 adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
                 goalsList.setAdapter(adapter);
             }
-
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), "Failed to create file", Toast.LENGTH_SHORT);
-            e.printStackTrace();
         }
     }
-
 
     private void initializeViews() {
 
@@ -203,16 +179,6 @@ public class DailyTasksFragment extends Fragment {
                 ++i;
             }
         }
-
         return i;
-    }
-
-    public static void addTask(String task) {
-        Task newTask = new Task();
-        newTask.setTask(task);
-        newTask.setStatus("uncompleted");
-
-        tasksList.add(newTask);
-        adapter.notifyDataSetChanged();
     }
 }

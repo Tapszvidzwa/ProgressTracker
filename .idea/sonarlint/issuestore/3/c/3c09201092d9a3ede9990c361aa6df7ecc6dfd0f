@@ -1,6 +1,22 @@
 
-[squid:S1068":Remove this unused "sharedProjectsListView" private field.(Š®™Ùýÿÿÿÿ8Œ‘í÷Æ,
-†squid:S1450"eRemove the "sharedProjectsListView" field and declare it as a local variable in the relevant methods.(Š®™Ùýÿÿÿÿ8Œ‘í÷Æ,
-asquid:S1858"@"getUid" returns a string, there's no need to call "toString()".(úÈÜØúÿÿÿÿ8Œ‘í÷Æ,
-vsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8Œ‘í÷Æ,
-Zsquid:S1155">Use isEmpty() to check whether the collection is empty or not.(ý÷ó£8Œ‘í÷Æ,
+Tsquid:S2696Z"6Make the enclosing method "static" or remove this set.(¾Ñ€º8‰¶Ì¶Ê,
+isquid:UnusedPrivateMethodk"8Remove this unused private "initializeListeners" method.(¶›ÿ†øÿÿÿÿ8‰¶Ì¶Ê,
+[squid:S1444("8Make this "public static sharedProjectsList" field final(Ý®ŒØþÿÿÿÿ8‰¶Ì¶Ê,
+jsquid:CommentedOutCodeLine—"<This block of commented-out lines of code should be removed.(šäÕË8‰¶Ì¶Ê,
+Usquid:S1068-"2Remove this unused "clickedProject" private field.(žùˆÅÿÿÿÿÿ8‰¶Ì¶Ê,
+Tsquid:S2696b"6Make the enclosing method "static" or remove this set.(†ëª×8‰¶Ì¶Ê,
+hsquid:CommentedOutCodeLineO"<This block of commented-out lines of code should be removed.(êý¬{8‰¶Ì¶Ê,
+Tsquid:S2696\"6Make the enclosing method "static" or remove this set.(“·öø8‰¶Ì¶Ê,
+xsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8‰¶Ì¶Ê,
+Ysquid:S2696["6Make the enclosing method "static" or remove this set.(¤Ä£Õÿÿÿÿÿ8‰¶Ì¶Ê,
+˜"squid:ClassVariableVisibilityCheck("^Make sharedProjectsList a static final constant or non-public and provide accessors if needed.(Ý®ŒØþÿÿÿÿ8‰¶Ì¶Ê,
+ squid:S1319("}The type of the "sharedProjectsList" object should be an interface such as "List" rather than the implementation "ArrayList".(Ý®ŒØþÿÿÿÿ8‰¶Ì¶Ê,
+Ysquid:S2696Y"6Make the enclosing method "static" or remove this set.(£ªµúÿÿÿÿ8‰¶Ì¶Ê,
+Lsquid:S1444'".Make this "public static mAdapter" field final(·Àøò8‰¶Ì¶Ê,
+€squid:S1450-"]Remove the "clickedProject" field and declare it as a local variable in the relevant methods.(žùˆÅÿÿÿÿÿ8‰¶Ì¶Ê,
+‰"squid:ClassVariableVisibilityCheck'"TMake mAdapter a static final constant or non-public and provide accessors if needed.(·Àøò8‰¶Ì¶Ê,
+Ksquid:S2386Z"-Make member "sharedProjectsList" "protected".(¾Ñ€º8‰¶Ì¶Ê,
+asquid:UnusedPrivateMethod¤"4Remove this unused private "exitFromProject" method.(è¦õ8‰¶Ì¶Ê,
+Rsquid:S1068,"4Remove this unused "inputRequestType" private field.(æ“†…8‰¶Ì¶Ê,
+Ysquid:S26967"6Make the enclosing method "static" or remove this set.(†Õúšÿÿÿÿÿ8‰¶Ì¶Ê,
+Tsquid:S2696e"6Make the enclosing method "static" or remove this set.(¹ÔÝï8‰¶Ì¶Ê,

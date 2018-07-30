@@ -1,6 +1,6 @@
 package com.example.tapiwa.todoapp.login;
 
-import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
+import com.example.tapiwa.todoapp.sharedProjects.SharedProjectReference;
 
 import java.util.ArrayList;
 
@@ -24,6 +24,10 @@ public class User {
         return dailyProjects;
     }
 
+    public void setDailyProjects(String dailyProjects) {
+        this.dailyProjects = dailyProjects;
+    }
+
     public String getYearlyProjects() {
         return yearlyProjects;
     }
@@ -38,12 +42,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-
-
-    public void setDailyProjects(String dailyProjects) {
-        this.dailyProjects = dailyProjects;
     }
 
     public String getWeeklyProjects() {

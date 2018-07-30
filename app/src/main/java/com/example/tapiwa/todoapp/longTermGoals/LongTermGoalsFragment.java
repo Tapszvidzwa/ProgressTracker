@@ -1,49 +1,38 @@
 package com.example.tapiwa.todoapp.longTermGoals;
 
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
+import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import org.json.JSONObject;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import androidx.appcompat.app.AlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import es.dmoral.toasty.Toasty;
 
 
-public class LongTermGoalsFragment extends Fragment {
+public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
 
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
-    private ListView goalsList;
+    private static ListView goalsList;
     private View tasksPageView;
-
-
+    private FileHandler fileHandler;
     private int uncompletedTasks;
-
-    public LongTermGoalsFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,87 +40,71 @@ public class LongTermGoalsFragment extends Fragment {
         tasksPageView = inflater.inflate(R.layout.fragment_long_term_goals, container, false);
         initializeViews();
         initializeVariables();
-        getGoals();
-
         return tasksPageView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        retrieveSavedTasks();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        saveTasks();
+    }
 
-        TaskList list = new TaskList();
-        list.setTaskList(tasksList);
-        Gson gson = new Gson();
-        String tasksJson = gson.toJson(list);
 
-        FileOutputStream fos = null;
-        try {
-            //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Five_year_tasks_file));
-            //create new file if the file does not exist
-            tasksFile.createNewFile();
-            //save/write the tasks to the tasks.json file
-            fos = new FileOutputStream(tasksFile);
-            byte[] tasksFileBytes = tasksJson.getBytes();
-            fos.write(tasksFileBytes);
-            fos.flush();
+    public LongTermGoalsFragment() {
+        // Required empty public constructor
+    }
 
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_creation), Toast.LENGTH_SHORT);
-            return;
-        } finally {
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+    public static void addNewTask(final String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+
+        //add it to the tasks list
+        tasksList.add(newTask);
+        goalsList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void saveTasks() {
+        String tasksJson = convertTasksListToJsonString();
+        fileHandler.saveFile(getString(R.string.LONG_TERM_PROJECTS_FILE), tasksJson);
+    }
+
+    private void retrieveSavedTasks() {
+        JSONObject tasksJson = fileHandler.readFile(getString(R.string.LONG_TERM_PROJECTS_FILE));
+        populateTaskList(tasksJson);
+    }
+
+    private void populateTaskList(JSONObject tasksJson) {
+        if (tasksJson != null) {
+            Gson gson = new Gson();
+            TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
+
+            if (list != null && list.getTaskList().size() > 0) {
+                tasksList = list.getTaskList();
+                adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
+                goalsList.setAdapter(adapter);
             }
         }
+    }
+
+    private String convertTasksListToJsonString() {
+        Gson gson = new Gson();
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        return gson.toJson(list);
     }
 
     private void initializeVariables() {
         tasksList = new LinkedList<>();
         uncompletedTasks = 0;
-    }
-
-
-    private void getGoals() {
-
-        try {
-            //open tasks file
-            File tasksFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Five_year_tasks_file));
-            //create new file if the file does not exist
-            tasksFile.createNewFile();
-
-            if (tasksFile.exists()) {
-
-                BufferedReader br = new BufferedReader(new FileReader(tasksFile));
-
-                Gson gson = new Gson();
-
-                TaskList list = gson.fromJson(br, TaskList.class);
-
-                if (list != null) {
-                    tasksList = list.getTaskList();
-                    adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
-                    goalsList.setAdapter(adapter);
-                }
-            } else {
-                getGoals();
-            }
-
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_loading), Toast.LENGTH_SHORT);
-            e.printStackTrace();
-        }
+        fileHandler = new FileHandler(getContext());
     }
 
     private void initializeViews() {
@@ -213,16 +186,6 @@ public class LongTermGoalsFragment extends Fragment {
             }
         }
         return true;
-    }
-
-    public static void addNewTask(final String task) {
-        Task newTask = new Task();
-        newTask.setTask(task);
-        newTask.setStatus("uncompleted");
-
-        //add it to the tasks list
-        tasksList.add(newTask);
-        adapter.notifyDataSetChanged();
     }
 
 }

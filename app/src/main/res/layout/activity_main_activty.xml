@@ -16,7 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:fabAlignmentMode="center"
+            app:hideOnScroll="true"
+            app:fabAttached="true"
+            app:navigationIcon="@drawable/ic_menu_white_24px"
+            style="@style/Widget.MaterialComponents.BottomAppBar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -26,17 +41,6 @@
             app:fabSize="normal"
             app:layout_anchor="@id/bar"
             app:srcCompat="@drawable/ic_white_add" />
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_gravity="bottom"
-            android:padding="12dp"
-            app:backgroundTint="@color/colorPrimaryDark"
-            app:fabAlignmentMode="center"
-            app:hideOnScroll="true"
-            app:navigationIcon="@drawable/ic_menu_white_24px" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

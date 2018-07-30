@@ -1,54 +1,28 @@
 
-Osquid:S1444/"1Make this "public static noGoalsText" field final(êÜéĞ8ˆšà’Ç,
-Tsquid:S2696¢"6Make the enclosing method "static" or remove this set.(—ŸÌ8Ú­€„Á,
-Zsquid:S2696“"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8¹ŒóùÆ,
-Ysquid:S2696J"6Make the enclosing method "static" or remove this set.(Ä´Ëøÿÿÿÿ8ˆšà’Ç,
-Hsquid:S1444/"*Make this "public static date" field final(êÜéĞ8ˆšà’Ç,
-Œ"squid:ClassVariableVisibilityCheck/"WMake noGoalsText a static final constant or non-public and provide accessors if needed.(êÜéĞ8ˆšà’Ç,
-Ssquid:S10685"0Remove this unused "parentLayout" private field.(£´ï†ıÿÿÿÿ8ˆšà’Ç,
-ysquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬ˆüÌ8Ú­€„Á,
-?squid:S1170:"!Make this final field static too.(×›øä8ˆšà’Ç,
-Rsquid:S1068="4Remove this unused "uncompletedTasks" private field.(³·­è8Ú­€„Á,
-Usquid:S2696¤"6Make the enclosing method "static" or remove this set.(üõ¹Œ8ªÔöùÆ,
-}squid:S1450="_Remove the "uncompletedTasks" field and declare it as a local variable in the relevant methods.(³·­è8ˆšà’Ç,
-Ysquid:S2696K"6Make the enclosing method "static" or remove this set.(±­ç…øÿÿÿÿ8€ˆá’Ç,
-:squid:S3626Ë"Remove this redundant jump.(ûÁİ…8ˆšà’Ç,
-Zsquid:S2696¨"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8ˆšà’Ç,
-@squid:S1659/""Declare "date" on a separate line.(êÜéĞ8ˆšà’Ç,
-lsquid:UselessImportCheck"<Remove this unused import 'android.content.DialogInterface'.(Š­›¨şÿÿÿÿ8ìà‚ØÉ,
-~squid:S14505"[Remove the "parentLayout" field and declare it as a local variable in the relevant methods.(£´ï†ıÿÿÿÿ8ˆšà’Ç,
-Usquid:S2696£"6Make the enclosing method "static" or remove this set.(ãò 8Ú­€„Á,
-Lsquid:S1068<".Remove this unused "totalTasks" private field.(¹½·é8Ú­€„Á,
-osquid:UselessImportCheck&"?Remove this unused import 'androidx.appcompat.app.AlertDialog'.(¼Ìï¨üÿÿÿÿ8ìà‚ØÉ,
-Osquid:S10688",Remove this unused "activity" private field.(¾ÒÖãùÿÿÿÿ8ìà‚ØÉ,
-zsquid:S14508"WRemove the "activity" field and declare it as a local variable in the relevant methods.(¾ÒÖãùÿÿÿÿ8ìà‚ØÉ,
-:squid:S3626Ñ"Remove this redundant jump.(ûÁİ…8ˆšà’Ç,
-Zsquid:S2696”"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8ˆšà’Ç,
-Usquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8ˆšà’Ç,
-_squid:UselessImportCheck"4Remove this unused import 'android.widget.EditText'.(†Å›Ú8ìà‚ØÉ,
-Fsquid:S1148z"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ˆšà’Ç,
-Tsquid:S10681"1Remove this unused "completionBar" private field.(Á´Å…ıÿÿÿÿ8ˆšà’Ç,
-Zsquid:S2696§"6Make the enclosing method "static" or remove this set.(åÙ›øÿÿÿÿ8ªÔöùÆ,
-Tsquid:S2696¡"6Make the enclosing method "static" or remove this set.(ƒÎ¼"8ªÔöùÆ,
-Gsquid:S1148š"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ˆšà’Ç,
-^
-squid:S899i"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8ˆšà’Ç,
-osquid:S00116:"PRename this field "GOALS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×›øä8ˆšà’Ç,
-_
-squid:S899Š"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8ˆšà’Ç,
-Msquid:S2093e"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8ˆšà’Ç,
-Zsquid:S2696¥"6Make the enclosing method "static" or remove this set.(åÂ÷‚ûÿÿÿÿ8ˆšà’Ç,
-…"squid:ClassVariableVisibilityCheck/"PMake date a static final constant or non-public and provide accessors if needed.(êÜéĞ8ˆšà’Ç,
-Nsquid:S10686"+Remove this unused "addTask" private field.(³ƒ¦ÿÿÿÿÿ8ìà‚ØÉ,
-Gsquid:S1068:")Remove this unused "GOALS" private field.(×›øä8ˆšà’Ç,
-^squid:UselessImportCheck	"3Remove this unused import 'android.text.InputType'.(€¨“§8ìà‚ØÉ,
-Nsquid:S1444."1Make this "public static restingDude" field final(¸ïép8Ú­€„Á,
-`squid:UselessImportCheck"5Remove this unused import 'android.text.InputFilter'.(Áóøù8ìà‚ØÉ,
-9squid:S3626r"Remove this redundant jump.(ûÁİ…8ˆšà’Ç,
-Wsquid:S1068>"4Remove this unused "initialBarlength" private field.(Â¥„‘ÿÿÿÿÿ8ˆšà’Ç,
-Tsquid:S2696I"6Make the enclosing method "static" or remove this set.(éšŞÅ8ªÔöùÆ,
-‹"squid:ClassVariableVisibilityCheck."WMake restingDude a static final constant or non-public and provide accessors if needed.(¸ïép8Ú­€„Á,
-zsquid:S30087"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æšªùÿÿÿÿ8ˆšà’Ç,
-bsquid:S1155É">Use isEmpty() to check whether the collection is empty or not.(¸¬ÆÏşÿÿÿÿ8ˆšà’Ç,
-nsquid:S1192¯"JDefine a constant instead of duplicating this literal "completed" 3 times.(À’øÿÿÿÿ8ˆšà’Ç,
-ksquid:S2095Œ"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ä›Ä»8ˆšà’Ç,
+ksquid:S1192"JDefine a constant instead of duplicating this literal "completed" 3 times.(À’øÿÿÿÿ8ÕİşŒÊ,
+msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(‚Ì’óúÿÿÿÿ8ÕİşŒÊ,
+xsquid:S3008"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æšªùÿÿÿÿ8ÕİşŒÊ,
+Fsquid:S1444"*Make this "public static date" field final(£ˆ«‚8ÕİşŒÊ,
+7squid:S3626"Remove this redundant jump.(ûÁİ…8ÕİşŒÊ,
+7squid:S3626"Remove this redundant jump.(ûÁİ…8ÕİşŒÊ,
+7squid:S3626"Remove this redundant jump.(ûÁİ…8ÕİşŒÊ,
+Ksquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8ÕİşŒÊ,
+hsquid:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ä›Ä»8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(´¬Ø£ùÿÿÿÿ8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Ä´Ëøÿÿÿÿ8ÕİşŒÊ,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8ÕİşŒÊ,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ƒÎ¼"8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(åÂ÷‚ûÿÿÿÿ8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(åÙ›øÿÿÿÿ8ÕİşŒÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8ÕİşŒÊ,
+ƒ"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(£ˆ«‚8ÕİşŒÊ,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬ˆüÌ8ÕİşŒÊ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÕİşŒÊ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÕİşŒÊ,
+\
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8ÕİşŒÊ,
+\
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8ÕİşŒÊ,
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(¸¬ÆÏşÿÿÿÿ8ÕİşŒÊ,

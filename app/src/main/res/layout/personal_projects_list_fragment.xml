@@ -28,7 +28,7 @@
             android:visibility="invisible" />
 
 
-        <androidx.appcompat.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/info_bar_cardv"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -54,7 +54,7 @@
 
             </RelativeLayout>
 
-        </androidx.appcompat.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/percentage_completed"

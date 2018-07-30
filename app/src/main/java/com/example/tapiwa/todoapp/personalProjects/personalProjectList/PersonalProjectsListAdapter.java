@@ -12,7 +12,6 @@ import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 
 public class PersonalProjectsListAdapter extends BaseAdapter {
@@ -30,7 +29,7 @@ public class PersonalProjectsListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if(taskList != null) {
+        if (taskList != null) {
             return taskList.size();
         } else {
             return 0;
@@ -60,7 +59,7 @@ public class PersonalProjectsListAdapter extends BaseAdapter {
         View row = view;
         ViewHolder holder = new ViewHolder();
 
-        if(row == null) {
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
 

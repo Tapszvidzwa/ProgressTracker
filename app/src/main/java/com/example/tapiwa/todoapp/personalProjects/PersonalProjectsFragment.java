@@ -1,6 +1,5 @@
 package com.example.tapiwa.todoapp.personalProjects;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -11,34 +10,31 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.home.MainActivty;
-import com.example.tapiwa.todoapp.personalProjects.personalProjectList.PersonalProjectListFragment;
+import com.example.tapiwa.todoapp.Utils.Constants;
+import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.home.MainActivity;
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-;import es.dmoral.toasty.Toasty;
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
+import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.PERSONAL_PROJECT;
 
-import static com.example.tapiwa.todoapp.personalProjects.PersonalProjectsFragment.InputRequestType.RENAME_PROJECT;
+public class PersonalProjectsFragment extends androidx.fragment.app.Fragment {
 
-public class PersonalProjectsFragment extends Fragment {
-
-    private View personalProjectsView;
-    private static ArrayList<PersonalProjectModel> personalProjectsList;
-    private PersonalProjectListModel personalProjectListModel;
-    private static PersonalProjectsAdapter adapter;
-    private TextView personalProjectsTitle;
-    private ListView personalProjectsListV;
     public static int clickedProject;
-    public static InputRequestType inputRequestType;
+    public static Constants.InputRequestType inputRequestType;
+    private static ArrayList<PersonalProjectModel> personalProjectsList;
+    private static PersonalProjectsAdapter adapter;
+    private View personalProjectsView;
+    private PersonalProjectListModel personalProjectListModel;
+    private ListView personalProjectsListV;
+    private FileHandler fileHandler;
 
     public PersonalProjectsFragment() {
         // Required empty public constructor
@@ -51,7 +47,6 @@ public class PersonalProjectsFragment extends Fragment {
         personalProjectsView = inflater.inflate(R.layout.fragment_personal_projects, container, false);
         initializeViews();
         initializeVariables();
-        getProjects();
         return personalProjectsView;
     }
 
@@ -70,7 +65,7 @@ public class PersonalProjectsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.rename_project:
                 inputRequestType = RENAME_PROJECT;
-                MainActivty.getInputForFragment(MainActivty.visibleFragment);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, null);
                 return true;
             case R.id.delete_project:
                 deleteProject(info.position);
@@ -81,81 +76,37 @@ public class PersonalProjectsFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        PersonalProjectListModel projectsList = new PersonalProjectListModel();
-        projectsList.setProjects(personalProjectsList);
-
-        Gson gson = new Gson();
-        String personalProjectsJson = gson.toJson(projectsList);
-
-        FileOutputStream fos = null;
-        try {
-            File personalProjectsFile = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Personal_projects_file));
-            personalProjectsFile.createNewFile();
-
-            fos = new FileOutputStream(personalProjectsFile);
-            byte[] personalProjectsFileBytes = personalProjectsJson.getBytes();
-            fos.write(personalProjectsFileBytes);
-            fos.flush();
-
-        } catch (IOException e) {
-            Toasty.error(getActivity().getApplicationContext(), getString(R.string.failed_file_creation), Toast.LENGTH_SHORT);
-            return;
-        } finally {
-
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
+    public void onResume() {
+        super.onResume();
+        retrieveSavedTasks();
     }
 
-    private void deleteProject(int pos) {
-        personalProjectsList.remove(pos);
+    @Override
+    public void onPause() {
+        super.onPause();
+        saveTasks();
+    }
+
+    public static void addProject(final String projectName) {
+        PersonalProjectModel newProject = new PersonalProjectModel();
+        newProject.setProjectTitle(projectName);
+        personalProjectsList.add(newProject);
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void renameProject(final String projectName) {
+        PersonalProjectModel projectModel = new PersonalProjectModel();
+        projectModel = personalProjectsList.get(clickedProject);
+        projectModel.setProjectTitle(projectName);
+        personalProjectsList.set(clickedProject, projectModel);
         adapter.notifyDataSetChanged();
     }
 
     private void initializeVariables() {
         personalProjectsList = new ArrayList<>();
-        inputRequestType = InputRequestType.NONE;
+        inputRequestType = NONE;
         clickedProject = 0;
-    }
-
-    private void getProjects() {
-
-        BufferedReader br = null;
-        try {
-            File personalProjectsFiles = new File(getActivity().getApplicationContext().getFilesDir(), getString(R.string.Personal_projects_file));
-            personalProjectsFiles.createNewFile();
-            br = new BufferedReader(new FileReader(personalProjectsFiles));
-
-            Gson gson = new Gson();
-
-            personalProjectListModel = gson.fromJson(br, PersonalProjectListModel.class);
-
-            if (personalProjectListModel != null) {
-                personalProjectsList = personalProjectListModel.getProjects();
-                adapter = new PersonalProjectsAdapter(getActivity().getApplicationContext(), R.layout.item_project, personalProjectsList);
-                personalProjectsListV.setAdapter(adapter);
-            }
-
-        } catch (IOException e) {
-            //TODO: handle appropriately
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            } catch (IOException e) {
-                //TODO: handle appropriately
-            }
-        }
+        fileHandler = new FileHandler(getContext());
     }
 
     private void initializeViews() {
@@ -171,35 +122,47 @@ public class PersonalProjectsFragment extends Fragment {
         });
     }
 
-    public static void addProject(final String projectName) {
-        PersonalProjectModel newProject = new PersonalProjectModel();
-        newProject.setProjectTitle(projectName);
-        personalProjectsList.add(newProject);
+    private void saveTasks() {
+        String tasksJson = convertTasksListToJsonString();
+        fileHandler.saveFile(getString(R.string.PERSONAL_PROJECTS_FILE), tasksJson);
+    }
+
+    private void retrieveSavedTasks() {
+        JSONObject tasksJson = fileHandler.readFile(getString(R.string.PERSONAL_PROJECTS_FILE));
+        populateTaskList(tasksJson);
+    }
+
+    private void populateTaskList(JSONObject tasksJson) {
+        if (tasksJson != null) {
+            Gson gson = new Gson();
+            personalProjectListModel = gson.fromJson(tasksJson.toString(),
+                    PersonalProjectListModel.class);
+            if (personalProjectListModel != null && personalProjectListModel.getProjects().size() > 0) {
+                personalProjectsList = personalProjectListModel.getProjects();
+                adapter = new PersonalProjectsAdapter(getActivity().getApplicationContext(),
+                        R.layout.item_project,
+                        personalProjectsList);
+                personalProjectsListV.setAdapter(adapter);
+            }
+        }
+    }
+
+    private String convertTasksListToJsonString() {
+        Gson gson = new Gson();
+        PersonalProjectListModel list = new PersonalProjectListModel();
+        list.setProjects(personalProjectsList);
+        return gson.toJson(list);
+    }
+
+    private void deleteProject(int pos) {
+        personalProjectsList.remove(pos);
         adapter.notifyDataSetChanged();
     }
 
     private void openProject(PersonalProjectModel chosenProject) {
         Bundle bundle = new Bundle();
-        bundle.putString("projectName", chosenProject.getProjectTitle());
-        bundle.putSerializable("taskList", chosenProject.getProjectTasks());
-        bundle.putSerializable("allProjects", personalProjectListModel);
-        android.app.Fragment projectTodoFragment = new PersonalProjectListFragment();
-        projectTodoFragment.setArguments(bundle);
-
-        android.app.FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_holder, projectTodoFragment).commit();
+        bundle.putSerializable("project", chosenProject);
+        bundle.putSerializable("allProjects", null);
+        MainActivity.switchToFragment(PERSONAL_PROJECT, bundle);
     }
-
-    public static void renameProject(final String projectName) {
-        PersonalProjectModel projectModel = new PersonalProjectModel();
-        projectModel = personalProjectsList.get(clickedProject);
-        projectModel.setProjectTitle(projectName);
-        personalProjectsList.set(clickedProject, projectModel);
-        adapter.notifyDataSetChanged();
-    }
-
-    public enum InputRequestType {
-        RENAME_PROJECT, CREATE_NEW_PROJECT, NONE;
-    }
-
 }

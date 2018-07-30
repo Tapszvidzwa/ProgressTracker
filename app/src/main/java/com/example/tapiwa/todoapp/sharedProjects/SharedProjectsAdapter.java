@@ -8,10 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.personalProjects.PersonalProjectModel;
-import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
+import static com.example.tapiwa.todoapp.Utils.Constants.SHARED_PROJECTS_DB_PATH;
 
 
 public class SharedProjectsAdapter extends BaseAdapter {
@@ -19,12 +23,14 @@ public class SharedProjectsAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private ArrayList<SharedProjectReference> sharedProjectsList;
+    private FirebaseFirestore db;
 
 
     public SharedProjectsAdapter(Context context, int layout, ArrayList<SharedProjectReference> sharedProjectsList) {
         this.context = context;
         this.layout = layout;
         this.sharedProjectsList = sharedProjectsList;
+        db = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -63,7 +69,21 @@ public class SharedProjectsAdapter extends BaseAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        holder.projectTitle.setText(project.getProjectName());
+        setProjectName(holder, project);
         return row;
+    }
+
+    public void setProjectName(final ViewHolder viewHolder, SharedProjectReference projectReference) {
+        db.document(SHARED_PROJECTS_DB_PATH + projectReference.getProjectKey()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                SharedProjectModel projectModel = documentSnapshot.toObject(SharedProjectModel.class);
+                if(projectModel != null) {
+                    viewHolder.projectTitle.setText(projectModel.getProjectTitle());
+                } else {
+                    viewHolder.projectTitle.setText("Could not load project name");
+                }
+            }
+        });
     }
 }

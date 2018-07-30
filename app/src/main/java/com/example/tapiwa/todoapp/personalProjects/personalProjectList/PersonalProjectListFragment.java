@@ -1,6 +1,5 @@
 package com.example.tapiwa.todoapp.personalProjects.personalProjectList;
 
-import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,11 +12,14 @@ import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.TaskList;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.personalProjects.PersonalProjectListModel;
 import com.example.tapiwa.todoapp.personalProjects.PersonalProjectModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -26,20 +28,21 @@ import java.util.Iterator;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class PersonalProjectListFragment extends Fragment {
+public class PersonalProjectListFragment extends androidx.fragment.app.Fragment {
 
-    private ListView goalsList;
     public static ImageView restingDude;
     public static TextView noGoalsText, date;
-    private View personalProjectsPageView;
-    private TextView percentageTxtV;
     private static ArrayList<Task> personalProjectTasksList;
     private static PersonalProjectsListAdapter adapter;
+    private ListView goalsList;
+    private View personalProjectsPageView;
+    private TextView percentageTxtV;
     private FloatingActionButton addTask;
     private PersonalProjectListModel allProjectsList;
     private String CURRENT_DATE;
     private String PROJECT_NAME;
     private FileHandler fileHandler;
+    public static PersonalProjectModel projectModel;
 
     public PersonalProjectListFragment() {
         // Required empty public constructor
@@ -55,12 +58,49 @@ public class PersonalProjectListFragment extends Fragment {
         return personalProjectsPageView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        PersonalProjectModel currentProject = new PersonalProjectModel();
+        currentProject.setProjectTitle(PROJECT_NAME);
+        //  currentProject.setProjectTask(personalProjectTasksList);
+
+        allProjectsList.updateProject(currentProject);
+        Gson gson = new Gson();
+        String personalProjectsJson = gson.toJson(allProjectsList);
+        fileHandler.saveFile(getString(R.string.PERSONAL_PROJECTS_FILE), personalProjectsJson);
+    }
+
+
+    private void saveTasks() {
+        String tasksJson = convertTasksListToJsonString();
+        fileHandler.saveFile(getString(R.string.DAILY_TASKS_FILE), tasksJson);
+    }
+
+    private String convertTasksListToJsonString() {
+        Gson gson = new Gson();
+        TaskList list = new TaskList();
+        //list.setTaskList(personalProjectTasksList);
+        return gson.toJson(list);
+    }
+
+    public static void addNewTask(final String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+        personalProjectTasksList.add(newTask);
+        adapter.notifyDataSetChanged();
+    }
+
     private void initializeVariables() {
         CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
         Bundle args = getArguments();
-        PROJECT_NAME = args.getString("projectName");
-        allProjectsList = (PersonalProjectListModel) args.getSerializable("allProjects");
-        // personalProjectTasksList = allProjectsList.getProject(PROJECT_NAME).getProjectTask();
+        projectModel = (PersonalProjectModel) args.getSerializable("project");
         fileHandler = new FileHandler(getActivity().getApplicationContext());
     }
 
@@ -106,16 +146,17 @@ public class PersonalProjectListFragment extends Fragment {
 
     private void calculatePercentage() {
         percentageTxtV.setTextColor(Color.rgb(208, 35, 35));
-
-        if (personalProjectTasksList.size() == 0) {
-            percentageTxtV.setText(Integer.toString(0) + "%");
-            return;
-        } else {
-            int completedTasks = countCompletedTasks();
-            int percentage = (int) Math.floor(((double) completedTasks / personalProjectTasksList.size()) * 100);
-            percentageTxtV.setText(Integer.toString(percentage) + "%");
-            checkTasksCompletion();
-            return;
+        if(personalProjectTasksList != null) {
+            if (personalProjectTasksList.size() == 0) {
+                percentageTxtV.setText(Integer.toString(0) + "%");
+                return;
+            } else {
+                int completedTasks = countCompletedTasks();
+                int percentage = (int) Math.floor(((double) completedTasks / personalProjectTasksList.size()) * 100);
+                percentageTxtV.setText(Integer.toString(percentage) + "%");
+                checkTasksCompletion();
+                return;
+            }
         }
     }
 
@@ -142,32 +183,5 @@ public class PersonalProjectListFragment extends Fragment {
         }
 
         return i;
-    }
-
-    public static void addNewTask(final String task) {
-        Task newTask = new Task();
-        newTask.setTask(task);
-        newTask.setStatus("uncompleted");
-
-        personalProjectTasksList.add(newTask);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        PersonalProjectModel currentProject = new PersonalProjectModel();
-        currentProject.setProjectTitle(PROJECT_NAME);
-        //  currentProject.setProjectTask(personalProjectTasksList);
-
-        allProjectsList.updateProject(currentProject);
-        Gson gson = new Gson();
-        String personalProjectsJson = gson.toJson(allProjectsList);
-        fileHandler.saveFile(getString(R.string.Personal_projects_file), personalProjectsJson);
     }
 }

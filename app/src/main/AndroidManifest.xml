@@ -21,7 +21,7 @@
 
         <activity android:name=".login.CreateAccountActivity"></activity>
 
-        <activity android:name=".home.MainActivty"></activity>
+        <activity android:name=".home.MainActivity"></activity>
 
         <activity android:name=".login.SplashScreenActivity">
             <intent-filter>

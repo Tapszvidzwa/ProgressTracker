@@ -8,8 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -55,7 +53,7 @@ public class TaskAdapter extends BaseAdapter {
         ViewHolder holder = new ViewHolder();
 
 
-        if(row == null) {
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
 

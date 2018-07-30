@@ -1,6 +1,6 @@
 package com.example.tapiwa.todoapp.sharedProjects;
 
-import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask;
 
 import java.util.ArrayList;
 
@@ -8,10 +8,19 @@ public class SharedProjectModel {
 
     private String projectTitle;
     private ArrayList<SharedProjectTask> projectTasks;
+    private ArrayList<String> memberEmails;
     private String lastModifiedtime;
     private String projectKey;
 
     public SharedProjectModel() {
+    }
+
+    public ArrayList<String> getMemberEmails() {
+        return memberEmails;
+    }
+
+    public void setMemberEmails(ArrayList<String> memberEmails) {
+        this.memberEmails = memberEmails;
     }
 
     public String getLastModifiedtime() {

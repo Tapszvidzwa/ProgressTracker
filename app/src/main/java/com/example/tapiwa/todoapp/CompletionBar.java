@@ -51,7 +51,6 @@ public class CompletionBar {
     }
 
 
-
     public int calculateCompletedScreenWidth() {
         double x = ((double) completed / total) * screenWidth;
         int newLoadingBarWdith = (int) Math.floor(x);
@@ -79,68 +78,68 @@ public class CompletionBar {
 
     public void setColor() {
 
-        if(completed <= (0.10 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(208,35,35));
-            completionTxtV.setTextColor(Color.rgb(208,35,35));
+        if (completed <= (0.10 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(208, 35, 35));
+            completionTxtV.setTextColor(Color.rgb(208, 35, 35));
             return;
         }
 
-        if(completed < (0.20 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(191,32,69));
-            completionTxtV.setTextColor(Color.rgb(191,32,69));
+        if (completed < (0.20 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(191, 32, 69));
+            completionTxtV.setTextColor(Color.rgb(191, 32, 69));
             return;
         }
 
-        if(completed < (0.30 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(170,28,103));
-            completionTxtV.setTextColor(Color.rgb(170,28,103));
+        if (completed < (0.30 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(170, 28, 103));
+            completionTxtV.setTextColor(Color.rgb(170, 28, 103));
             return;
         }
 
-        if(completed < (0.40 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(147,25,148));
-            completionTxtV.setTextColor(Color.rgb(147,25,148));
+        if (completed < (0.40 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(147, 25, 148));
+            completionTxtV.setTextColor(Color.rgb(147, 25, 148));
             return;
         }
 
-        if(completed < (0.50 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(97,30,139));
-            completionTxtV.setTextColor(Color.rgb(97,30,139));
+        if (completed < (0.50 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(97, 30, 139));
+            completionTxtV.setTextColor(Color.rgb(97, 30, 139));
             return;
         }
 
-        if(completed < (0.60 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(78,34,142));
-            completionTxtV.setTextColor(Color.rgb(78,34,142));
+        if (completed < (0.60 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(78, 34, 142));
+            completionTxtV.setTextColor(Color.rgb(78, 34, 142));
             return;
         }
 
-        if(completed < (0.70 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(54,40,144));
-            completionTxtV.setTextColor(Color.rgb(54,40,144));
+        if (completed < (0.70 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(54, 40, 144));
+            completionTxtV.setTextColor(Color.rgb(54, 40, 144));
             return;
         }
 
-        if(completed < (0.80 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(36,64,140));
-            completionTxtV.setTextColor(Color.rgb(36,64,140));
+        if (completed < (0.80 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(36, 64, 140));
+            completionTxtV.setTextColor(Color.rgb(36, 64, 140));
             return;
         }
 
 
-        if(completed < (0.90 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(31,84,135));
-            completionTxtV.setTextColor(Color.rgb(31,84,135));
+        if (completed < (0.90 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(31, 84, 135));
+            completionTxtV.setTextColor(Color.rgb(31, 84, 135));
             return;
         }
 
-        if(completed < (0.95 * total)) {
-            horizontalBar.setBackgroundColor(Color.rgb(42,143,92));
-            completionTxtV.setTextColor(Color.rgb(42,143,92));
+        if (completed < (0.95 * total)) {
+            horizontalBar.setBackgroundColor(Color.rgb(42, 143, 92));
+            completionTxtV.setTextColor(Color.rgb(42, 143, 92));
             return;
         }
 
-        horizontalBar.setBackgroundColor(Color.rgb(35,169,28));
-        completionTxtV.setTextColor(Color.rgb(35,169,28));
+        horizontalBar.setBackgroundColor(Color.rgb(35, 169, 28));
+        completionTxtV.setTextColor(Color.rgb(35, 169, 28));
     }
 }

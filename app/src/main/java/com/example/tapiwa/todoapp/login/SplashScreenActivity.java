@@ -5,23 +5,22 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.example.tapiwa.todoapp.home.MainActivty;
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.home.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import androidx.annotation.NonNull;
 
 
 public class SplashScreenActivity extends Activity {
 
-    private TextView mAppNameTxtV;
     public FirebaseAuth mAuth;
+    private TextView mAppNameTxtV;
     private Activity thisActivity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +49,20 @@ public class SplashScreenActivity extends Activity {
             public void run() {
                 try {
                     sleep(2000);
-                       mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                    mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
                         @Override
                         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                            FirebaseUser user =  firebaseAuth.getCurrentUser();
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            if(user != null) {
-                                Intent openFrontPage = new Intent(SplashScreenActivity.this, MainActivty.class);
+                            if (user != null) {
+                                Intent openFrontPage = new Intent(SplashScreenActivity.this, MainActivity.class);
                                 startActivity(openFrontPage);
                                 thisActivity.finish();
                             } else {
                                 Intent openFrontPage = new Intent(SplashScreenActivity.this, CreateAccountActivity.class);
                                 startActivity(openFrontPage);
                                 thisActivity.finish();
-                           }
+                            }
                         }
                     });
 

@@ -1,10 +1,11 @@
 package com.example.tapiwa.todoapp.personalProjects;
 
-import com.example.tapiwa.todoapp.sharedProjects.SharedProjectTask;
+import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PersonalProjectModel {
+public class PersonalProjectModel implements Serializable {
 
     private String projectTitle;
     private ArrayList<SharedProjectTask> projectTasks;

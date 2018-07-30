@@ -2,13 +2,7 @@ package com.example.tapiwa.todoapp.login;
 
 import android.content.Intent;
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-
-import com.example.tapiwa.todoapp.sharedProjects.sharedProject.SharedProjectReference;
-import com.google.android.material.textfield.TextInputEditText;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,23 +11,32 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.tapiwa.todoapp.InitializeApp.InitializeApp;
-import com.example.tapiwa.todoapp.home.MainActivty;
-import com.google.android.gms.tasks.*;
+import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.sharedProjects.SharedProjectReference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import es.dmoral.toasty.Toasty;
 
 import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
 
-public class CreateAccountActivity extends AppCompatActivity  {
+public class CreateAccountActivity extends AppCompatActivity {
 
-    private TextInputEditText emailEdtTxt, usernameEdtTxt, passwordEdtTxt, passwordConfirmEditTxt;
     public Button createAccountBtn;
+    private TextInputEditText emailEdtTxt, usernameEdtTxt, passwordEdtTxt, passwordConfirmEditTxt;
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
     private RelativeLayout mBackground;
@@ -66,7 +69,7 @@ public class CreateAccountActivity extends AppCompatActivity  {
             public void onClick(View v) {
 
                 Log.d(TAG, "butn clicked");
-                if(isUserCredentialsValid()) {
+                if (isUserCredentialsValid()) {
                     attemptLogin(
                             passwordEdtTxt.getText().toString().trim(),
                             emailEdtTxt.getText().toString().trim(),
@@ -82,7 +85,7 @@ public class CreateAccountActivity extends AppCompatActivity  {
         mProgressBar.setVisibility(View.VISIBLE);
         mBackground.getBackground().setAlpha(100);
 
-        if(emailEdtTxt.getText().toString().trim().length() == 0) {
+        if (emailEdtTxt.getText().toString().trim().length() == 0) {
             //Todo check all other things that make a valid email
             emailEdtTxt.setError("Invalid email");
             mProgressBar.setVisibility(View.INVISIBLE);
@@ -90,7 +93,7 @@ public class CreateAccountActivity extends AppCompatActivity  {
             return false;
         }
 
-        if(passwordEdtTxt.getText().toString().trim().length() == 0) {
+        if (passwordEdtTxt.getText().toString().trim().length() == 0) {
             //Todo: make sure the password entered is strong enough
             emailEdtTxt.setError("Invalid email");
             mProgressBar.setVisibility(View.INVISIBLE);
@@ -98,14 +101,14 @@ public class CreateAccountActivity extends AppCompatActivity  {
             return false;
         }
 
-        if(usernameEdtTxt.getText().toString().trim().length() == 0) {
+        if (usernameEdtTxt.getText().toString().trim().length() == 0) {
             emailEdtTxt.setError("Invalid email");
             mProgressBar.setVisibility(View.INVISIBLE);
             mBackground.getBackground().setAlpha(0);
             return false;
         }
 
-        if(!passwordConfirmEditTxt.getText().toString().trim()
+        if (!passwordConfirmEditTxt.getText().toString().trim()
                 .equals(passwordEdtTxt.getText().toString().trim())) {
             passwordConfirmEditTxt.setError("You entered different passwords");
             mProgressBar.setVisibility(View.INVISIBLE);
@@ -128,63 +131,77 @@ public class CreateAccountActivity extends AppCompatActivity  {
 
     private void registerUserToFirestore(String uid, String username, String email) {
 
-       User user = new User();
-       user.setEmail(email);
-       user.setUserName(username);
-       user.setUid(uid);
-       user.setDailyProjects("");
-       user.setWeeklyProjects("");
-       user.setLongTermProjects("");
-       user.setYearlyProjects("");
-       user.setSharedProjectReferenceKeys(new ArrayList<SharedProjectReference>());
-       user.setPersonalProjects("");
+        User user = new User();
+        user.setEmail(email);
+        user.setUserName(username);
+        user.setUid(uid);
+        user.setDailyProjects("");
+        user.setWeeklyProjects("");
+        user.setLongTermProjects("");
+        user.setYearlyProjects("");
+        user.setSharedProjectReferenceKeys(new ArrayList<SharedProjectReference>());
+        user.setPersonalProjects("");
 
-       FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-       db.document(USERS_DB_PATH + uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-           @Override
-           public void onSuccess(Void aVoid) {
-               Log.d(TAG, "DocumentSnapshot added");
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               Log.w(TAG, "Error adding document", e);
-           }
-       });
+        db.document(USERS_DB_PATH + uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot added");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error adding document", e);
+            }
+        });
 
+
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(user.getUserName())
+                .setPhotoUri(null)
+                .build();
+
+        fbUser.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
+                        }
+                    }
+                });
     }
 
-   private void attemptLogin(String password, final String email, final String username) {
+    private void attemptLogin(String password, final String email, final String username) {
 
         dimBackground();
 
-       mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-           @Override
-           public void onComplete(@NonNull Task<AuthResult> task) {
-               if(task.isSuccessful()) {
-                   String uid = mAuth.getCurrentUser().getUid().toString();
-                   registerUserToFirestore(uid, username, email);
-                   mProgressBar.setVisibility(View.INVISIBLE);
-                   mBackground.getBackground().setAlpha(0);
-                   //TODO: create a loading circle bar here
-                   InitializeApp initializeApp = new InitializeApp(getApplicationContext());
-                   initializeApp.createFiles();
-                   Intent intent = new Intent(CreateAccountActivity.this, MainActivty.class);
-                   startActivity(intent);
-                   CreateAccountActivity.this.finish();
-               }
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               mProgressBar.setVisibility(View.INVISIBLE);
-               mBackground.getBackground().setAlpha(0);
-               Toasty.error(getApplicationContext(), "An error occured in signing up, try again");
-           }
-       });
-       //Todo add on failure listener and inform user using a toast if error happens
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    String uid = mAuth.getCurrentUser().getUid();
+                    registerUserToFirestore(uid, username, email);
+                    mProgressBar.setVisibility(View.INVISIBLE);
+                    mBackground.getBackground().setAlpha(0);
+                    //TODO: create a loading circle bar here
+                    InitializeApp initializeApp = new InitializeApp(getApplicationContext());
+                    initializeApp.createFiles();
+                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    CreateAccountActivity.this.finish();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+                mBackground.getBackground().setAlpha(0);
+                Toasty.error(getApplicationContext(), "An error occured in signing up, try again");
+            }
+        });
     }
-
-
 }

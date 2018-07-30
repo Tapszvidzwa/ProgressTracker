@@ -9,4 +9,13 @@ public class Constants {
         //required constructor
     }
 
+    public static enum InputRequestType {
+        RENAME_PROJECT,
+        CREATE_NEW_PROJECT,
+        NONE,
+        ADD_GROUP_MEMBER,
+        CREATE_NEW_TASK,
+        RENAME_TASK
+    }
+
 }

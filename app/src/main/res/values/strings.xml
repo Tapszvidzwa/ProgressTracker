@@ -2,16 +2,20 @@
     <string name="app_name">TodoApp</string>
 
     //file namess
-    <string name="DailyGoalsFile">daily_tasks.json</string>
-    <string name="Weekly_tasks_file">weekly_tasks.json</string>
-    <string name="Yearly_tasks_file">yearly_tasks.json</string>
-    <string name="Five_year_tasks_file">five_year_tasks.json</string>
-    <string name="Personal_projects_file">personal_projects.json</string>
+    <string name="DAILY_TASKS_FILE">daily_tasks.json</string>
+    <string name="WEEKLY_TASKS_FILE">weekly_tasks.json</string>
+    <string name="YEARLY_TASKS_FILE">yearly_tasks.json</string>
+    <string name="LONG_TERM_PROJECTS_FILE">long_term_tasks.json</string>
+    <string name="PERSONAL_PROJECTS_FILE">personal_projects.json</string>
 
+    //Messages and prompts
     <string name="congratulatory_msg">Congratulations! You have finished all your tasks</string>
     <string name="congratulations">Congratulations!</string>
     <string name="add_new_task">Create a new task</string>
     <string name="add_new_project">Create a new project</string>
+
+    //Toasts
+    <string name="successfully_added_shared_project">Shared project updated</string>
 
     //Error messages
     <string name="no_task_entered">Please enter a task</string>
@@ -25,5 +29,8 @@
     <string name="long_term_goals_title">Long Term Goals</string>
     <string name="personal_projects_fragment_title">Personal Projects</string>
     <string name="shared_projects_fragment_title">Shared Projects</string>
+
+    //Miscellaneous
+    <string name="completed_by">Completed by </string>
 
 </resources>

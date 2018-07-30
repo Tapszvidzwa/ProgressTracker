@@ -15,25 +15,25 @@ public class PersonalProjectListModel implements Serializable {
         return projects;
     }
 
+    public void setProjects(ArrayList<PersonalProjectModel> projects) {
+        this.projects = projects;
+    }
+
     public PersonalProjectModel getProject(String projectName) {
-        for(int i = 0; i < projects.size(); i++) {
-            if(projects.get(i).getProjectTitle().equals(projectName)) {
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getProjectTitle().equals(projectName)) {
                 return projects.get(i);
             }
         }
         return new PersonalProjectModel();
     }
 
-    public void setProjects(ArrayList<PersonalProjectModel> projects) {
-        this.projects = projects;
-    }
-
     public void updateProject(PersonalProjectModel project) {
 
         String projectName = project.getProjectTitle();
 
-        for(int i = 0; i < projects.size(); i++) {
-            if(projects.get(i).getProjectTitle().equals(projectName)) {
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getProjectTitle().equals(projectName)) {
                 projects.set(i, project);
                 return;
             }

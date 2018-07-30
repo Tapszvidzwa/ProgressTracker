@@ -1,20 +1,28 @@
 
-Psquid:EmptyStatementUsageCheck"Remove this empty statement.(Åñ­õþÿÿÿÿ8ÕŠí÷Æ,
-Usquid:S1068"9Remove this unused "personalProjectsListV" private field.(ØùÁÍ8ÕŠí÷Æ,
-Ssquid:S1068"2Remove this unused "percentageTxtV" private field.(´¯…†ýÿÿÿÿ8ÕŠí÷Æ,
-]squid:S1068"<Remove this unused "personalProjectListModel" private field.(Û ×ûÿÿÿÿ8ÕŠí÷Æ,
-Rsquid:S1068"1Remove this unused "addProjectFab" private field.(Ü½´†ýÿÿÿÿ8ÕŠí÷Æ,
-Usquid:S1068"9Remove this unused "personalProjectsTitle" private field.(ãòËâ8ÕŠí÷Æ,
-„squid:S1450"cRemove the "personalProjectsView" field and declare it as a local variable in the relevant methods.(¶ÅÖ¤þÿÿÿÿ8ÕŠí÷Æ,
-Lsquid:S1444"1Make this "public static restingDude" field final(¸ïép8ÕŠí÷Æ,
-Msquid:S1444"1Make this "public static noGoalsText" field final(…ÕŽ‚8ÕŠí÷Æ,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¶Øô‰þÿÿÿÿ8ÕŠí÷Æ,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÕÒ„–øÿÿÿÿ8ÕŠí÷Æ,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Û–¿Ûøÿÿÿÿ8ÕŠí÷Æ,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.( ô•À8ÕŠí÷Æ,
-‰"squid:ClassVariableVisibilityCheck"WMake restingDude a static final constant or non-public and provide accessors if needed.(¸ïép8ÕŠí÷Æ,
-Š"squid:ClassVariableVisibilityCheck"WMake noGoalsText a static final constant or non-public and provide accessors if needed.(…ÕŽ‚8ÕŠí÷Æ,
-Nsquid:S1135"2Complete the task associated to this TODO comment.(¾ÉÇØ8ÕŠí÷Æ,
-Nsquid:S1135"2Complete the task associated to this TODO comment.(¾ÉÇØ8ÕŠí÷Æ,
-Dsquid:S1185"(Remove this method to simply inherit it.(ßû¢½8ÕŠí÷Æ,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‹Ñµ®üÿÿÿÿ8ÕŠí÷Æ,
+Ksquid:EmptyStatementUsageCheck"Remove this empty statement.(íŠÞ8¬¥ÝÊ,
+Usquid:S1068"9Remove this unused "personalProjectsTitle" private field.(ãòËâ8¬¥ÝÊ,
+Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾þÿÿÿÿ8¬¥ÝÊ,
+Qsquid:S1444"6Make this "public static inputRequestType" field final(û÷ëZ8¬¥ÝÊ,
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8¬¥ÝÊ,
+Jsquid:S2786")Remove this redundant "static" qualifier.(£èý˜ýÿÿÿÿ8¬¥ÝÊ,
+Ksquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8¬¥ÝÊ,
+Ksquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8¬¥ÝÊ,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8¬¥ÝÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¯ëÖ»üÿÿÿÿ8¬¥ÝÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ó È¶ùÿÿÿÿ8¬¥ÝÊ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(À†‘•ÿÿÿÿÿ8¬¥ÝÊ,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ý×šß8¬¥ÝÊ,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(Âë¼ó8¬¥ÝÊ,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(Ã Q8¬¥ÝÊ,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(Ã Q8¬¥ÝÊ,
+’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾þÿÿÿÿ8¬¥ÝÊ,
+Ž"squid:ClassVariableVisibilityCheck"\Make inputRequestType a static final constant or non-public and provide accessors if needed.(û÷ëZ8¬¥ÝÊ,
+Nsquid:S1135"2Complete the task associated to this TODO comment.(¾ÉÇØ8¬¥ÝÊ,
+Nsquid:S1135"2Complete the task associated to this TODO comment.(¾ÉÇØ8¬¥ÝÊ,
+asquid:S1854"@Remove this useless assignment to local variable "projectModel".(ïüÎþýÿÿÿÿ8¬¥ÝÊ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‹Ñµ®üÿÿÿÿ8¬¥ÝÊ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8¬¥ÝÊ,
+]
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(ðî«¶8¬¥ÝÊ,
+]
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(»‘Òø8¬¥ÝÊ,

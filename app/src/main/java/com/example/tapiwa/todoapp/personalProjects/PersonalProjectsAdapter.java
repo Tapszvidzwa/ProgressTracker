@@ -40,31 +40,26 @@ public class PersonalProjectsAdapter extends BaseAdapter {
         return position;
     }
 
-    private class ViewHolder {
-        TextView projectTitle;
-    }
-
     @Override
     public View getView(int position, final View view, ViewGroup viewGroup) {
-
         final PersonalProjectModel project = personalProjectsList.get(position);
-
         View row = view;
         ViewHolder holder = new ViewHolder();
 
-
-        if(row == null) {
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
             holder.projectTitle = row.findViewById(R.id.project_name);
             row.setTag(holder);
-
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
         holder.projectTitle.setText(project.getProjectTitle());
-
         return row;
+    }
+
+    private class ViewHolder {
+        TextView projectTitle;
     }
 }
