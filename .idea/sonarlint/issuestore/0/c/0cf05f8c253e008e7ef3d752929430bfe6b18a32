@@ -1,26 +1,0 @@
-
-@squid:S1659!""Declare "date" on a separate line.(êÜéĞ8ûÓŸ·Ê,
-msquid:S1192Q"JDefine a constant instead of duplicating this literal "completed" 3 times.(À’øÿÿÿÿ8ûÓŸ·Ê,
-osquid:S1192^"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(‚Ì’óúÿÿÿÿ8ûÓŸ·Ê,
-Hsquid:S1068&"+Remove this unused "addTask" private field.(ÜŠ¸z8ûÓŸ·Ê,
-vsquid:S1450"XRemove the "goalsList" field and declare it as a local variable in the relevant methods.(¼°¸«8ûÓŸ·Ê,
-Nsquid:S1444 "1Make this "public static restingDude" field final(¸ïép8ûÓŸ·Ê,
-Osquid:S1444!"1Make this "public static noGoalsText" field final(êÜéĞ8ûÓŸ·Ê,
-Hsquid:S1444!"*Make this "public static date" field final(êÜéĞ8ûÓŸ·Ê,
-9squid:S3626p"Remove this redundant jump.(ûÁİ…8ûÓŸ·Ê,
-9squid:S3626v"Remove this redundant jump.(ûÁİ…8ûÓŸ·Ê,
-isquid:CommentedOutCodeLine?"<This block of commented-out lines of code should be removed.( ƒÿ8ûÓŸ·Ê,
-osquid:CommentedOutCodeLine¦"<This block of commented-out lines of code should be removed.(ñĞıÇúÿÿÿÿ8ûÓŸ·Ê,
-Ysquid:S2696E"6Make the enclosing method "static" or remove this set.(Œ²É¬üÿÿÿÿ8ûÓŸ·Ê,
-Ysquid:S2696F"6Make the enclosing method "static" or remove this set.(”‘Å¢ûÿÿÿÿ8ûÓŸ·Ê,
-Ysquid:S2696G"6Make the enclosing method "static" or remove this set.(ÚË”¸ùÿÿÿÿ8ûÓŸ·Ê,
-Ssquid:S2696J"6Make the enclosing method "static" or remove this set.(ÎíÛg8ûÓŸ·Ê,
-Ssquid:S2696g"6Make the enclosing method "static" or remove this set.(ÎíÛg8ûÓŸ·Ê,
-‹"squid:ClassVariableVisibilityCheck "WMake restingDude a static final constant or non-public and provide accessors if needed.(¸ïép8ûÓŸ·Ê,
-Œ"squid:ClassVariableVisibilityCheck!"WMake noGoalsText a static final constant or non-public and provide accessors if needed.(êÜéĞ8ûÓŸ·Ê,
-…"squid:ClassVariableVisibilityCheck!"PMake date a static final constant or non-public and provide accessors if needed.(êÜéĞ8ûÓŸ·Ê,
-Gsquid:S1185"(Remove this method to simply inherit it.(öÿÕÅ8ûÓŸ·Ê,
-usquid:S00116("WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¸î}8ûÓŸ·Ê,
-{squid:S00116)"WRename this field "PROJECT_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µÃ åøÿÿÿÿ8ûÓŸ·Ê,
-~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(™Ù¸Ùøÿÿÿÿ8ûÓŸ·Ê,
-asquid:S1155n">Use isEmpty() to check whether the collection is empty or not.(¦Ô•øüÿÿÿÿ8ûÓŸ·Ê,

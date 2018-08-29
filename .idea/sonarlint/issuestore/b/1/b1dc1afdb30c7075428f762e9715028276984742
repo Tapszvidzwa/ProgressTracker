@@ -1,0 +1,8 @@
+
+vsquid:S1450"URemove the "header" field and declare it as a local variable in the relevant methods.(ò» šüÿÿÿÿ8ÔÂ…ÉÎ,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ï‰ˆ¬8ÔÂ…ÉÎ,
+…squid:S1450"dRemove the "bottomNavigationSheet" field and declare it as a local variable in the relevant methods.(Æ±†÷úÿÿÿÿ8ÔÂ…ÉÎ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Øî›×üÿÿÿÿ8ÔÂ…ÉÎ,
+tsquid:UselessImportCheck"FRemove this unused import 'androidx.core.view.TintableBackgroundView'.(ñáâ¨ÿÿÿÿÿ8ÔÂ…ÉÎ,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¦ôâùÿÿÿÿ8ÔÂ…ÉÎ,
+wsquid:S1450"[Remove the "emailAddress" field and declare it as a local variable in the relevant methods.(³ù—¹8ÔÂ…ÉÎ,

@@ -1,40 +1,0 @@
-
-Dsquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
-fsquid:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(îüêÉùÿÿÿÿ
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îüêÉùÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¼†ûÿÿÿÿÿ
-=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-U
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^
-dsquid:UselessImportCheck"BRemove this unused import 'cn.pedant.SweetAlert.SweetAlertDialog'.(õ”ØÁ
-Nsquid:S1659"4Declare "sharedProjectsListView" on a separate line.(ÉÙµÑüÿÿÿÿ
-Ssquid:UselessImportCheck"1Remove this unused import 'java.text.DateFormat'.(÷Œá¼
-Rsquid:S1197"8Move the array designator from the variable to the type.(Æã¹êüÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(È×›•ıÿÿÿÿ
-_squid:UselessImportCheck"8Remove this unused import 'android.widget.LinearLayout'.(çîšçúÿÿÿÿ
-csquid:S2095"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(…ŸÖ»
-Xsquid:S1854"CRemove this useless assignment to local variable "shared_projects".(Ş¢àí
-[
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(Ù†§üÿÿÿÿ
-[
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(Ù†§üÿÿÿÿ
-fsquid:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(Â˜½ıÿÿÿÿ
-squid:S1450"gRemove the "personalProjectsListView" field and declare it as a local variable in the relevant methods.(ÉÙµÑüÿÿÿÿ
-Qsquid:UselessImportCheck"/Remove this unused import 'java.util.Iterator'.(¥ÍòÕ
-\squid:UselessImportCheck"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ
-Msquid:S1659"3Declare "sharedProjectsAdapter" on a separate line.(ëø‰áıÿÿÿÿ
-gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş¢àí
-Isquid:S1481"4Remove this unused "shared_projects" local variable.(Ş¢àí
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…ÈšÁÿÿÿÿÿ
-ksquid:S1192"QDefine a constant instead of duplicating this literal "Personal Project" 3 times.(Æã¹êüÿÿÿÿ
-Vsquid:S1068"<Remove this unused "personalProjectsListView" private field.(ÉÙµÑüÿÿÿÿ
-lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â˜½ıÿÿÿÿ
-[squid:UselessImportCheck"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ
-V
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(Äë
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚÃã²ıÿÿÿÿ
-tsquid:UselessImportCheck"FRemove this unused import 'androidx.recyclerview.widget.RecyclerView'.(Îèòçøÿÿÿÿ8ì¦½áÉ,
-Ysquid:UselessImportCheck"7Remove this unused import 'android.widget.AdapterView'.(¶¾éæ
-=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-0squid:S3626"Remove this redundant jump.(ûÁİ…
-Rsquid:S1068"1Remove this unused "addProjectFab" private field.(Ü½´†ıÿÿÿÿ8Ëš¿áÉ,

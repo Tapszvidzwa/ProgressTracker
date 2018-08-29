@@ -1,0 +1,21 @@
+
+Msquid:S1444"1Make this "public static noGoalsText" field final(êÜéÐ8²Õƒ‹Ø,
+ksquid:S1192"JDefine a constant instead of duplicating this literal "completed" 3 times.(ãêÝ«ýÿÿÿÿ8²Õƒ‹Ø,
+Lsquid:S1444"1Make this "public static restingDude" field final(¸ïép8²Õƒ‹Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Œ²É¬üÿÿÿÿ8²Õƒ‹Ø,
+xsquid:S00116"VRename this field "PROJECT_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øï—åûÿÿÿÿ8²Õƒ‹Ø,
+>squid:S1659""Declare "date" on a separate line.(êÜéÐ8²Õƒ‹Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(íäÌÜ8²Õƒ‹Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¶ŸÌ—8²Õƒ‹Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚË”¸ùÿÿÿÿ8²Õƒ‹Ø,
+Š"squid:ClassVariableVisibilityCheck"WMake noGoalsText a static final constant or non-public and provide accessors if needed.(êÜéÐ8²Õƒ‹Ø,
+ssquid:S00116"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¸î}8²Õƒ‹Ø,
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(¦Ô•øüÿÿÿÿ8²Õƒ‹Ø,
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8²Õƒ‹Ø,
+‰"squid:ClassVariableVisibilityCheck"WMake restingDude a static final constant or non-public and provide accessors if needed.(¸ïép8²Õƒ‹Ø,
+ƒ"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(êÜéÐ8²Õƒ‹Ø,
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8²Õƒ‹Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(”‘Å¢ûÿÿÿÿ8²Õƒ‹Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(†“ž˜8²Õƒ‹Ø,
+Fsquid:S1444"*Make this "public static date" field final(êÜéÐ8²Õƒ‹Ø,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ ‹î8²Õƒ‹Ø,

@@ -1,0 +1,36 @@
+
+Nsquid:S1444"2Make this "public static bottomAppBar" field final( ò˜ã8êæâ…Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¹€èø8êæâ…Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ôÓê•8êæâ…Ø,
+“"squid:ClassVariableVisibilityCheck"[Make visibleFragment a static final constant or non-public and provide accessors if needed.( ¯Ûúÿÿÿÿ8êæâ…Ø,
+lsquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ÕíÇ™ıÿÿÿÿ8êæâ…Ø,
+lsquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ÕíÇ™ıÿÿÿÿ8êæâ…Ø,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ëš›Ì8êæâ…Ø,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚÑ Ù8êæâ…Ø,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ñ”Ò8êæâ…Ø,
+[squid:S1444"?Make this "public static bottomSheetDialogFragment" field final(ÅÆâ“8êæâ…Ø,
+‹"squid:ClassVariableVisibilityCheck"XMake bottomAppBar a static final constant or non-public and provide accessors if needed.( ò˜ã8êæâ…Ø,
+"squid:ClassVariableVisibilityCheck"[Make fragmentManager a static final constant or non-public and provide accessors if needed.(§˜¤™8êæâ…Ø,
+˜"squid:ClassVariableVisibilityCheck"eMake bottomSheetDialogFragment a static final constant or non-public and provide accessors if needed.(ÅÆâ“8êæâ…Ø,
+Ssquid:S1135"2Complete the task associated to this TODO comment.(¼ó˜ùÿÿÿÿ8êæâ…Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(³É´ù8êæâ…Ø,
+Vsquid:S1444"5Make this "public static visibleFragment" field final( ¯Ûúÿÿÿÿ8êæâ…Ø,
+‡"squid:ClassVariableVisibilityCheck"TMake activity a static final constant or non-public and provide accessors if needed.(æÄı8êæâ…Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(·Ë‚İüÿÿÿÿ8êæâ…Ø,
+"squid:ClassVariableVisibilityCheck"WMake fileHandler a static final constant or non-public and provide accessors if needed.(™æ×Üùÿÿÿÿ8êæâ…Ø,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(§şüÿÿÿÿ8êæâ…Ø,
+Fsquid:S1444"*Make this "public static auth" field final(ĞœÃĞ8êæâ…Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(´ã›¢ùÿÿÿÿ8êæâ…Ø,
+†"squid:ClassVariableVisibilityCheck"SMake toolbar a static final constant or non-public and provide accessors if needed.(Íç¶Å8êæâ…Ø,
+xsquid:S1450"\Remove the "mDrawerLayout" field and declare it as a local variable in the relevant methods.(Ù®¢¬8êæâ…Ø,
+Qsquid:S1444"5Make this "public static fragmentManager" field final(§˜¤™8êæâ…Ø,
+"squid:ClassVariableVisibilityCheck"UMake actionBar a static final constant or non-public and provide accessors if needed.(Îúïõüÿÿÿÿ8êæâ…Ø,
+Rsquid:S1444"1Make this "public static fileHandler" field final(™æ×Üùÿÿÿÿ8êæâ…Ø,
+Isquid:S1444"-Make this "public static toolbar" field final(Íç¶Å8êæâ…Ø,
+Psquid:S1444"/Make this "public static actionBar" field final(Îúïõüÿÿÿÿ8êæâ…Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(±ôÀ°8êæâ…Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ì¹¤ÿÿÿÿÿ8êæâ…Ø,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(–¯Óèûÿÿÿÿ8êæâ…Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ã—¼¬8êæâ…Ø,
+Jsquid:S1444".Make this "public static activity" field final(æÄı8êæâ…Ø,
+ƒ"squid:ClassVariableVisibilityCheck"PMake auth a static final constant or non-public and provide accessors if needed.(ĞœÃĞ8êæâ…Ø,

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,8 +17,8 @@ import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.dailyProjects.DailyTasksFragment;
 import com.example.tapiwa.todoapp.longTermGoals.LongTermGoalsFragment;
 import com.example.tapiwa.todoapp.oneYearGoals.YearlyGoalsFragment;
-import com.example.tapiwa.todoapp.personalProjects.PersonalProjectsFragment;
-import com.example.tapiwa.todoapp.personalProjects.personalProjectList.PersonalProjectListFragment;
+import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerFragment;
+import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectsFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SingleProjectFragment;
 import com.example.tapiwa.todoapp.weeklyGoals.WeeklyTasksFragment;
@@ -49,7 +50,7 @@ import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SHARED_P
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.WEEKLY_TASKS;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.YEARLY_TASKS;
-import static com.example.tapiwa.todoapp.personalProjects.PersonalProjectsFragment.inputRequestType;
+import static com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerFragment.inputRequestType;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bottomSheetDialogFragment.show(getSupportFragmentManager(), bottomSheetDialogFragment.getTag());
-                // mDrawerLayout.openDrawer(GravityCompat.START);
-                //   switchToFragment(BOTTOM_SHEET_MENU, null);
             }
         });
 
@@ -103,16 +102,6 @@ public class MainActivity extends AppCompatActivity {
         navUsername.setText(auth.getCurrentUser().getEmail());
 
         mDrawerLayout.closeDrawers();
-
-     /*   navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                }); */
 
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
@@ -138,12 +127,11 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        //   setupDrawer(navigationView);
         switchToFragment(DAILY_TASKS, null);
         updateToolBarName();
     }
 
-  /*  @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -151,7 +139,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    } */
+    }
+
+
+    public void openAppropriateFragment() {
+        if(visibleFragment == SINGLE_SHARED_PROJECT) {
+            switchToFragment(SHARED_PROJECTS, null);
+        } else if(visibleFragment == PERSONAL_PROJECT) {
+            switchToFragment(PERSONAL_PROJECTS, null);
+        }
+    }
 
     public static void updateBottomBarMenu() {
         switch (visibleFragment) {
@@ -169,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
             case SINGLE_SHARED_PROJECT:
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 actionBar.setDisplayShowHomeEnabled(true);
+                break;
+            case PERSONAL_PROJECT:
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setDisplayHomeAsUpEnabled(true);
                 break;
             default:
                 actionBar.setDisplayShowHomeEnabled(false);
@@ -218,13 +219,13 @@ public class MainActivity extends AppCompatActivity {
         }
         switch (requestType) {
             case ADD_GROUP_MEMBER:
-                return "Enter member's email address";
+                return "Enter new member's email address";
             case RENAME_PROJECT:
-                return "Rename project";
+                return "Rename Project";
             case CREATE_NEW_PROJECT:
-                return "Enter project name";
+                return "Enter Project Title";
             case RENAME_TASK:
-                return "Rename task";
+                return "Rename Task";
             default:
                 return "Add a new task";
         }
@@ -255,10 +256,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case PERSONAL_PROJECTS:
                 if (inputRequestType == CREATE_NEW_PROJECT) {
-                    PersonalProjectsFragment.addProject(input);
+                    PersonalProjectsContainerFragment.addProject(input);
                 }
                 if (inputRequestType == RENAME_PROJECT) {
-                    PersonalProjectsFragment.renameProject(input);
+                    PersonalProjectsContainerFragment.renameProject(input);
                 }
                 break;
             case SINGLE_SHARED_PROJECT:
@@ -273,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case PERSONAL_PROJECT:
-                PersonalProjectListFragment.addNewTask(input);
+                PersonalProjectFragment.addNewTask(input);
                 break;
             default:
                 break;
@@ -326,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (fragmentName) {
             case PERSONAL_PROJECTS:
-                return new PersonalProjectsFragment();
+                return new PersonalProjectsContainerFragment();
             case SHARED_PROJECTS:
                 return new SharedProjectsFragment();
             case LONG_TERM_TASKS:
@@ -340,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
             case SINGLE_SHARED_PROJECT:
                 return new SingleProjectFragment();
             case PERSONAL_PROJECT:
-                return new PersonalProjectListFragment();
+                return new PersonalProjectFragment();
             case BOTTOM_SHEET_MENU:
                 return new BottomNavigationDrawerFragment();
             default:
@@ -373,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case PERSONAL_PROJECTS:
                         inputRequestType = CREATE_NEW_PROJECT;
-                        getInputForFragment(PERSONAL_PROJECTS, null);
+                        getInputForFragment(PERSONAL_PROJECTS, CREATE_NEW_PROJECT);
                         break;
                     case SINGLE_SHARED_PROJECT:
                         getInputForFragment(SINGLE_SHARED_PROJECT, null);

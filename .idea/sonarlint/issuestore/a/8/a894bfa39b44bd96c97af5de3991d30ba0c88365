@@ -1,6 +1,6 @@
 
-[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
 psquid:S1450"[Remove the "mAppNameTxtV" field and declare it as a local variable in the relevant methods.(áÎí
 =squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-‚"squid:ClassVariableVisibilityCheck"QMake mAuth a static final constant or non-public and provide accessors if needed.(ä××şÿÿÿÿ
 esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ŞñŒãøÿÿÿÿ
+‚"squid:ClassVariableVisibilityCheck"QMake mAuth a static final constant or non-public and provide accessors if needed.(ä××şÿÿÿÿ
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€

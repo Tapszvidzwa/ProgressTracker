@@ -2,6 +2,7 @@ package com.example.tapiwa.todoapp.login;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,6 +79,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
+        new InitializeApp(getApplicationContext()).execute(true);
     }
 
     private boolean isUserCredentialsValid() {
@@ -179,6 +181,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         dimBackground();
 
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -187,9 +190,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                     registerUserToFirestore(uid, username, email);
                     mProgressBar.setVisibility(View.INVISIBLE);
                     mBackground.getBackground().setAlpha(0);
-                    //TODO: create a loading circle bar here
-                    InitializeApp initializeApp = new InitializeApp(getApplicationContext());
-                    initializeApp.createFiles();
                     Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
                     startActivity(intent);
                     CreateAccountActivity.this.finish();

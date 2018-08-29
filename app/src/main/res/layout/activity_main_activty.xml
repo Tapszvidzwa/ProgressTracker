@@ -27,7 +27,6 @@
             app:backgroundTint="@color/colorPrimaryDark"
             app:fabAlignmentMode="center"
             app:hideOnScroll="true"
-            app:fabAttached="true"
             app:navigationIcon="@drawable/ic_menu_white_24px"
             style="@style/Widget.MaterialComponents.BottomAppBar"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

@@ -1,19 +1,11 @@
 
-Dsquid:S1185"(Remove this method to simply inherit it.(öÿÕÅ8©¤³ãÉ,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¢íÐ“þÿÿÿÿ8©¤³ãÉ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8©­ÁãÉ,
-\
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8©¤³ãÉ,
-Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8©¤³ãÉ,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(îñë‡8©¤³ãÉ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8©­ÁãÉ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8ÐÁãÉ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8ÐÁãÉ,
-7squid:S3626"Remove this redundant jump.(ûÁÝ…8©¤³ãÉ,
-Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8©¤³ãÉ,
-hsquid:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ä›Ä»8©¤³ãÉ,
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(‚Ì’óúÿÿÿÿ8ç®¿ãÉ,
-\
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8©¤³ãÉ,
-Ksquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8©¤³ãÉ,
-7squid:S3626"Remove this redundant jump.(ûÁÝ…8©¤³ãÉ,
+msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(‚Ì’óúÿÿÿÿ8óì¤•Î,
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8óì¤•Î,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8óì¤•Î,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8óì¤•Î,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8óì¤•Î,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ª Öõ8óì¤•Î,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8óì¤•Î,
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(îñë‡8óì¤•Î,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¢íÐ“þÿÿÿÿ8óì¤•Î,
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ýÿÿÿÿ8óì¤•Î,

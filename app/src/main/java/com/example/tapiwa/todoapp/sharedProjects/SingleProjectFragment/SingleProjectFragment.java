@@ -102,28 +102,6 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         }
     }
 
-   /* @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.single_shared_project_toolbar_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add_member:
-                inputRequestType = ADD_GROUP_MEMBER;
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, Constants.InputRequestType.ADD_GROUP_MEMBER);
-                break;
-            case R.id.exit_project:
-                exitProject();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return super.onOptionsItemSelected(item);
-    } */
-
     public static void loadProjectsFromDb() {
         db.document(SHARED_PROJECTS_DB_PATH + projectReference.getProjectKey()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -169,7 +147,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     private void initializeViews() {
 
         sharedProjectsListV = sharedProjectsView.findViewById(R.id.single_project_listV);
-        //toolbar.setTitle();
+
         registerForContextMenu(sharedProjectsListV);
         loadProjectsFromDb();
 

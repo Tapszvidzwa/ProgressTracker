@@ -1,28 +1,0 @@
-
-Ksquid:EmptyStatementUsageCheck"Remove this empty statement.(íŠŞ8¬¥İÊ,
-Usquid:S1068"9Remove this unused "personalProjectsTitle" private field.(ãòËâ8¬¥İÊ,
-Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8¬¥İÊ,
-Qsquid:S1444"6Make this "public static inputRequestType" field final(û÷ëZ8¬¥İÊ,
-7squid:S3626"Remove this redundant jump.(ûÁİ…8¬¥İÊ,
-Jsquid:S2786")Remove this redundant "static" qualifier.(£èı˜ıÿÿÿÿ8¬¥İÊ,
-Ksquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8¬¥İÊ,
-Ksquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8¬¥İÊ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8¬¥İÊ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¯ëÖ»üÿÿÿÿ8¬¥İÊ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ó È¶ùÿÿÿÿ8¬¥İÊ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(À†‘•ÿÿÿÿÿ8¬¥İÊ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ı×šß8¬¥İÊ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(Âë¼ó8¬¥İÊ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(Ã Q8¬¥İÊ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(Ã Q8¬¥İÊ,
-’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8¬¥İÊ,
-"squid:ClassVariableVisibilityCheck"\Make inputRequestType a static final constant or non-public and provide accessors if needed.(û÷ëZ8¬¥İÊ,
-Nsquid:S1135"2Complete the task associated to this TODO comment.(¾ÉÇØ8¬¥İÊ,
-Nsquid:S1135"2Complete the task associated to this TODO comment.(¾ÉÇØ8¬¥İÊ,
-asquid:S1854"@Remove this useless assignment to local variable "projectModel".(ïüÎşıÿÿÿÿ8¬¥İÊ,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‹Ñµ®üÿÿÿÿ8¬¥İÊ,
-Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¬¥İÊ,
-]
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(ğî«¶8¬¥İÊ,
-]
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(»‘Òø8¬¥İÊ,

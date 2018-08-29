@@ -119,12 +119,17 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 User userCredentials = documentSnapshot.toObject(User.class);
-                sharedProjectsList.clear();
-                sharedProjectsList = userCredentials.getSharedProjectReferenceKeys();
-                mAdapter = new SharedProjectsAdapter(activity.getApplicationContext(),
-                        R.layout.item_shared_project,
-                        sharedProjectsList);
-                sharedProjectsListV.setAdapter(mAdapter);
+
+                try {
+                    sharedProjectsList.clear();
+                    sharedProjectsList = userCredentials.getSharedProjectReferenceKeys();
+                    mAdapter = new SharedProjectsAdapter(activity.getApplicationContext(),
+                            R.layout.item_shared_project,
+                            sharedProjectsList);
+                    sharedProjectsListV.setAdapter(mAdapter);
+                } catch (NullPointerException ex) {
+
+                }
             }
         });
     }

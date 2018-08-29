@@ -37,7 +37,7 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        tasksPageView = inflater.inflate(R.layout.fragment_long_term_goals, container, false);
+        tasksPageView = inflater.inflate(R.layout.fragment_long_term_tasks, container, false);
         initializeViews();
         initializeVariables();
         return tasksPageView;

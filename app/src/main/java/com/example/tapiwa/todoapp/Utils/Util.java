@@ -3,6 +3,7 @@ package com.example.tapiwa.todoapp.Utils;
 import android.app.Activity;
 
 import java.util.Calendar;
+import java.util.Random;
 
 public class Util {
 
@@ -92,4 +93,16 @@ public class Util {
         builder.append(year);
         return builder.toString();
     }
+
+
+    public static int getRandomAlphabeticChar() {
+        Random rand = new Random();
+        return rand.nextInt(26) + 97;
+    }
+
+    public static int getRandomDigit() {
+        Random rand = new Random();
+        return rand.nextInt(10) + 48;
+    }
+
 }

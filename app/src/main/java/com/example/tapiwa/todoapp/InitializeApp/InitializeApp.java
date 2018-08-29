@@ -1,19 +1,23 @@
 package com.example.tapiwa.todoapp.InitializeApp;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskList;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
-import com.example.tapiwa.todoapp.personalProjects.PersonalProjectListModel;
-import com.example.tapiwa.todoapp.personalProjects.PersonalProjectModel;
+import com.example.tapiwa.todoapp.Utils.Util;
+import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectTask;
+import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerModel;
+import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectModel;
+import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class InitializeApp {
+public class InitializeApp extends AsyncTask<Boolean, Integer, Boolean> {
 
     private Context context;
     private FileHandler fileHandler;
@@ -24,22 +28,25 @@ public class InitializeApp {
     }
 
     public void createFiles() {
-        fileHandler.saveFile(context.getString(R.string.DAILY_TASKS_FILE), createExampleTask());
-        fileHandler.saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), createExampleTask());
-        fileHandler.saveFile(context.getString(R.string.YEARLY_TASKS_FILE), createExampleTask());
-        fileHandler.saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), createEmptyPersonalProjectFolder());
-        fileHandler.saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), createExampleTask());
+                fileHandler.saveFile(context.getString(R.string.DAILY_TASKS_FILE), createExampleTask());
+                fileHandler.saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), createExampleTask());
+                fileHandler.saveFile(context.getString(R.string.YEARLY_TASKS_FILE), createExampleTask());
+                fileHandler.saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), createExampleTask());
+                fileHandler.saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), createEmptyPersonalProjectFolder());
     }
 
     private String createEmptyPersonalProjectFolder() {
         PersonalProjectModel projectModel = new PersonalProjectModel();
         projectModel.setProjectTitle("Sample project folder");
-        ArrayList<PersonalProjectModel> list = new ArrayList<>();
+        projectModel.setProjectKey();
+        projectModel.setLastModifiedtime(Long.toString(System.currentTimeMillis()));
+        projectModel.setProjectTasks(new ArrayList<PersonalProjectTask>());
+        LinkedList<PersonalProjectModel> list = new LinkedList<>();
         list.add(projectModel);
-        PersonalProjectListModel projectListModel = new PersonalProjectListModel();
-        projectListModel.setProjects(list);
+        PersonalProjectsContainerModel personalProjectsContainerModel = new PersonalProjectsContainerModel();
+        personalProjectsContainerModel.setProjects(list);
         Gson gson = new Gson();
-        return gson.toJson(projectListModel);
+        return gson.toJson(personalProjectsContainerModel);
     }
 
     private String createExampleTask() {
@@ -60,5 +67,12 @@ public class InitializeApp {
 
     private int getSharedProjectsCount() {
         return 0;
+    }
+
+
+    @Override
+    protected Boolean doInBackground(Boolean... booleans) {
+        createFiles();
+        return null;
     }
 }
