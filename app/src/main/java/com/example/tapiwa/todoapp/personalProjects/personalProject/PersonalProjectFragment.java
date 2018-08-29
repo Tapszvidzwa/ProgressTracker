@@ -2,7 +2,10 @@ package com.example.tapiwa.todoapp.personalProjects.personalProject;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerModel;
@@ -24,11 +28,16 @@ import java.util.Iterator;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_TASK;
+
 
 public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
     public static ImageView restingDude;
     public static TextView noGoalsText, date;
+    public static Constants.InputRequestType inputRequestType = NONE;
     private static ArrayList<PersonalProjectTask> personalProjectTasksList;
     private static PersonalProjectAdapter adapter;
     private ListView tasksListV;
@@ -38,6 +47,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     private FileHandler fileHandler;
     private PersonalProjectsContainerModel personalProjectsContainerModel;
     private PersonalProjectModel personalProjectModel;
+    public static int clickedProject = 0;
     String PROJECT_KEY;
 
     public PersonalProjectFragment() {
@@ -64,6 +74,36 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     public void onPause() {
         super.onPause();
         saveTasks();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.personal_project_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        clickedProject = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.rename_task:
+                inputRequestType = RENAME_TASK;
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_TASK);
+                return true;
+            case R.id.delete_task:
+                deleteTask(info.position);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void deleteTask(int pos) {
+        personalProjectTasksList.remove(pos);
+        adapter.notifyDataSetChanged();
     }
 
     private void retrieveSavedTasks(String projectKey) {
@@ -115,6 +155,15 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    public static void renameTask(String newTitle) {
+        inputRequestType = NONE;
+        PersonalProjectTask task = personalProjectTasksList.get(clickedProject);
+        task.setTask(newTitle);
+        task.setDateLastModified(Long.toString(System.currentTimeMillis()));
+        personalProjectTasksList.set(clickedProject, task);
+        adapter.notifyDataSetChanged();
+    }
+
     private void initializeVariables() {
         CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
         Bundle args = getArguments();
@@ -130,6 +179,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         date = personalProjectsPageView.findViewById(R.id.current_date);
         date.setText(CURRENT_DATE);
         tasksListV = personalProjectsPageView.findViewById(R.id.goals_lstV);
+        registerForContextMenu(tasksListV);
         setClickListeners();
     }
 
@@ -157,6 +207,14 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
                     adapter.notifyDataSetChanged();
                 }
                 calculatePercentage();
+            }
+        });
+
+        tasksListV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                return false;
             }
         });
     }

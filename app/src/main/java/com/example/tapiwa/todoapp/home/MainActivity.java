@@ -41,6 +41,7 @@ import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.CREATE
 import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.CREATE_NEW_TASK;
 import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
 import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
+import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_TASK;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.DAILY_TASKS;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.LONG_TERM_TASKS;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.MONTHLY_TASKS;
@@ -100,32 +101,6 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = headerView.findViewById(R.id.user_email);
         navUsername.setText(auth.getCurrentUser().getEmail());
-
-        mDrawerLayout.closeDrawers();
-
-        mDrawerLayout.addDrawerListener(
-                new DrawerLayout.DrawerListener() {
-                    @Override
-                    public void onDrawerSlide(View drawerView, float slideOffset) {
-                        // Respond when the drawer's position changes
-                    }
-
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                        // Respond when the drawer is opened
-                    }
-
-                    @Override
-                    public void onDrawerClosed(View drawerView) {
-                        // Respond when the drawer is closed
-                    }
-
-                    @Override
-                    public void onDrawerStateChanged(int newState) {
-                        // Respond when the drawer motion state changes
-                    }
-                }
-        );
 
         switchToFragment(DAILY_TASKS, null);
         updateToolBarName();
@@ -274,7 +249,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case PERSONAL_PROJECT:
-                PersonalProjectFragment.addNewTask(input);
+                if(PersonalProjectFragment.inputRequestType == RENAME_TASK) {
+                    PersonalProjectFragment.renameTask(input);
+                } else {
+                    //its definitely add new task
+                    PersonalProjectFragment.addNewTask(input);
+                }
                 break;
             default:
                 break;

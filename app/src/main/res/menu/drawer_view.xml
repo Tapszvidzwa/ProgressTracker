@@ -3,6 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/daily_tasks"
+            android:checked="true"
             android:icon="@drawable/ic_daily_calendar_day_14"
             android:title="Daily Goals" />
         <item

@@ -54,7 +54,7 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.personal_projects_menu, menu);
+        inflater.inflate(R.menu.personal_projects_container_menu, menu);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
         switch (item.getItemId()) {
             case R.id.rename_project:
                 inputRequestType = RENAME_PROJECT;
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, null);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_PROJECT);
                 return true;
             case R.id.delete_project:
                 deleteProject(info.position);

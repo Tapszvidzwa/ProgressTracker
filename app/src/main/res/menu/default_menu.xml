@@ -5,5 +5,4 @@
             android:id="@+id/Settings"
             android:title="Add member"
             app:showAsAction="never"/>
-
 </menu>
