@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/daily_tasks"
@@ -11,24 +10,23 @@
             android:icon="@drawable/ic_week_calendar"
             android:title="Weekly Goals" />
         <item
-        android:id="@+id/yearly_goals"
-        android:icon="@drawable/ic_yearly_calendar"
-        android:title="Yearly Goals" />
+            android:id="@+id/yearly_goals"
+            android:icon="@drawable/ic_yearly_calendar"
+            android:title="Yearly Goals" />
 
         <item
-        android:id="@+id/five_year_goals"
-        android:icon="@drawable/ic_5_year"
-        android:title="Long Term Goals" />
+            android:id="@+id/five_year_goals"
+            android:icon="@drawable/ic_5_year"
+            android:title="Long Term Goals" />
 
         <item
-        android:id="@+id/personal_projects"
-        android:icon="@drawable/ic_single_person"
-        android:title="Personal Projects" />
+            android:id="@+id/personal_projects"
+            android:icon="@drawable/ic_single_person"
+            android:title="Personal Projects" />
 
         <item
             android:id="@+id/shared_projects"
             android:icon="@drawable/ic_network"
-            android:checkable="true"
             android:title="Shared Projects" />
     </group>
 </menu>

@@ -13,13 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="4dp"
-        android:paddingBottom="40dp"
-        app:headerLayout="@layout/bottom_sheet_header"
-        app:menu="@menu/drawer_view"
         android:theme="@style/Widget.Design.BottomNavigationView"
         app:itemBackground="@drawable/item_highlight"
         app:itemTextColor="@drawable/textcolor"
         app:itemIconTint="@drawable/iconcolor"
+        app:headerLayout="@layout/bottom_sheet_header"
+        app:menu="@menu/drawer_view"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
