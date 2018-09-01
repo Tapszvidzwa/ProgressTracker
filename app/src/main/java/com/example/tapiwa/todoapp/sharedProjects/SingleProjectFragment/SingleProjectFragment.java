@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
 import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
@@ -28,12 +26,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.ADD_GROUP_MEMBER;
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_TASK;
 import static com.example.tapiwa.todoapp.Utils.Constants.SHARED_PROJECTS_DB_PATH;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
 
@@ -48,7 +40,6 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     private static ListView sharedProjectsListV;
     private static Activity activity;
     private static SharedProjectReference projectReference;
-    public static Constants.InputRequestType inputRequestType;
     private FirebaseUser user;
     public static int clickedProject;
     public static String TAG;
@@ -88,8 +79,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         switch (item.getItemId()) {
             case R.id.edit_task:
                 clickedProject = info.position;
-                SingleProjectFragment.inputRequestType = RENAME_TASK;
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_TASK);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.delete_task:
                 deleteTask(info.position);
@@ -141,33 +131,12 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         remoteDb = new DatabaseHandler();
         activity = getActivity();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        inputRequestType = NONE;
     }
 
     private void initializeViews() {
-
         sharedProjectsListV = sharedProjectsView.findViewById(R.id.single_project_listV);
-
         registerForContextMenu(sharedProjectsListV);
         loadProjectsFromDb();
-
-        MainActivity.bottomAppBar.replaceMenu(R.menu.single_shared_project_toolbar_menu);
-
-        MainActivity.bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.add_member:
-                        inputRequestType = ADD_GROUP_MEMBER;
-                        MainActivity.getInputForFragment(MainActivity.visibleFragment, Constants.InputRequestType.ADD_GROUP_MEMBER);
-                        break;
-                    case R.id.exit_project:
-                        exitProject();
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     private void initializeListeners() {

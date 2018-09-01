@@ -28,16 +28,11 @@ import java.util.Iterator;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_TASK;
-
 
 public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
     public static ImageView restingDude;
     public static TextView noGoalsText, date;
-    public static Constants.InputRequestType inputRequestType = NONE;
     private static ArrayList<PersonalProjectTask> personalProjectTasksList;
     private static PersonalProjectAdapter adapter;
     private ListView tasksListV;
@@ -90,8 +85,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_task:
-                inputRequestType = RENAME_TASK;
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_TASK);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.delete_task:
                 deleteTask(info.position);
@@ -156,7 +150,6 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     public static void renameTask(String newTitle) {
-        inputRequestType = NONE;
         PersonalProjectTask task = personalProjectTasksList.get(clickedProject);
         task.setTask(newTitle);
         task.setDateLastModified(Long.toString(System.currentTimeMillis()));

@@ -23,9 +23,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
-
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
 import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
 
@@ -39,7 +36,6 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
     private static DatabaseHandler remoteDb;
     private static ListView sharedProjectsListV;
     public static Activity activity;
-    public static Constants.InputRequestType inputRequestType;
     public static int clickedProject;
 
     public SharedProjectsFragment() {
@@ -71,8 +67,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_project:
-                inputRequestType = RENAME_PROJECT;
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_PROJECT);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.exit_project:
                 exitFromProject();
@@ -88,7 +83,6 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
         sharedProjectsList = new ArrayList<>();
         remoteDb = new DatabaseHandler();
         activity = getActivity();
-        inputRequestType = NONE;
     }
 
     private void initializeViews() {

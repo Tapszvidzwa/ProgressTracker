@@ -131,21 +131,11 @@ public class DatabaseHandler {
     }
 
     public void updateSharedProjectInDb(final Context context, SharedProjectModel project, final String projectKey) {
-        db.document(SHARED_PROJECTS_DB_PATH + projectKey).set(project).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(context,
-                        context.getString(R.string.successfully_added_shared_project),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        db.document(SHARED_PROJECTS_DB_PATH + projectKey).set(project);
     }
 
     public void addMemberToSharedProject(final Context context, final SharedProjectReference projectReference, final String userEmail) {
-
         findUserWithEmailAddress(context, userEmail, projectReference);
-
-
     }
 
     public void findUserWithEmailAddress(final Context context, final String emailAddress, final SharedProjectReference sharedProjectReference) {

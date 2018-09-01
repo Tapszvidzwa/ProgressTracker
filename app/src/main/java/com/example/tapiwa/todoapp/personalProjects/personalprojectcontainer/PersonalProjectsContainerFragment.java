@@ -20,15 +20,11 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.util.LinkedList;
-
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.NONE;
-import static com.example.tapiwa.todoapp.Utils.Constants.InputRequestType.RENAME_PROJECT;
 import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.PERSONAL_PROJECT;
 
 public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fragment {
 
     public static int clickedProject;
-    public static Constants.InputRequestType inputRequestType;
     private static LinkedList<PersonalProjectModel> personalProjectsList;
     private static PersonalProjectsContainerAdapter adapter;
     private View personalProjectsView;
@@ -64,8 +60,7 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
 
         switch (item.getItemId()) {
             case R.id.rename_project:
-                inputRequestType = RENAME_PROJECT;
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, RENAME_PROJECT);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.delete_project:
                 deleteProject(info.position);
@@ -109,7 +104,6 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
 
     private void initializeVariables() {
         personalProjectsList = new LinkedList<>();
-        inputRequestType = NONE;
         clickedProject = 0;
         fileHandler = new FileHandler(getContext());
     }

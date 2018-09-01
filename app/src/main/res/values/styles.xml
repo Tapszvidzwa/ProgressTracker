@@ -1,11 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:itemBackground">@android:color/white</item>
+    </style>
+
+    <style name="PopupMenu" parent="Base.Widget.AppCompat.Light.PopupMenu">
+        <item name="android:popupBackground">@android:color/white</item>
+        <item name="android:itemBackground">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
     </style>
 
 </resources>

@@ -120,7 +120,6 @@ public class Util {
     public boolean isReadyForBackUp() {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         int loginSessionsCount = sharedPref.getInt(activity.getString(R.string.login_sessions), 0);
-        Toast.makeText(activity, "" + loginSessionsCount, Toast.LENGTH_SHORT).show();
         if(loginSessionsCount >= 20) {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putInt(activity.getString(R.string.login_sessions), 0);
