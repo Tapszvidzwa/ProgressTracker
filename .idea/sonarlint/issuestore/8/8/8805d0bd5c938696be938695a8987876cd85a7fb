@@ -1,11 +1,0 @@
-
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ψ€Ώύÿÿÿÿ8®τό¨Μ,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ςΕ²8®τό¨Μ,
-7squid:S3626"Remove this redundant jump.(ϋΑέ…8®τό¨Μ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ΛΪΛόÿÿÿÿ8®τό¨Μ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ΛΪΛόÿÿÿÿ8®τό¨Μ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°Ι΄ϊÿÿÿÿ8®τό¨Μ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†άλ8®τό¨Μ,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ξρλ‡8®τό¨Μ,
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(θΠΆϊÿÿÿÿ8®τό¨Μ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(•Η®–8®τό¨Μ,

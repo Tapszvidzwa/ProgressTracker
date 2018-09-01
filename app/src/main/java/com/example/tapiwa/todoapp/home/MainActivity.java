@@ -1,7 +1,10 @@
 package com.example.tapiwa.todoapp.home;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -9,19 +12,22 @@ import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Utils.BackUp;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
-import com.example.tapiwa.todoapp.dailyProjects.DailyTasksFragment;
-import com.example.tapiwa.todoapp.longTermGoals.LongTermGoalsFragment;
-import com.example.tapiwa.todoapp.oneYearGoals.YearlyGoalsFragment;
+import com.example.tapiwa.todoapp.Utils.Util;
+import com.example.tapiwa.todoapp.dailyTasks.DailyTasksFragment;
+import com.example.tapiwa.todoapp.longTermTasks.LongTermGoalsFragment;
+import com.example.tapiwa.todoapp.oneYearTasks.YearlyGoalsFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectsFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SingleProjectFragment;
-import com.example.tapiwa.todoapp.weeklyGoals.WeeklyTasksFragment;
+import com.example.tapiwa.todoapp.weeklyTasks.WeeklyTasksFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -61,11 +68,12 @@ public class MainActivity extends AppCompatActivity {
     public static androidx.appcompat.app.ActionBar actionBar;
     public static FragmentManager fragmentManager;
     public static FileHandler fileHandler;
-    private DrawerLayout mDrawerLayout;
     public static BottomAppBar bottomAppBar;
     private FloatingActionButton getInputFab;
     public static FirebaseAuth auth;
     public static BottomSheetDialogFragment bottomSheetDialogFragment;
+    private ProgressBar progressBar;
+    private Util Utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +84,14 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         bottomAppBar = findViewById(R.id.bar);
+        progressBar = findViewById(R.id.loading_progress_bar);
         getInputFab = findViewById(R.id.fab);
         visibleFragment = DAILY_TASKS;
         fragmentManager = getSupportFragmentManager();
         activity = this;
         fileHandler = new FileHandler(activity.getApplicationContext());
-        mDrawerLayout = findViewById(R.id.drawer_layout);
         bottomSheetDialogFragment = new BottomNavigationDrawerFragment();
+        Utils = new Util(this);
         final NavigationView navigationView = findViewById(R.id.nav_view);
 
         setSupportActionBar(toolbar);
@@ -104,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
 
         switchToFragment(DAILY_TASKS, null);
         updateToolBarName();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Utils.incrementLoginSessionCount();
+        if(Utils.isReadyForBackUp()) {
+            BackUp backUp = new BackUp(getApplicationContext(), auth.getUid());
+            backUp.runBackupFiles();
+        }
     }
 
     @Override

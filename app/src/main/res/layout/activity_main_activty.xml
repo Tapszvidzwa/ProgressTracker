@@ -18,6 +18,13 @@
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+        <ProgressBar
+            android:id="@+id/loading_progress_bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+         />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"

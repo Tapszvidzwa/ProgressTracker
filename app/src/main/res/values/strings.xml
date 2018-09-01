@@ -33,4 +33,7 @@
     //Miscellaneous
     <string name="completed_by">Completed by </string>
 
+    //Shared Preferences
+    <string name="login_sessions">loginSessions</string>
+
 </resources>

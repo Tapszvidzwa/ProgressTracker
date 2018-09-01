@@ -1,4 +1,4 @@
 
-Vsquid:S2209"5Change this instance-reference to a static reference.(ÆêàÕþÿÿÿÿ8‰œž Î,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(— «Äýÿÿÿÿ8‰œž Î,
-‰"squid:ClassVariableVisibilityCheck"WMake projectName a static final constant or non-public and provide accessors if needed.(ï„§h8‰œž Î,
+‡"squid:ClassVariableVisibilityCheck"TMake activity a static final constant or non-public and provide accessors if needed.(î«ùù8¢ æãØ,
+Vsquid:S2209"5Change this instance-reference to a static reference.(ÆêàÕþÿÿÿÿ8¢ æãØ,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(— «Äýÿÿÿÿ8¢ æãØ,

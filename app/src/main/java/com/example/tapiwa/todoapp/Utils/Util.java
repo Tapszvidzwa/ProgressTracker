@@ -1,20 +1,24 @@
 package com.example.tapiwa.todoapp.Utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
+import com.example.tapiwa.todoapp.R;
 
 import java.util.Calendar;
 import java.util.Random;
 
 public class Util {
 
-    Activity activity;
-    public String projectName;
+    public Activity activity;
 
     public Util() {
     }
 
-    public Util(Activity context) {
-        this.activity = context;
+    public Util(Activity activity) {
+        this.activity = activity;
     }
 
     public String getDateFromMillis(Long millis) {
@@ -105,4 +109,25 @@ public class Util {
         return rand.nextInt(10) + 48;
     }
 
+    public void incrementLoginSessionCount() {
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        int loginSessionsCount = sharedPref.getInt(activity.getString(R.string.login_sessions), 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(activity.getString(R.string.login_sessions), ++loginSessionsCount);
+        editor.commit();
+    }
+
+    public boolean isReadyForBackUp() {
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        int loginSessionsCount = sharedPref.getInt(activity.getString(R.string.login_sessions), 0);
+        Toast.makeText(activity, "" + loginSessionsCount, Toast.LENGTH_SHORT).show();
+        if(loginSessionsCount >= 20) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt(activity.getString(R.string.login_sessions), 0);
+            editor.commit();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

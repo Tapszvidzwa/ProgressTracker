@@ -1,0 +1,7 @@
+
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(— «Δύÿÿÿÿ8‚ϋιγΨ,
+Hsquid:S1068"'Remove this unused "TAG" private field.(°£ªνϊÿÿÿÿ8‚ϋιγΨ,
+Zsquid:UselessImportCheck"1Remove this unused import 'android.os.AsyncTask'.(ΐ»¥—8‚ϋιγΨ,
+[squid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Τ¦Ψ²ψÿÿÿÿ8‚ϋιγΨ,
+ysquid:UselessImportCheck"KRemove this unused import 'androidx.core.widget.ContentLoadingProgressBar'.(½ξί¥ÿÿÿÿÿ8‚ϋιγΨ,
+psquid:S00116"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°£ªνϊÿÿÿÿ8‚ϋιγΨ,

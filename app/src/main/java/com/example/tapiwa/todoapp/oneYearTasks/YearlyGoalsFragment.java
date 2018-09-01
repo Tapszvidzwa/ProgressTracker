@@ -1,13 +1,13 @@
-package com.example.tapiwa.todoapp.dailyProjects;
+package com.example.tapiwa.todoapp.oneYearTasks;
 
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
@@ -18,47 +18,31 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import androidx.appcompat.app.AlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class DailyTasksFragment extends androidx.fragment.app.Fragment {
+public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
 
-    public static TextView date;
     private static ListView goalsList;
-    private static View tasksPageView;
-    private static TextView percentageTxtV;
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
-    private static String CURRENT_DATE;
+    private View tasksPageView;
     private FileHandler fileHandler;
 
-
-    public DailyTasksFragment() {
+    public YearlyGoalsFragment() {
         // Required empty public constructor
-    }
-
-    public static void addTask(String task) {
-        Task newTask = new Task();
-        newTask.setTask(task);
-        newTask.setStatus("uncompleted");
-
-        tasksList.add(newTask);
-        goalsList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        tasksPageView = inflater.inflate(R.layout.fragment_daily_tasks, container, false);
-        CURRENT_DATE = DateFormat.getDateInstance().format(System.currentTimeMillis());
+        tasksPageView = inflater.inflate(R.layout.fragment_yearly_tasks, container, false);
         initializeViews();
         initializeVariables();
-        calculatePercentage();
         return tasksPageView;
     }
 
@@ -74,26 +58,24 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
         saveTasks();
     }
 
+    public static void addNewTask(String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+
+        tasksList.add(newTask);
+        goalsList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     private void saveTasks() {
         String tasksJson = convertTasksListToJsonString();
-        fileHandler.saveFile(getString(R.string.DAILY_TASKS_FILE), tasksJson);
+        fileHandler.saveFile(getString(R.string.YEARLY_TASKS_FILE), tasksJson);
     }
 
     private void retrieveSavedTasks() {
-        JSONObject tasksJson = fileHandler.readFile(getString(R.string.DAILY_TASKS_FILE));
+        JSONObject tasksJson = fileHandler.readFile(getString(R.string.YEARLY_TASKS_FILE));
         populateTaskList(tasksJson);
-    }
-
-    private String convertTasksListToJsonString() {
-        Gson gson = new Gson();
-        TaskList list = new TaskList();
-        list.setTaskList(tasksList);
-        return gson.toJson(list);
-    }
-
-    private void initializeVariables() {
-        tasksList = new LinkedList<>();
-        fileHandler = new FileHandler(getContext());
     }
 
     private void populateTaskList(JSONObject tasksJson) {
@@ -109,12 +91,20 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
         }
     }
 
-    private void initializeViews() {
+    private String convertTasksListToJsonString() {
+        Gson gson = new Gson();
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        return gson.toJson(list);
+    }
 
-        percentageTxtV = tasksPageView.findViewById(R.id.percentage_completed);
-        date = tasksPageView.findViewById(R.id.current_date);
-        date.setText(CURRENT_DATE);
-        goalsList = tasksPageView.findViewById(R.id.goals_lstV);
+    private void initializeVariables() {
+        tasksList = new LinkedList<>();
+        fileHandler = new FileHandler(getContext());
+    }
+
+    private void initializeViews() {
+        goalsList = tasksPageView.findViewById(R.id.yearly_goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,33 +119,46 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-                        dg.setTitleText("Congratulations!").setContentText("Congratulations on finishing all your tasks");
+                        dg.setTitleText(getString(R.string.congratulations)).setContentText(getString(R.string.congratulatory_msg));
                         dg.show();
-                        tasksList.clear();
-                    }
 
+                        new CountDownTimer(2000, 1000) {
+                            public void onTick(long millisUntilFinished) {
+                            }
+
+                            public void onFinish() {
+                                permissionClearTasks();
+                            }
+                        }.start();
+                    }
                 } else {
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                 }
-                calculatePercentage();
             }
         });
     }
 
-    private void calculatePercentage() {
-        percentageTxtV.setTextColor(Color.rgb(208, 35, 35));
-        if (tasksList.size() == 0) {
-            percentageTxtV.setText(Integer.toString(0));
-            return;
-        } else {
-            int completedTasks = countCompletedTasks();
-            int percentage = (int) Math.floor(((double) completedTasks / tasksList.size()) * 100);
-            percentageTxtV.setText(Integer.toString(percentage) + "%");
-            checkTasksCompletion();
-            return;
-        }
+    public void permissionClearTasks() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        tasksList.clear();
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private boolean checkTasksCompletion() {
@@ -167,18 +170,5 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
             }
         }
         return true;
-    }
-
-    private int countCompletedTasks() {
-        Iterator iter = tasksList.iterator();
-        int i = 0;
-
-        while (iter.hasNext()) {
-            Task task = (Task) iter.next();
-            if (task.getStatus().equals("completed")) {
-                ++i;
-            }
-        }
-        return i;
     }
 }

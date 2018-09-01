@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.oneYearGoals;
+package com.example.tapiwa.todoapp.longTermTasks;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -25,22 +25,19 @@ import androidx.appcompat.app.AlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
+public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
 
-    private static ListView goalsList;
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
+    private static ListView goalsList;
     private View tasksPageView;
     private FileHandler fileHandler;
-
-    public YearlyGoalsFragment() {
-        // Required empty public constructor
-    }
+    private int uncompletedTasks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        tasksPageView = inflater.inflate(R.layout.fragment_yearly_tasks, container, false);
+        tasksPageView = inflater.inflate(R.layout.fragment_long_term_tasks, container, false);
         initializeViews();
         initializeVariables();
         return tasksPageView;
@@ -58,11 +55,17 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
         saveTasks();
     }
 
-    public static void addNewTask(String task) {
+
+    public LongTermGoalsFragment() {
+        // Required empty public constructor
+    }
+
+    public static void addNewTask(final String task) {
         Task newTask = new Task();
         newTask.setTask(task);
         newTask.setStatus("uncompleted");
 
+        //add it to the tasks list
         tasksList.add(newTask);
         goalsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -70,11 +73,11 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
 
     private void saveTasks() {
         String tasksJson = convertTasksListToJsonString();
-        fileHandler.saveFile(getString(R.string.YEARLY_TASKS_FILE), tasksJson);
+        fileHandler.saveFile(getString(R.string.LONG_TERM_PROJECTS_FILE), tasksJson);
     }
 
     private void retrieveSavedTasks() {
-        JSONObject tasksJson = fileHandler.readFile(getString(R.string.YEARLY_TASKS_FILE));
+        JSONObject tasksJson = fileHandler.readFile(getString(R.string.LONG_TERM_PROJECTS_FILE));
         populateTaskList(tasksJson);
     }
 
@@ -100,11 +103,12 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
 
     private void initializeVariables() {
         tasksList = new LinkedList<>();
+        uncompletedTasks = 0;
         fileHandler = new FileHandler(getContext());
     }
 
     private void initializeViews() {
-        goalsList = tasksPageView.findViewById(R.id.yearly_goals_lstV);
+        goalsList = tasksPageView.findViewById(R.id.five_year_goals_lstV);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -116,25 +120,34 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
                     updatedTask.setStatus("completed");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
+                    --uncompletedTasks;
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
                         dg.setTitleText(getString(R.string.congratulations)).setContentText(getString(R.string.congratulatory_msg));
                         dg.show();
 
+
                         new CountDownTimer(2000, 1000) {
+
                             public void onTick(long millisUntilFinished) {
                             }
 
                             public void onFinish() {
                                 permissionClearTasks();
                             }
+
                         }.start();
+
                     }
+
                 } else {
+
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
+                    ++uncompletedTasks;
+
                 }
             }
         });
@@ -147,16 +160,19 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
+                        uncompletedTasks = 0;
                         tasksList.clear();
                         adapter.notifyDataSetChanged();
                     }
                 });
+
         alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 return;
             }
         });
+
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
@@ -171,4 +187,5 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
         }
         return true;
     }
+
 }

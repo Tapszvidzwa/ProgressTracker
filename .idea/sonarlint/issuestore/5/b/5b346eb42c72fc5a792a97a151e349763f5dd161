@@ -1,20 +1,0 @@
-
-xsquid:S3008"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æšªùÿÿÿÿ8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(åÂ÷‚ûÿÿÿÿ8åÃ£ùÖ,
-ksquid:S1192"JDefine a constant instead of duplicating this literal "completed" 3 times.(À’øÿÿÿÿ8åÃ£ùÖ,
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ŸèĞ¢úÿÿÿÿ8åÃ£ùÖ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8åÃ£ùÖ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ƒÎ¼"8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8åÃ£ùÖ,
-7squid:S3626"Remove this redundant jump.(ûÁİ…8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(åÙ›øÿÿÿÿ8åÃ£ùÖ,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬ˆüÌ8åÃ£ùÖ,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(¸¬ÆÏşÿÿÿÿ8åÃ£ùÖ,
-Fsquid:S1444"*Make this "public static date" field final(£ˆ«‚8åÃ£ùÖ,
-7squid:S3626"Remove this redundant jump.(ûÁİ…8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(´¬Ø£ùÿÿÿÿ8åÃ£ùÖ,
-ƒ"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(£ˆ«‚8åÃ£ùÖ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Ä´Ëøÿÿÿÿ8åÃ£ùÖ,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ıÿÿÿÿ8‡üå×,
