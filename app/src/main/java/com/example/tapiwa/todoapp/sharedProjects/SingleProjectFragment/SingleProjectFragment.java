@@ -100,6 +100,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
                 try {
                     if (sharedProjectModel != null) {
                         tasksList = sharedProjectModel.getProjectTasks();
+                        setTitle();
                     }
                     if (tasksList != null) {
                         mAdapter = new SingleProjectAdapter(activity.getApplicationContext(),
@@ -112,6 +113,10 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
                 }
             }
         });
+    }
+
+    private static void setTitle() {
+        MainActivity.toolbar.setTitle(sharedProjectModel.getProjectTitle());
     }
 
     public static void addTask(final String taskTitle) {
