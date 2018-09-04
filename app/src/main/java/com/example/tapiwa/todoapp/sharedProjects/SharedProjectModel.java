@@ -13,6 +13,7 @@ public class SharedProjectModel implements Serializable {
     private ArrayList<String> memberNames;
     private String lastModifiedtime;
     private String projectKey;
+    private String percentageCompleted;
 
     public SharedProjectModel() {
     }
@@ -63,5 +64,23 @@ public class SharedProjectModel implements Serializable {
 
     public void setMemberNames(ArrayList<String> memberNames) {
         this.memberNames = memberNames;
+    }
+
+    public String getPercentageCompleted() {
+        if(percentageCompleted == null) {
+            return "0";
+        } else {
+            return percentageCompleted;
+        }
+    }
+
+    public void setPercentageCompleted() {
+        double completed = 0;
+        for(int i = 0; i < projectTasks.size(); i++) {
+            if(projectTasks.get(i).getCompletionStatus().equals("completed")){
+                ++completed;
+            }
+        }
+        this.percentageCompleted = Double.toString(((double) completed / projectTasks.size()) * 100).substring(0, 2);
     }
 }

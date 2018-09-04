@@ -1,6 +1,7 @@
 package com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,16 +57,19 @@ public class PersonalProjectsContainerAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
             holder.projectTitle = row.findViewById(R.id.project_name);
+            holder.percentageCompleted = row.findViewById(R.id.percentage_completed_pp);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
         holder.projectTitle.setText(project.getProjectTitle());
+        holder.percentageCompleted.setText(project.getPercentageCompleted() + "%");
+        holder.percentageCompleted.setTextColor(Color.rgb(208, 35, 35));
         return row;
     }
 
     private class ViewHolder {
-        TextView projectTitle;
+        TextView projectTitle, percentageCompleted;
     }
 }

@@ -12,6 +12,7 @@ public class PersonalProjectModel {
     private ArrayList<PersonalProjectTask> projectTasks;
     private String lastModifiedtime;
     private String projectKey;
+    private String percentageCompleted;
 
     public PersonalProjectModel() {
     }
@@ -59,4 +60,24 @@ public class PersonalProjectModel {
         }
         return randomWord.toString();
     }
+
+    public String getPercentageCompleted() {
+        if(percentageCompleted == null) {
+            return "0";
+        } else {
+            return percentageCompleted;
+        }
+    }
+
+    public void setPercentageCompleted() {
+        int num_completed = 0;
+        for(int i = 0; i < projectTasks.size(); i++) {
+            if(projectTasks.get(i).getCompletionStatus().equals("completed")) {
+                ++num_completed;
+            }
+        }
+
+        this.percentageCompleted = Double.toString(((double) num_completed / projectTasks.size()) * 100).substring(0,2);
+    }
+
 }

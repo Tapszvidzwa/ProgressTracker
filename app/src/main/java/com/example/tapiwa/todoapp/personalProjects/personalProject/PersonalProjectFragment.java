@@ -130,6 +130,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
     private void saveTasks() {
         personalProjectModel.setProjectTasks(personalProjectTasksList);
+        personalProjectModel.setPercentageCompleted();
         personalProjectsContainerModel.updateProject(personalProjectModel);
         String personalProjectsJson = convertPersonalProjectsContainerToJson();
         fileHandler.saveFile(getString(R.string.PERSONAL_PROJECTS_FILE), personalProjectsJson);

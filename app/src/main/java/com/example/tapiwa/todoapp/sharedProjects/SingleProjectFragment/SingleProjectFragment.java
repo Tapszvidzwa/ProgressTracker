@@ -2,6 +2,7 @@ package com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
@@ -44,6 +46,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     private static Activity activity;
     private static SharedProjectReference projectReference;
     private FirebaseUser user;
+    private TextView percentageCompleted;
     public static int clickedProject;
     public static String TAG, username;
 
@@ -146,6 +149,9 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
     private void initializeViews() {
         sharedProjectsListV = sharedProjectsView.findViewById(R.id.single_project_listV);
+        percentageCompleted = sharedProjectsView.findViewById(R.id.single_project_percentage_completed);
+        percentageCompleted.setTextColor(Color.rgb(208, 35, 35));
+        percentageCompleted.setText(sharedProjectModel.getPercentageCompleted());
         registerForContextMenu(sharedProjectsListV);
         loadProjectsFromDb();
     }
@@ -212,6 +218,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
     public static void saveProject() {
         sharedProjectModel.setProjectTasks(tasksList);
+        sharedProjectModel.setPercentageCompleted();
         remoteDb.saveSingleSharedProject(sharedProjectModel);
     }
 
