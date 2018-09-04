@@ -1,6 +1,7 @@
 package com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -14,9 +15,11 @@ import android.widget.ListView;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
+import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectReference;
+import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.projectmembers.ProjectMembersActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,7 +45,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     private static SharedProjectReference projectReference;
     private FirebaseUser user;
     public static int clickedProject;
-    public static String TAG;
+    public static String TAG, username;
 
     public SingleProjectFragment() {
         // Required empty public constructor
@@ -79,6 +82,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         switch (item.getItemId()) {
             case R.id.edit_task:
                 clickedProject = info.position;
+                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_TASK);
                 MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.delete_task:
@@ -123,6 +127,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         SharedProjectTask task = new SharedProjectTask();
         task.setCompletionStatus("uncompleted");
         task.setDateLastModified(Long.toString(System.currentTimeMillis()));
+        task.setWhoLastModifiedTask(username);
         task.setTask(taskTitle);
         remoteDb.addSharedProjectTaskToDb(activity.getApplicationContext(), task, projectReference.getProjectKey());
     }
@@ -136,6 +141,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         remoteDb = new DatabaseHandler();
         activity = getActivity();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        username = user.getDisplayName();
     }
 
     private void initializeViews() {
@@ -179,12 +185,12 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
         if (clickedTask.getCompletionStatus().equals("uncompleted")) {
             clickedTask.setCompletionStatus("completed");
-            clickedTask.setWhoCompletedTask(user.getDisplayName());
+            clickedTask.setWhoLastModifiedTask(user.getDisplayName());
             clickedTask.setDateLastModified(Long.toString(System.currentTimeMillis()));
             tasksList.set(i, clickedTask);
         } else {
             clickedTask.setCompletionStatus("uncompleted");
-            clickedTask.setWhoCompletedTask("");
+            clickedTask.setWhoLastModifiedTask(username);
             clickedTask.setDateLastModified(Long.toString(System.currentTimeMillis()));
             tasksList.set(i, clickedTask);
         }
@@ -194,6 +200,14 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
     public static void addMember(String userEmail) {
         remoteDb.addMemberToSharedProject(activity.getApplicationContext(), projectReference, userEmail);
+    }
+
+    public static void viewSharedProjectMembers() {
+            Intent intent = new Intent(MainActivity.activity, ProjectMembersActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("projectModel", sharedProjectModel);
+            intent.putExtras(bundle);
+            MainActivity.activity.startActivity(intent);
     }
 
     public static void saveProject() {
@@ -219,6 +233,4 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         sharedProjectModel.setProjectTasks(tasksList);
         remoteDb.updateSharedProjectInDb(activity.getApplicationContext(), sharedProjectModel, projectReference.getProjectKey());
     }
-
-
 }

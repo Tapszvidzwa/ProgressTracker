@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
+import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.login.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,6 +68,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_project:
+                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
                 MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.exit_project:

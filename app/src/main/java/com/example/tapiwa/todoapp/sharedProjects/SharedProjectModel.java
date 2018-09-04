@@ -2,13 +2,15 @@ package com.example.tapiwa.todoapp.sharedProjects;
 
 import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SharedProjectModel {
+public class SharedProjectModel implements Serializable {
 
     private String projectTitle;
     private ArrayList<SharedProjectTask> projectTasks;
     private ArrayList<String> memberEmails;
+    private ArrayList<String> memberNames;
     private String lastModifiedtime;
     private String projectKey;
 
@@ -55,5 +57,11 @@ public class SharedProjectModel {
         this.projectKey = projectKey;
     }
 
+    public ArrayList<String> getMemberNames() {
+        return memberNames;
+    }
 
+    public void setMemberNames(ArrayList<String> memberNames) {
+        this.memberNames = memberNames;
+    }
 }

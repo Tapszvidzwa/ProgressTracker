@@ -23,6 +23,8 @@
 
         <activity android:name=".home.MainActivity"></activity>
 
+        <activity android:name=".sharedProjects.SingleProjectFragment.projectmembers.ProjectMembersActivity"></activity>
+
         <activity android:name=".Sync.Sync"></activity>
 
         <activity android:name=".login.SplashScreenActivity">

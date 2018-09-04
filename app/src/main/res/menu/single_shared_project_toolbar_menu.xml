@@ -5,10 +5,15 @@
             android:id="@+id/add_member"
             android:title="Add member"
             android:icon="@drawable/ic_baseline_person_add_24px"
-            app:showAsAction="always"/>
+            android:showAsAction="always"/>
+
+        <item
+            android:id="@+id/view_members"
+            android:title="View members"
+            android:showAsAction="never"/>
 
         <item
             android:id="@+id/exit_project"
             android:title="Exit Project"
-            app:showAsAction="never"/>
+            android:showAsAction="never"/>
 </menu>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.login.User;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectReference;
@@ -15,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +144,7 @@ public class DatabaseHandler {
                 try {
                     User user = users.get(0);
                     addSharedProjectToUserPortfolio(context, sharedProjectReference.getProjectKey(), user.getUid());
-                    addEmailAddressToSharedProject(context, sharedProjectReference, emailAddress);
+                    addMemberDetailsToSharedProject(context, sharedProjectReference, emailAddress, user);
                 } catch (IndexOutOfBoundsException e) {
                     Toast.makeText(context, "Failed to account associated with that email address", Toast.LENGTH_LONG).show();
                     return;
@@ -160,18 +158,25 @@ public class DatabaseHandler {
         });
     }
 
-    private void addEmailAddressToSharedProject(final Context context, final SharedProjectReference projectReference, final String userEmail) {
+    private void addMemberDetailsToSharedProject(final Context context, final SharedProjectReference projectReference, final String userEmail, final User user) {
         db.document(SHARED_PROJECTS_DB_PATH + projectReference.getProjectKey()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 SharedProjectModel projectModel = documentSnapshot.toObject(SharedProjectModel.class);
                 ArrayList<String> memberEmails = projectModel.getMemberEmails();
+                ArrayList<String> memberNames = projectModel.getMemberNames();
 
                 if (memberEmails == null) {
                     memberEmails = new ArrayList<>();
                 }
 
+                if (memberNames == null) {
+                    memberNames = new ArrayList<>();
+                }
+
+                memberNames.add(user.getUserName());
                 memberEmails.add(userEmail);
+                projectModel.setMemberNames(memberNames);
                 projectModel.setMemberEmails(memberEmails);
                 updateSharedProjectInDb(context, projectModel, projectReference.getProjectKey());
             }

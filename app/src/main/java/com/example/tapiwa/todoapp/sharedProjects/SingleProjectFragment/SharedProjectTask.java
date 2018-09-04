@@ -39,11 +39,11 @@ public class SharedProjectTask {
         this.task = task;
     }
 
-    public String getWhoCompletedTask() {
+    public String getWhoLastModifiedTask() {
         return whoCompletedTask;
     }
 
-    public void setWhoCompletedTask(String whoCompletedTask) {
+    public void setWhoLastModifiedTask(String whoCompletedTask) {
         this.whoCompletedTask = whoCompletedTask;
     }
 }

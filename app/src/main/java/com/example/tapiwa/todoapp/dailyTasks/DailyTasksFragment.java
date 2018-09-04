@@ -113,7 +113,6 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
     }
 
     private void initializeViews() {
-
         percentageTxtV = tasksPageView.findViewById(R.id.percentage_completed);
         date = tasksPageView.findViewById(R.id.current_date);
         date.setText(CURRENT_DATE);

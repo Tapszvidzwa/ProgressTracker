@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     public static BottomSheetDialogFragment bottomSheetDialogFragment;
     private ProgressBar progressBar;
     private Util Utils;
-    private static InputRequests inputRequest = new InputRequests();
+    public static InputRequests inputRequest = new InputRequests();
     private BackUp backUp;
 
     @Override
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         bottomSheetDialogFragment = new BottomNavigationDrawerFragment();
         Utils = new Util(this);
         backUp = new BackUp(getApplicationContext(), auth.getUid());
-        //  backUp.runSyncLocalFiles();
         final NavigationView navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -167,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.sign_out:
                         signOut();
+                        break;
+                    case R.id.view_members:
+                        SingleProjectFragment.viewSharedProjectMembers();
                         break;
                 }
                 return false;

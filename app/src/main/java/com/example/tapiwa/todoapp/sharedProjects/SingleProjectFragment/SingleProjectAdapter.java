@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class SingleProjectAdapter extends BaseAdapter {
@@ -80,12 +79,13 @@ public class SingleProjectAdapter extends BaseAdapter {
         switch (task.getCompletionStatus()) {
             case "completed":
                 holder.completionStatus.setImageResource(R.drawable.ic_chck);
-                holder.lastModifiedByName.setText(context.getString(R.string.completed_by) + " " + task.getWhoCompletedTask());
+                holder.lastModifiedByName.setText(context.getString(R.string.completed_by) + " " + task.getWhoLastModifiedTask());
                 holder.lastModifiedDate.setText(utils.getDateFromMillis(Long.parseLong(task.getDateLastModified())));
                 break;
             case "uncompleted":
                 holder.completionStatus.setImageResource(R.drawable.ic_red_boxx);
-                holder.lastModifiedByName.setText("");
+                holder.lastModifiedByName.setText("Last Modified by " + task.getWhoLastModifiedTask());
+                holder.lastModifiedDate.setText(utils.getDateFromMillis(Long.parseLong(task.getDateLastModified())));
                 break;
             default:
                 holder.completionStatus.setImageResource(R.drawable.ic_red_boxx);
