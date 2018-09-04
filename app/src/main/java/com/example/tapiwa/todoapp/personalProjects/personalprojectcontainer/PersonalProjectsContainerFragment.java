@@ -78,8 +78,8 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
 
     @Override
     public void onPause() {
-        super.onPause();
         saveTasks();
+        super.onPause();
     }
 
     public static void addProject(final String projectName) {

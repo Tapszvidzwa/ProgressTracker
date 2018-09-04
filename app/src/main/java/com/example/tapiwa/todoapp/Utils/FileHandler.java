@@ -4,6 +4,12 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Task;
+import com.example.tapiwa.todoapp.TaskList;
+import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectModel;
+import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectTask;
+import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerModel;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +19,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import es.dmoral.toasty.Toasty;
 
@@ -66,9 +74,9 @@ public class FileHandler {
                     return null;
                 }
             }
-        } catch (IOException | JSONException e) {
-            Toasty.error(context, context.getString(R.string.failed_file_loading), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+        } catch (Exception e) {
+                Toasty.error(context, context.getString(R.string.failed_file_loading), Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
         } finally {
             try {
                 if (br != null) {
@@ -81,4 +89,48 @@ public class FileHandler {
 
         return null;
     }
+
+    public void clearAllFiles() {
+        saveFile(context.getString(R.string.DAILY_TASKS_FILE), "");
+        saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), "");
+        saveFile(context.getString(R.string.YEARLY_TASKS_FILE), "");
+        saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), "");
+        saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), "");
+    }
+
+    public void createFiles() {
+       saveFile(context.getString(R.string.DAILY_TASKS_FILE), createExampleTask());
+       saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), createExampleTask());
+       saveFile(context.getString(R.string.YEARLY_TASKS_FILE), createExampleTask());
+       saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), createExampleTask());
+       saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), createEmptyPersonalProjectFolder());
+    }
+
+    private String createEmptyPersonalProjectFolder() {
+        PersonalProjectModel projectModel = new PersonalProjectModel();
+        projectModel.setProjectTitle("Sample project folder");
+        projectModel.setProjectKey();
+        projectModel.setLastModifiedtime(Long.toString(System.currentTimeMillis()));
+        projectModel.setProjectTasks(new ArrayList<PersonalProjectTask>());
+        LinkedList<PersonalProjectModel> list = new LinkedList<>();
+        list.add(projectModel);
+        PersonalProjectsContainerModel personalProjectsContainerModel = new PersonalProjectsContainerModel();
+        personalProjectsContainerModel.setProjects(list);
+        Gson gson = new Gson();
+        return gson.toJson(personalProjectsContainerModel);
+    }
+
+    private String createExampleTask() {
+        Task task = new Task();
+        task.setStatus("uncompleted");
+        task.setTask("Sample task");
+        LinkedList<Task> list = new LinkedList<>();
+        list.add(task);
+        TaskList taskList = new TaskList();
+        taskList.setTaskList(list);
+        Gson gson = new Gson();
+        return gson.toJson(taskList);
+    }
+
+
 }

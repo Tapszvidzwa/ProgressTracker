@@ -1,6 +1,8 @@
 package com.example.tapiwa.todoapp.Utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -8,8 +10,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
@@ -26,29 +32,69 @@ public class BackUp {
     private String dailyTasksJson;
     private String weeklyTasksJson;
     private String longTermTasksJson;
+    private String oneYearTasksJson;
     private String personalProjectsJson;
     private String userId;
     private Context context;
-    private String TAG = "BACKUP";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FileHandler fileHandler;
+    public Boolean syncCompletionStatus = false;
 
     public BackUp(Context context, String userId) {
         this.context = context;
         this.userId = userId;
+        this.fileHandler = new FileHandler(context);
+    }
+
+    public BackUp() {
     }
 
     public void runBackupFiles() {
-        setDailyTasksJson(getLocalDailyTasksJson());
-        setWeeklyTasksJson(getLocalWeeklyTasksJson());
-        setLongTermTasksJson(getLocalLongTermTasksJson());
-        setPersonalProjectsJson(getLocalPersonalProjectsJson());
+            setDailyTasksJson(getLocalDailyTasksJson());
+            setWeeklyTasksJson(getLocalWeeklyTasksJson());
+            setLongTermTasksJson(getLocalLongTermTasksJson());
+            setPersonalProjectsJson(getLocalPersonalProjectsJson());
+            setOneYearTasksJson(getLocalOneYearTasksJson());
+            db = FirebaseFirestore.getInstance();
+            db.document(BACKUP_PATH + userId).set(this);
+    }
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public void runSyncLocalFiles() {
+        fileHandler.clearAllFiles();
 
-        db.document(BACKUP_PATH + userId).set(this);
+        db.document(BACKUP_PATH + userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                BackUp backupFiles = documentSnapshot.toObject(BackUp.class);
+                try {
+                    fileHandler.saveFile(context.getString(R.string.DAILY_TASKS_FILE), backupFiles.getDailyTasksJson());
+                    fileHandler.saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), backupFiles.getWeeklyTasksJson());
+                    fileHandler.saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), backupFiles.getLongTermTasksJson());
+                    fileHandler.saveFile(context.getString(R.string.YEARLY_TASKS_FILE), backupFiles.getOneYearTasksJson());
+                    fileHandler.saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), backupFiles.getPersonalProjectsJson());
+                    syncCompletionStatus = true;
+                } catch (NullPointerException e) {
+                    syncCompletionStatus = false;
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                syncCompletionStatus = false;
+            }
+        });
     }
 
     public String getDailyTasksJson() {
         return dailyTasksJson;
+    }
+
+    public String getOneYearTasksJson() {
+        return oneYearTasksJson;
+    }
+
+    public Boolean isSyncCompleted() {
+        return syncCompletionStatus;
     }
 
     public String getWeeklyTasksJson() {
@@ -79,6 +125,10 @@ public class BackUp {
         this.personalProjectsJson = personalProjectsJson;
     }
 
+    public void setOneYearTasksJson(String oneYearTasksJson) {
+        this.oneYearTasksJson = oneYearTasksJson;
+    }
+
     public String getLocalPersonalProjectsJson() {
         JSONObject tasksJson = fileHandler.readFile(context.getString(R.string.PERSONAL_PROJECTS_FILE));
         return tasksJson.toString();
@@ -96,6 +146,11 @@ public class BackUp {
 
     public String getLocalDailyTasksJson() {
         JSONObject tasks = fileHandler.readFile(context.getString(R.string.DAILY_TASKS_FILE));
+        return tasks.toString();
+    }
+
+    public String getLocalOneYearTasksJson() {
+        JSONObject tasks = fileHandler.readFile(context.getString(R.string.YEARLY_TASKS_FILE));
         return tasks.toString();
     }
 }

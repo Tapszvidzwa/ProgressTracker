@@ -1,16 +1,13 @@
 
-squid:S1450"mRemove the "personalProjectsContainerModel" field and declare it as a local variable in the relevant methods.(ÓÚÇæÿÿÿÿÿ8—¬ÇÛØ,
-Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8—¬ÇÛØ,
-Rsquid:S1444"6Make this "public static inputRequestType" field final(ƒ¶úà8—¬ÇÛØ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8—¬ÇÛØ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¯ëÖ»üÿÿÿÿ8—¬ÇÛØ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(û®Ù08—¬ÇÛØ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ÍÔ¶’8—¬ÇÛØ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ı×šß8—¬ÇÛØ,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(›êÒ8—¬ÇÛØ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(™”®ıÿÿÿÿ8—¬ÇÛØ,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(û®Ù08—¬ÇÛØ,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ü°úÿÿÿÿ8—¬ÇÛØ,
-’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8—¬ÇÛØ,
-"squid:ClassVariableVisibilityCheck"\Make inputRequestType a static final constant or non-public and provide accessors if needed.(ƒ¶úà8—¬ÇÛØ,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(óÏàÚ8—¬ÇÛØ,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8¿ÊÁ Ù,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(óÏàÚ8¿ÊÁ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(›êÒ8¿ÊÁ Ù,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(û®Ù08¿ÊÁ Ù,
+squid:S1450"mRemove the "personalProjectsContainerModel" field and declare it as a local variable in the relevant methods.(ÓÚÇæÿÿÿÿÿ8¿ÊÁ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(™”®ıÿÿÿÿ8¿ÊÁ Ù,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(û®Ù08¿ÊÁ Ù,
+Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8¿ÊÁ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ı×šß8¿ÊÁ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ü°úÿÿÿÿ8¿ÊÁ Ù,
+’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8¿ÊÁ Ù,
+psquid:UselessImportCheck"GRemove this unused import 'com.example.tapiwa.todoapp.Utils.Constants'.(—ß•8ğ”Ä Ù,

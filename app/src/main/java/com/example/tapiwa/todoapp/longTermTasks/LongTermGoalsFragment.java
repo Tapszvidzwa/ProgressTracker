@@ -51,8 +51,8 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public void onPause() {
-        super.onPause();
         saveTasks();
+        super.onPause();
     }
 
 

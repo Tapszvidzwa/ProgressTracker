@@ -2,7 +2,6 @@ package com.example.tapiwa.todoapp.login;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.tapiwa.todoapp.InitializeApp.InitializeApp;
+import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Utils.Util;
 import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.login.signIn.SignInActivity;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectReference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,13 +38,15 @@ import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    public Button createAccountBtn;
+    public Button createAccountBtn, signIn;
     private TextInputEditText emailEdtTxt, usernameEdtTxt, passwordEdtTxt, passwordConfirmEditTxt;
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
     private RelativeLayout mBackground;
     private ProgressBar mProgressBar;
     private String TAG = "CREATE_ACCOUNT_ACTIVITY";
+    private Util Utils = new Util(this);
+    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         mBackground = findViewById(com.example.tapiwa.todoapp.R.id.create_account_bkgrnd);
         mProgressBar = findViewById(com.example.tapiwa.todoapp.R.id.login_progress_circle);
         passwordEdtTxt = findViewById(com.example.tapiwa.todoapp.R.id.password_EdtTxt);
+        signIn = findViewById(R.id.sign_up_from_create_account_btn);
         passwordConfirmEditTxt = findViewById(com.example.tapiwa.todoapp.R.id.password_confirm_EdtTxt);
         createAccountBtn = findViewById(com.example.tapiwa.todoapp.R.id.create_account_Btn);
+        activity = this;
+
         mToolbar = findViewById(com.example.tapiwa.todoapp.R.id.create_new_account_toolbar);
         mAuth = FirebaseAuth.getInstance();
 
@@ -64,12 +71,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.WHITE);
 
         createAccountBtn.setActivated(true);
+        setButtonClickListeners();
 
+        new InitializeApp(getApplicationContext()).execute(true);
+    }
+
+    private void setButtonClickListeners() {
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "butn clicked");
                 if (isUserCredentialsValid()) {
                     attemptLogin(
                             passwordEdtTxt.getText().toString().trim(),
@@ -79,7 +89,15 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        new InitializeApp(getApplicationContext()).execute(true);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CreateAccountActivity.this, SignInActivity.class);
+                startActivity(intent);
+                activity.finish();
+
+            }
+        });
     }
 
     private boolean isUserCredentialsValid() {
@@ -178,14 +196,13 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private void attemptLogin(String password, final String email, final String username) {
-
         dimBackground();
-
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    Utils.setFirstTimeUser();
                     String uid = mAuth.getCurrentUser().getUid();
                     registerUserToFirestore(uid, username, email);
                     mProgressBar.setVisibility(View.INVISIBLE);

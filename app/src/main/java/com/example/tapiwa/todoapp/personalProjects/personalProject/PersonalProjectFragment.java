@@ -67,8 +67,8 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public void onPause() {
-        super.onPause();
         saveTasks();
+        super.onPause();
     }
 
     @Override

@@ -1,0 +1,10 @@
+
+fsquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ŸèĞ¢úÿÿÿÿ
+0squid:S3626"Remove this redundant jump.(ûÁİ…
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ
+Ksquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë
+Ksquid:S2696"6Make the enclosing method "static" or remove this set.(—£æø
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ
+–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(îñë‡
+usquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ùŸÍõşÿÿÿÿ

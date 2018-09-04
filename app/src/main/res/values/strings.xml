@@ -35,5 +35,6 @@
 
     //Shared Preferences
     <string name="login_sessions">loginSessions</string>
+    <string name="first_time_user">firstTimeUser</string>
 
 </resources>

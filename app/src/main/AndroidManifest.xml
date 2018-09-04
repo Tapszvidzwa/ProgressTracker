@@ -17,11 +17,13 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="icon">
 
-        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.signIn.SignInActivity"></activity>
 
         <activity android:name=".login.CreateAccountActivity"></activity>
 
         <activity android:name=".home.MainActivity"></activity>
+
+        <activity android:name=".Sync.Sync"></activity>
 
         <activity android:name=".login.SplashScreenActivity">
             <intent-filter>

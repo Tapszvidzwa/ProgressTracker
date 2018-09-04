@@ -54,8 +54,8 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public void onPause() {
-        super.onPause();
         saveTasks();
+        super.onPause();
     }
 
     public static void addNewTask(String task) {

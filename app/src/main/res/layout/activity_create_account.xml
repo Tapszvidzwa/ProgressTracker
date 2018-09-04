@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="90dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical">
 
@@ -30,8 +30,6 @@
             android:id="@+id/username_EdtTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
             android:background="@drawable/curved_background"
             android:gravity="center_vertical"
             android:hint="Username" />
@@ -41,8 +39,6 @@
             android:id="@+id/email_address_EdtTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/textInputEditText"
-            android:layout_alignStart="@+id/textInputEditText"
             android:layout_marginTop="10dp"
             android:background="@drawable/curved_background"
             android:gravity="center_vertical"
@@ -54,9 +50,7 @@
             android:id="@+id/password_EdtTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/textInputEditText2"
-            android:layout_alignStart="@+id/textInputEditText2"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/curved_background"
             android:gravity="center_vertical"
             android:hint="Password"
@@ -66,9 +60,7 @@
             android:id="@+id/password_confirm_EdtTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/password_EdtTxt"
-            android:layout_alignStart="@+id/textInputEditText2"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/curved_background"
             android:gravity="center_vertical"
             android:hint="Confirm Password"
@@ -78,8 +70,8 @@
             android:id="@+id/create_account_Btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:background="@color/colorAccent"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_screen_btn"
             android:clickable="true"
             android:text="CREATE ACCOUNT"
             android:textColor="@android:color/white" />
@@ -91,6 +83,25 @@
             android:text="By signing up you agree to the terms of service and privacy policy"
             android:textColor="@android:color/black" />
 
+        <TextView
+            android:id="@+id/already_have_account_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:text="Already have an account? " />
+
+        <Button
+            android:id="@+id/sign_up_from_create_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_screen_btn"
+            android:clickable="true"
+            android:text="SIGN IN"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
     <ProgressBar
@@ -100,4 +111,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="invisible" />
+
+
 </RelativeLayout>

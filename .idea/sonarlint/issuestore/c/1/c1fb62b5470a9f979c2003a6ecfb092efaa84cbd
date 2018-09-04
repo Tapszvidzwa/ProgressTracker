@@ -1,37 +1,27 @@
 
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ûâæÓÿÿÿÿÿ8‡¬Œ»Î,
-‘"squid:ClassVariableVisibilityCheck"^Make sharedProjectModel a static final constant or non-public and provide accessors if needed.(ùÈƒ™8‡¬Œ»Î,
-"squid:ClassVariableVisibilityCheck"OMake TAG a static final constant or non-public and provide accessors if needed.(é—é8‡¬Œ»Î,
-@squid:S2386"$Make member "tasksList" "protected".( Øı8‡¬Œ»Î,
-Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8‡¬Œ»Î,
-"squid:ClassVariableVisibilityCheck"UMake tasksList a static final constant or non-public and provide accessors if needed.(ğŒ£Öıÿÿÿÿ8‡¬Œ»Î,
-Rsquid:S1444"6Make this "public static inputRequestType" field final(ƒ¶úà8‡¬Œ»Î,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¤Ä£Õÿÿÿÿÿ8‡¬Œ»Î,
-Z"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Ù©ó¹üÿÿÿÿ8‡¬Œ»Î,
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ôŞï˜øÿÿÿÿ8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(„œÒŞøÿÿÿÿ8‡¬Œ»Î,
-lsquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(£ªµúÿÿÿÿ8‡¬Œ»Î,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ã‚è#8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Õ‹Ñ¸üÿÿÿÿ8‡¬Œ»Î,
-‡"squid:ClassVariableVisibilityCheck"TMake mAdapter a static final constant or non-public and provide accessors if needed.(Úãø¸8‡¬Œ»Î,
-•squid:S1319"tThe type of the "tasksList" object should be an interface such as "List" rather than the implementation "ArrayList".(ğŒ£Öıÿÿÿÿ8‡¬Œ»Î,
-Dsquid:S1444")Make this "public static TAG" field final(é—é8‡¬Œ»Î,
-isquid:S3008"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(é—é8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Íùœ§øÿÿÿÿ8‡¬Œ»Î,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.( Øı8‡¬Œ»Î,
-Psquid:S1444"/Make this "public static tasksList" field final(ğŒ£Öıÿÿÿÿ8‡¬Œ»Î,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(÷Á®½8‡¬Œ»Î,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(“·öø8‡¬Œ»Î,
-nsquid:UselessImportCheck"ERemove this unused import 'androidx.appcompat.app.AppCompatActivity'.(€¶£î8‡¬Œ»Î,
-Tsquid:S1444"8Make this "public static sharedProjectModel" field final(ùÈƒ™8‡¬Œ»Î,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ÍÔ¶’8‡¬Œ»Î,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(óöª˜8‡¬Œ»Î,
-"squid:ClassVariableVisibilityCheck"\Make inputRequestType a static final constant or non-public and provide accessors if needed.(ƒ¶úà8‡¬Œ»Î,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(Ç­á®8‡¬Œ»Î,
-’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8‡¬Œ»Î,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(±Â¶ëÿÿÿÿÿ8‡¬Œ»Î,
-Jsquid:S1444".Make this "public static mAdapter" field final(Úãø¸8‡¬Œ»Î,
-Wsquid:UselessImportCheck".Remove this unused import 'android.view.Menu'.(£¯Ò…8ÃŒê°Ø,
+"squid:ClassVariableVisibilityCheck"OMake TAG a static final constant or non-public and provide accessors if needed.(é—é8™êÅ Ù,
+Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8™êÅ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(Ç­á®8ü³Æ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¤Ä£Õÿÿÿÿÿ8™êÅ Ù,
+’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8™êÅ Ù,
+"squid:ClassVariableVisibilityCheck"UMake tasksList a static final constant or non-public and provide accessors if needed.(ğŒ£Öıÿÿÿÿ8™êÅ Ù,
+Jsquid:S1444".Make this "public static mAdapter" field final(Úãø¸8™êÅ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.( Øı8ü³Æ Ù,
+Tsquid:S1444"8Make this "public static sharedProjectModel" field final(ùÈƒ™8™êÅ Ù,
+‡"squid:ClassVariableVisibilityCheck"TMake mAdapter a static final constant or non-public and provide accessors if needed.(Úãø¸8™êÅ Ù,
+isquid:S3008"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(é—é8™êÅ Ù,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8™êÅ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Íùœ§øÿÿÿÿ8™êÅ Ù,
+Dsquid:S1444")Make this "public static TAG" field final(é—é8™êÅ Ù,
+•squid:S1319"tThe type of the "tasksList" object should be an interface such as "List" rather than the implementation "ArrayList".(ğŒ£Öıÿÿÿÿ8™êÅ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(£ªµúÿÿÿÿ8™êÅ Ù,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ã‚è#8™êÅ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(“·öø8™êÅ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Õ‹Ñ¸üÿÿÿÿ8™êÅ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Ù©ó¹üÿÿÿÿ8ü³Æ Ù,
+?squid:S2386"$Make member "tasksList" "protected".(ã‚è#8™êÅ Ù,
+‘"squid:ClassVariableVisibilityCheck"^Make sharedProjectModel a static final constant or non-public and provide accessors if needed.(ùÈƒ™8™êÅ Ù,
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ûâæÓÿÿÿÿÿ8™êÅ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(±Â¶ëÿÿÿÿÿ8™êÅ Ù,
+Psquid:S1444"/Make this "public static tasksList" field final(ğŒ£Öıÿÿÿÿ8™êÅ Ù,
+msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ôŞï˜øÿÿÿÿ8ü³Æ Ù,

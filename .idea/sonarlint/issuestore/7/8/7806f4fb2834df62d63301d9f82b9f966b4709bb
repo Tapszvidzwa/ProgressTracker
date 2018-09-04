@@ -1,29 +1,27 @@
 
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(íäÌÜ8ùŸû¶Ø,
-Rsquid:S1444"6Make this "public static inputRequestType" field final(¨Íñ8ùŸû¶Ø,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Œ²É¬üÿÿÿÿ8ùŸû¶Ø,
-Msquid:S1444"1Make this "public static noGoalsText" field final(êÜéÐ8ùŸû¶Ø,
-xsquid:S00116"VRename this field "PROJECT_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øï—åûÿÿÿÿ8ùŸû¶Ø,
-Xsquid:S2589"7Remove this expression which always evaluates to "true"(ÑÌòúùÿÿÿÿ8ùŸû¶Ø,
-7squid:S3626"Remove this redundant jump.(ûÁÝ…8ùŸû¶Ø,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(”‘Å¢ûÿÿÿÿ8ùŸû¶Ø,
-ksquid:S1192"JDefine a constant instead of duplicating this literal "completed" 3 times.(ãêÝ«ýÿÿÿÿ8ùŸû¶Ø,
-Usquid:S1444"4Make this "public static clickedProject" field final(§ ƒÍÿÿÿÿÿ8ùŸû¶Ø,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(†“ž˜8ùŸû¶Ø,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(†“ž˜8ùŸû¶Ø,
-Lsquid:S1444"1Make this "public static restingDude" field final(¸ïép8ùŸû¶Ø,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ ‹î8ùŸû¶Ø,
-"squid:ClassVariableVisibilityCheck"\Make inputRequestType a static final constant or non-public and provide accessors if needed.(¨Íñ8ùŸû¶Ø,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚË”¸ùÿÿÿÿ8ùŸû¶Ø,
-‰"squid:ClassVariableVisibilityCheck"WMake restingDude a static final constant or non-public and provide accessors if needed.(¸ïép8ùŸû¶Ø,
-Fsquid:S1444"*Make this "public static date" field final(êÜéÐ8ùŸû¶Ø,
-7squid:S3626"Remove this redundant jump.(ûÁÝ…8ùŸû¶Ø,
-ƒ"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(êÜéÐ8ùŸû¶Ø,
-Š"squid:ClassVariableVisibilityCheck"WMake noGoalsText a static final constant or non-public and provide accessors if needed.(êÜéÐ8ùŸû¶Ø,
->squid:S1659""Declare "date" on a separate line.(êÜéÐ8ùŸû¶Ø,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8ùŸû¶Ø,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¥¬¶Ð8ùŸû¶Ø,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¶ŸÌ—8ùŸû¶Ø,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(¦Ô•øüÿÿÿÿ8ùŸû¶Ø,
-ssquid:S00116"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¸î}8ùŸû¶Ø,
-’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(§ ƒÍÿÿÿÿÿ8ùŸû¶Ø,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(†“ž˜8«Ó½ Ù,
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(¦Ô•øüÿÿÿÿ8«Ó½ Ù,
+Usquid:S1444"4Make this "public static clickedProject" field final(§ ƒÍÿÿÿÿÿ8«Ó½ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(íäÌÜ8«Ó½ Ù,
+’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(§ ƒÍÿÿÿÿÿ8«Ó½ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Œ²É¬üÿÿÿÿ8«Ó½ Ù,
+xsquid:S00116"VRename this field "PROJECT_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øï—åûÿÿÿÿ8«Ó½ Ù,
+ƒ"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(êÜéÐ8«Ó½ Ù,
+Fsquid:S1444"*Make this "public static date" field final(êÜéÐ8«Ó½ Ù,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¥ ‹î8«Ó½ Ù,
+Š"squid:ClassVariableVisibilityCheck"WMake noGoalsText a static final constant or non-public and provide accessors if needed.(êÜéÐ8«Ó½ Ù,
+ssquid:S00116"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¸î}8«Ó½ Ù,
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8«Ó½ Ù,
+ksquid:S1192"JDefine a constant instead of duplicating this literal "completed" 3 times.(ãêÝ«ýÿÿÿÿ8«Ó½ Ù,
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8«Ó½ Ù,
+Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8«Ó½ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¶ŸÌ—8«Ó½ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚË”¸ùÿÿÿÿ8«Ó½ Ù,
+>squid:S1659""Declare "date" on a separate line.(êÜéÐ8«Ó½ Ù,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(†“ž˜8«Ó½ Ù,
+Xsquid:S2589"7Remove this expression which always evaluates to "true"(ÑÌòúùÿÿÿÿ8«Ó½ Ù,
+Msquid:S1444"1Make this "public static noGoalsText" field final(êÜéÐ8«Ó½ Ù,
+Lsquid:S1444"1Make this "public static restingDude" field final(¸ïép8«Ó½ Ù,
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(”‘Å¢ûÿÿÿÿ8«Ó½ Ù,
+‰"squid:ClassVariableVisibilityCheck"WMake restingDude a static final constant or non-public and provide accessors if needed.(¸ïép8«Ó½ Ù,
+psquid:UselessImportCheck"GRemove this unused import 'com.example.tapiwa.todoapp.Utils.Constants'.(—Žß•8œ«Á Ù,

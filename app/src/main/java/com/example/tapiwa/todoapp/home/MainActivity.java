@@ -2,6 +2,7 @@ package com.example.tapiwa.todoapp.home;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -19,6 +20,7 @@ import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.Utils.Util;
 import com.example.tapiwa.todoapp.dailyTasks.DailyTasksFragment;
+import com.example.tapiwa.todoapp.login.signIn.SignInActivity;
 import com.example.tapiwa.todoapp.longTermTasks.LongTermGoalsFragment;
 import com.example.tapiwa.todoapp.oneYearTasks.YearlyGoalsFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectFragment;
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Util Utils;
     private static InputRequests inputRequest = new InputRequests();
+    private BackUp backUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +89,12 @@ public class MainActivity extends AppCompatActivity {
         fileHandler = new FileHandler(activity.getApplicationContext());
         bottomSheetDialogFragment = new BottomNavigationDrawerFragment();
         Utils = new Util(this);
+        backUp = new BackUp(getApplicationContext(), auth.getUid());
+        //  backUp.runSyncLocalFiles();
         final NavigationView navigationView = findViewById(R.id.nav_view);
-
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
+
         setupBottomAppBar();
         updateUpNavigationIcon();
         updateBottomBarMenu();
@@ -105,12 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        runBackUp();
         super.onStop();
-        Utils.incrementLoginSessionCount();
-        if (Utils.isReadyForBackUp()) {
-            BackUp backUp = new BackUp(getApplicationContext(), auth.getUid());
-            backUp.runBackupFiles();
-        }
     }
 
     @Override
@@ -121,6 +122,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void runBackUp() {
+        Utils.incrementLoginSessionCount();
+        if (Utils.isReadyForBackUp()) {
+            backUp.runBackupFiles();
+        }
     }
 
     public void openAppropriateFragment() {
@@ -412,7 +420,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signOut() {
-        auth.signOut();
+        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+        startActivity(intent);
+        //  auth.signOut();
+        // this.finish();
     }
 
 }

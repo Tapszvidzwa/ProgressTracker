@@ -73,8 +73,8 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public void onPause() {
-        super.onPause();
         saveTasks();
+        super.onPause();
     }
 
     private void saveTasks() {

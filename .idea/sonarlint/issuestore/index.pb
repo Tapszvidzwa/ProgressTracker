@@ -5,8 +5,6 @@ U
 %app/src/main/res/menu/drawer_view.xml,5/c/5c55ecc36829ad34700347996b5327b833eb9278
 á
 Wapp/src/main/java/com/example/tapiwa/todoapp/sharedProjects/SharedProjectsFragment.java,3/c/3c09201092d9a3ede9990c361aa6df7ecc6dfd0f
-u
-Eapp/src/main/java/com/example/tapiwa/todoapp/login/LoginActivity.java,3/d/3d8645b00bb737e479fc869b70a3ba5c308bd587
 |
 Lapp/src/main/java/com/example/tapiwa/todoapp/login/SplashScreenActivity.java,a/8/a894bfa39b44bd96c97af5de3991d30ba0c88365
 X
@@ -179,3 +177,13 @@ Uapp/src/main/java/com/example/tapiwa/todoapp/longTermTasks/LongTermGoalsFragmen
 Oapp/src/main/java/com/example/tapiwa/todoapp/dailyTasks/DailyTasksFragment.java,1/8/1862609e8239964747a0dd6c542cc8029bb69d73
 n
 >app/src/main/java/com/example/tapiwa/todoapp/Utils/BackUp.java,7/3/734181e6623e8de3b813bb123bf381984a58f8cb
+Å
+Qapp/src/main/java/com/example/tapiwa/todoapp/navigation/NavigationController.java,d/a/da40fc71503f163edec1f96f9993f40c86d699e1
+u
+Eapp/src/main/java/com/example/tapiwa/todoapp/Utils/InputRequests.java,4/a/4a5199c8e71160c246b2b4e52ca1024479409b01
+Ç
+Rapp/src/main/java/com/example/tapiwa/todoapp/oneYearTasks/YearlyGoalsFragment.java,e/1/e15f4b7198af38efc7eaf5cd5bae53de82a7d1af
+A
+gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
+}
+Mapp/src/main/java/com/example/tapiwa/todoapp/login/signIn/SignInActivity.java,a/c/acebab3921af7474e67e07e3f00d0cf39b97d62f
