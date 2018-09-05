@@ -151,7 +151,6 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
         sharedProjectsListV = sharedProjectsView.findViewById(R.id.single_project_listV);
         percentageCompleted = sharedProjectsView.findViewById(R.id.single_project_percentage_completed);
         percentageCompleted.setTextColor(Color.rgb(208, 35, 35));
-        percentageCompleted.setText(sharedProjectModel.getPercentageCompleted());
         registerForContextMenu(sharedProjectsListV);
         loadProjectsFromDb();
     }
@@ -179,6 +178,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
                             mAdapter = new SingleProjectAdapter(activity.getApplicationContext(),
                                     R.layout.item_shared_project,
                                     tasksList);
+                            percentageCompleted.setText(sharedProjectModel.getPercentageCompleted());
                         } catch (NullPointerException ex) {
                             // no - op
                         }

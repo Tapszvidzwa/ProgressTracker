@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         bottomSheetDialogFragment = new BottomNavigationDrawerFragment();
         Utils = new Util(this);
         backUp = new BackUp(getApplicationContext(), auth.getUid());
-        final NavigationView navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
@@ -98,11 +97,6 @@ public class MainActivity extends AppCompatActivity {
         updateUpNavigationIcon();
         updateBottomBarMenu();
         initializeFab();
-
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = headerView.findViewById(R.id.user_email);
-        navUsername.setText(auth.getCurrentUser().getEmail());
-
         switchToFragment(DAILY_TASKS, null);
         updateToolBarName();
     }
@@ -424,8 +418,6 @@ public class MainActivity extends AppCompatActivity {
     private void signOut() {
         Intent intent = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intent);
-        //  auth.signOut();
-        // this.finish();
     }
 
 }

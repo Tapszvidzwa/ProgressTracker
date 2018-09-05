@@ -3,6 +3,7 @@ package com.example.tapiwa.todoapp.sharedProjects;
 import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SharedProjectModel implements Serializable {
@@ -68,7 +69,7 @@ public class SharedProjectModel implements Serializable {
 
     public String getPercentageCompleted() {
         if(percentageCompleted == null) {
-            return "0";
+            return "0%";
         } else {
             return percentageCompleted;
         }
@@ -76,11 +77,13 @@ public class SharedProjectModel implements Serializable {
 
     public void setPercentageCompleted() {
         double completed = 0;
-        for(int i = 0; i < projectTasks.size(); i++) {
-            if(projectTasks.get(i).getCompletionStatus().equals("completed")){
+        for (int i = 0; i < projectTasks.size(); i++) {
+            if (projectTasks.get(i).getCompletionStatus().equals("completed")) {
                 ++completed;
             }
         }
-        this.percentageCompleted = Double.toString(((double) completed / projectTasks.size()) * 100).substring(0, 2);
+        DecimalFormat numberformat = new DecimalFormat("#");
+        double result = ((double) completed / projectTasks.size()) * 100;
+        this.percentageCompleted = numberformat.format(result) + "%";
     }
 }

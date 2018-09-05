@@ -2,6 +2,7 @@ package com.example.tapiwa.todoapp.personalProjects.personalProject;
 
 import com.example.tapiwa.todoapp.Utils.Util;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.example.tapiwa.todoapp.Utils.Constants.PERSONAL_PROJECT_KEY_SIZE;
@@ -77,7 +78,9 @@ public class PersonalProjectModel {
             }
         }
 
-        this.percentageCompleted = Double.toString(((double) num_completed / projectTasks.size()) * 100).substring(0,2);
+        DecimalFormat numberformat = new DecimalFormat("#");
+        double result = ((double) num_completed / projectTasks.size()) * 100;
+        this. percentageCompleted = numberformat.format(result);
     }
 
 }

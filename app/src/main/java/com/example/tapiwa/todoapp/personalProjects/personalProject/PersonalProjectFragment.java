@@ -55,13 +55,13 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         personalProjectsPageView = inflater.inflate(R.layout.fragment_personal_project, container, false);
         initializeVariables();
         initializeViews();
-        calculatePercentage();
         return personalProjectsPageView;
     }
 
     @Override
     public void onResume() {
         retrieveSavedTasks(PROJECT_KEY);
+        setPercentage();
         super.onResume();
     }
 
@@ -93,6 +93,11 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    private void setPercentage() {
+        percentageTxtV.setTextColor(Color.rgb(208, 35, 35));
+        percentageTxtV.setText(personalProjectModel.getPercentageCompleted() + "%");
     }
 
     private void deleteTask(int pos) {
@@ -192,7 +197,6 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
                         dg.setTitleText("Congratulations!").setContentText("Congratulations on finishing all your tasks");
                         dg.show();
-                        personalProjectTasksList.clear();
                     }
 
                 } else {
