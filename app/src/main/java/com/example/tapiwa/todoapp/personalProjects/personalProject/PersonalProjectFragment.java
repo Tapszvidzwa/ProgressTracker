@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -225,8 +226,10 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
                 return;
             } else {
                 int completedTasks = countCompletedTasks();
-                int percentage = (int) Math.floor(((double) completedTasks / personalProjectTasksList.size()) * 100);
-                percentageTxtV.setText(Integer.toString(percentage) + "%");
+                double result = ((double) completedTasks / personalProjectTasksList.size()) * 100;
+                DecimalFormat numFormat = new DecimalFormat("#");
+                String newPercentage = numFormat.format(result) + "%";
+                percentageTxtV.setText(newPercentage);
                 checkTasksCompletion();
                 return;
             }

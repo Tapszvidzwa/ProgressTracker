@@ -63,7 +63,7 @@ public class PersonalProjectModel {
     }
 
     public String getPercentageCompleted() {
-        if(percentageCompleted == null) {
+        if (percentageCompleted == null) {
             return "0";
         } else {
             return percentageCompleted;
@@ -71,16 +71,20 @@ public class PersonalProjectModel {
     }
 
     public void setPercentageCompleted() {
-        int num_completed = 0;
-        for(int i = 0; i < projectTasks.size(); i++) {
-            if(projectTasks.get(i).getCompletionStatus().equals("completed")) {
-                ++num_completed;
+        if (projectTasks.size() == 0) {
+            this.percentageCompleted = "0";
+        } else {
+            int num_completed = 0;
+            for (int i = 0; i < projectTasks.size(); i++) {
+                if (projectTasks.get(i).getCompletionStatus().equals("completed")) {
+                    ++num_completed;
+                }
             }
-        }
 
-        DecimalFormat numberformat = new DecimalFormat("#");
-        double result = ((double) num_completed / projectTasks.size()) * 100;
-        this. percentageCompleted = numberformat.format(result);
+            DecimalFormat numberformat = new DecimalFormat("#");
+            double result = ((double) num_completed / projectTasks.size()) * 100;
+            this.percentageCompleted = numberformat.format(result);
+        }
     }
 
 }
