@@ -53,6 +53,7 @@ public class ProjectMembersAdapter  extends BaseAdapter {
     @Override
     public View getView(int position, final View view, ViewGroup viewGroup) {
         String name, email;
+
         try {
              name = names.get(position);
              email = emails.get(position);

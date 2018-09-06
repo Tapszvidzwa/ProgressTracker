@@ -1,5 +1,6 @@
 package com.example.tapiwa.todoapp.dailyTasks;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,8 +14,8 @@ import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
-import com.example.tapiwa.todoapp.Utils.BackUp;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.ProgressTracker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
@@ -36,21 +37,13 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
     private static String CURRENT_DATE;
-    private FileHandler fileHandler;
+    private static FileHandler fileHandler;
+    private Activity activity;
+    private static ProgressTracker progressTracker;
 
 
     public DailyTasksFragment() {
         // Required empty public constructor
-    }
-
-    public static void addTask(String task) {
-        Task newTask = new Task();
-        newTask.setTask(task);
-        newTask.setStatus("uncompleted");
-
-        tasksList.add(newTask);
-        goalsList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -67,14 +60,30 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public void onResume() {
-        super.onResume();
         retrieveSavedTasks();
+        super.onResume();
     }
 
     @Override
     public void onPause() {
         saveTasks();
         super.onPause();
+    }
+
+    public static void addTask(String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+        tasksList.add(newTask);
+        goalsList.setAdapter(adapter);
+        updateProgressTracker();
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void updateProgressTracker() {
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        progressTracker.updateCounter(list);
     }
 
     private void saveTasks() {
@@ -97,6 +106,7 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
     private void initializeVariables() {
         tasksList = new LinkedList<>();
         fileHandler = new FileHandler(getContext());
+        progressTracker = new ProgressTracker(getContext(), getString(R.string.DAILY_TASKS_FILE));
     }
 
     private void populateTaskList(JSONObject tasksJson) {
@@ -141,10 +151,13 @@ public class DailyTasksFragment extends androidx.fragment.app.Fragment {
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                 }
+                updateProgressTracker();
                 calculatePercentage();
             }
         });
     }
+
+
 
     private void calculatePercentage() {
         percentageTxtV.setTextColor(Color.rgb(208, 35, 35));

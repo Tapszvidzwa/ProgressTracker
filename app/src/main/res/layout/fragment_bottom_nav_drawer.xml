@@ -5,17 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:behavior_hideable="true"
-    android:background="@android:color/white"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_gravity="bottom"
         android:layout_marginTop="4dp"
+        android:background="@drawable/bottom_nav_header"
         android:theme="@style/Widget.Design.BottomNavigationView"
         app:itemBackground="@drawable/item_highlight"
         app:itemTextColor="@drawable/textcolor"

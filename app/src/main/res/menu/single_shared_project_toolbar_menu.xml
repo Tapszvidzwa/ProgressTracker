@@ -5,12 +5,12 @@
             android:id="@+id/add_member"
             android:title="Add member"
             android:icon="@drawable/ic_baseline_person_add_24px"
-            android:showAsAction="always"/>
+            app:showAsAction="ifRoom"/>
 
         <item
             android:id="@+id/view_members"
             android:title="View members"
-            android:showAsAction="never"/>
+            app:showAsAction="ifRoom"/>
 
         <item
             android:id="@+id/exit_project"

@@ -144,6 +144,9 @@ public class FileHandler {
     }
 
     public String getNumTasksUncompleted(String filename) {
+        if(filename.equals(context.getString(R.string.PERSONAL_PROJECTS_FILE))) {
+            return getNumUncompletedPersonalProjects();
+        }
         JSONObject tasksJson = readFile(filename);
         Gson gson = new Gson();
         TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
@@ -152,5 +155,18 @@ public class FileHandler {
         } else {
             return String.valueOf(list.getNumUncompletedTasks());
         }
+    }
+
+    private String getNumUncompletedPersonalProjects() {
+        JSONObject tasksJson = readFile(context.getString(R.string.PERSONAL_PROJECTS_FILE));
+        Gson gson = new Gson();
+        PersonalProjectsContainerModel list = gson.fromJson(tasksJson.toString(), PersonalProjectsContainerModel.class);
+
+        if(list.getNumUncompletedProjects().equals("0")) {
+            return "";
+        } else {
+            return list.getNumUncompletedProjects();
+        }
+
     }
 }

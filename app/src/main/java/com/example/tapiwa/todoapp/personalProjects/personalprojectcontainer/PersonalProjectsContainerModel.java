@@ -68,4 +68,14 @@ public class PersonalProjectsContainerModel {
         }
         return null;
     }
+
+    public String getNumUncompletedProjects() {
+        int uncompletedProjects = 0;
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).isProjectComplete() == false) {
+                ++uncompletedProjects;
+            }
+        }
+        return String.valueOf(uncompletedProjects);
+    }
 }

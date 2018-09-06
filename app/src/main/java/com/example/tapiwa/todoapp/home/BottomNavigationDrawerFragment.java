@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.ProgressTracker;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +22,8 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     private static TextView emailAddress;
     private View header;
     private FileHandler fileHandler;
+    private ProgressTracker progressTracker;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
         emailAddress = header.findViewById(R.id.user_email);
         emailAddress.setText(MainActivity.auth.getCurrentUser().getEmail());
         fileHandler = new FileHandler(getContext());
+        progressTracker = new ProgressTracker(getContext(), null);
         return bottomNavigationSheet;
     }
 
@@ -37,21 +41,38 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupViews();
-        setupNumbersForNavView();
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+        setupCounters();
     }
 
-    private void setupNumbersForNavView() {
-        TextView view = (TextView) navigationView.getMenu().findItem(R.id.daily_tasks).getActionView();
-        view.setText(fileHandler.getNumTasksUncompleted(getString(R.string.DAILY_TASKS_FILE)));
+    private void setupCounters() {
+        TextView[] counterTextView = new TextView[6];
+        counterTextView[0] = (TextView) navigationView.getMenu().findItem(R.id.daily_tasks).getActionView();
+        counterTextView[1] = (TextView) navigationView.getMenu().findItem(R.id.weekly_tasks).getActionView();
+        counterTextView[2] = (TextView) navigationView.getMenu().findItem(R.id.yearly_tasks).getActionView();
+        counterTextView[3] = (TextView) navigationView.getMenu().findItem(R.id.long_term_tasks).getActionView();
+        counterTextView[4] = (TextView) navigationView.getMenu().findItem(R.id.personal_projects).getActionView();
+        counterTextView[5] = (TextView) navigationView.getMenu().findItem(R.id.shared_projects).getActionView();
 
-        TextView view2 = (TextView) navigationView.getMenu().findItem(R.id.weekly_tasks).getActionView();
-        view2.setText(fileHandler.getNumTasksUncompleted(getString(R.string.WEEKLY_TASKS_FILE)));
+        String[] count = new String[6];
+        count[0] = progressTracker.getUncompleted_daily_tasks();
+        count[1] = progressTracker.getUncompleted_weekly_tasks();
+        count[2] = progressTracker.getUncompleted_yearly_tasks();
+        count[3] = progressTracker.getUncompleted_long_term_tasks();
+        count[4] = progressTracker.getUncompleted_personal_projects();
+        count[5] = progressTracker.getUncompleted_shared_projects();
 
-        TextView view3 = (TextView) navigationView.getMenu().findItem(R.id.yearly_tasks).getActionView();
-        view3.setText(fileHandler.getNumTasksUncompleted(getString(R.string.YEARLY_TASKS_FILE)));
+        for (int i = 0; i < counterTextView.length; i++) {
+            configureCounterView(counterTextView[i], count[i]);
+        }
+    }
 
-        TextView view4 = (TextView) navigationView.getMenu().findItem(R.id.long_term_tasks).getActionView();
-        view4.setText(fileHandler.getNumTasksUncompleted(getString(R.string.LONG_TERM_PROJECTS_FILE)));
+    private void configureCounterView(TextView view, String count) {
+        if (count.equals("")) {
+            view.setVisibility(View.INVISIBLE);
+        } else {
+            view.setText(count);
+        }
     }
 
     private void setupViews() {

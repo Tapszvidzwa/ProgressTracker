@@ -74,7 +74,7 @@ public class DatabaseHandler {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Updated your projects", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "New member added", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -89,9 +89,11 @@ public class DatabaseHandler {
         newProject.setLastModifiedtime(Long.toString(System.currentTimeMillis()));
 
         ArrayList<String> memberEmails = new ArrayList<>();
+        ArrayList<String> memberNames = new ArrayList<>();
+        memberNames.add(auth.getCurrentUser().getDisplayName());
         memberEmails.add(auth.getCurrentUser().getEmail());
         newProject.setMemberEmails(memberEmails);
-
+        newProject.setMemberNames(memberNames);
         return newProject;
     }
 
