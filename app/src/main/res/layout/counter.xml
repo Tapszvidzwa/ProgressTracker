@@ -3,5 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:layout_marginTop="4dp"
+    android:textSize="15sp"
+    android:textColor="@android:color/black"
+    android:layout_gravity="center_vertical"
     android:background="@drawable/counter_background"
-    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+ />

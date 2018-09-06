@@ -14,6 +14,7 @@ import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.ProgressTracker;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ public class WeeklyTasksFragment extends androidx.fragment.app.Fragment {
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
     private FileHandler fileHandler;
+    private static ProgressTracker progressTracker;
 
     public WeeklyTasksFragment() {
         // Required empty public constructor
@@ -91,6 +93,7 @@ public class WeeklyTasksFragment extends androidx.fragment.app.Fragment {
     private void initializeVariables() {
         tasksList = new LinkedList<>();
         fileHandler = new FileHandler(getContext());
+        progressTracker = new ProgressTracker(getContext(), getString(R.string.WEEKLY_TASKS_FILE));
     }
 
     private void initializeViews() {
@@ -128,6 +131,7 @@ public class WeeklyTasksFragment extends androidx.fragment.app.Fragment {
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                 }
+                updateProgressTracker();
             }
         });
     }
@@ -170,9 +174,15 @@ public class WeeklyTasksFragment extends androidx.fragment.app.Fragment {
         Task newTask = new Task();
         newTask.setTask(task);
         newTask.setStatus("uncompleted");
-
         tasksList.add(newTask);
         goalsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        updateProgressTracker();
+    }
+
+    public static void updateProgressTracker() {
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        progressTracker.updateCounter(list);
     }
 }

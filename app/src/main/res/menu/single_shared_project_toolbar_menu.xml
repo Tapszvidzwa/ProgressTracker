@@ -10,7 +10,7 @@
         <item
             android:id="@+id/view_members"
             android:title="View members"
-            app:showAsAction="ifRoom"/>
+            app:showAsAction="never"/>
 
         <item
             android:id="@+id/exit_project"

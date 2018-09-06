@@ -14,6 +14,7 @@ import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.ProgressTracker;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -33,6 +34,7 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
     private View tasksPageView;
     private FileHandler fileHandler;
     private int uncompletedTasks;
+    private static ProgressTracker progressTracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,11 +66,16 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
         Task newTask = new Task();
         newTask.setTask(task);
         newTask.setStatus("uncompleted");
-
-        //add it to the tasks list
         tasksList.add(newTask);
         goalsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        updateProgressTracker();
+    }
+
+    public static void updateProgressTracker() {
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        progressTracker.updateCounter(list);
     }
 
     private void saveTasks() {
@@ -105,6 +112,7 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
         tasksList = new LinkedList<>();
         uncompletedTasks = 0;
         fileHandler = new FileHandler(getContext());
+        progressTracker = new ProgressTracker(getContext(), getString(R.string.LONG_TERM_PROJECTS_FILE));
     }
 
     private void initializeViews() {
@@ -142,13 +150,12 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
                     }
 
                 } else {
-
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                     ++uncompletedTasks;
-
                 }
+                updateProgressTracker();
             }
         });
     }
