@@ -29,4 +29,25 @@ public class TaskList {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getNumUncompletedTasks() {
+        int num_uncompleted = 0;
+        for(int i = 0; i < taskList.size(); i++) {
+            if(taskList.get(i).getStatus().equals("uncompleted")) {
+                ++num_uncompleted;
+            }
+        }
+
+        return num_uncompleted;
+    }
+
+    public int getNumCompletedTasks() {
+        int completed = 0;
+        for(int i = 0; i < taskList.size(); i++) {
+            if(taskList.get(i).equals("completed")) {
+                ++completed;
+            }
+        }
+        return completed;
+    }
 }

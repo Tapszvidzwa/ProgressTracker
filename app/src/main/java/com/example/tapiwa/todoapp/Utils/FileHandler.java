@@ -132,5 +132,25 @@ public class FileHandler {
         return gson.toJson(taskList);
     }
 
+    public String getNumTasksCompleted(String filename) {
+        JSONObject tasksJson = readFile(filename);
+        Gson gson = new Gson();
+        TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
+        if(list.getNumCompletedTasks() == 0) {
+            return "";
+        } else {
+            return String.valueOf(list.getNumCompletedTasks());
+        }
+    }
 
+    public String getNumTasksUncompleted(String filename) {
+        JSONObject tasksJson = readFile(filename);
+        Gson gson = new Gson();
+        TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
+        if(list.getNumUncompletedTasks() == 0) {
+            return "";
+        } else {
+            return String.valueOf(list.getNumUncompletedTasks());
+        }
+    }
 }

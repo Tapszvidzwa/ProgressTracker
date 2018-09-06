@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/daily_tasks"
             android:checked="true"
+            app:actionLayout="@layout/counter"
             android:icon="@drawable/ic_daily_calendar_day_14"
-            android:title="Daily Goals" />
+            android:title="Daily Goals"
+            android:showAsAction="always"/>
         <item
             android:id="@+id/weekly_tasks"
             android:icon="@drawable/ic_week_calendar"
+            app:actionLayout="@layout/counter"
+            android:showAsAction="always"
             android:title="Weekly Goals" />
         <item
-            android:id="@+id/yearly_goals"
+            android:id="@+id/yearly_tasks"
+            app:actionLayout="@layout/counter"
+            android:showAsAction="always"
             android:icon="@drawable/ic_yearly_calendar"
             android:title="Yearly Goals" />
 
         <item
-            android:id="@+id/five_year_goals"
+            android:id="@+id/long_term_tasks"
+            app:actionLayout="@layout/counter"
             android:icon="@drawable/ic_5_year"
+            android:showAsAction="always"
             android:title="Long Term Goals" />
 
         <item
             android:id="@+id/personal_projects"
+            app:actionLayout="@layout/counter"
             android:icon="@drawable/ic_single_person"
+            android:showAsAction="always"
             android:title="Personal Projects" />
 
         <item
             android:id="@+id/shared_projects"
+            app:actionLayout="@layout/counter"
             android:icon="@drawable/ic_network"
+            android:showAsAction="always"
             android:title="Shared Projects" />
     </group>
 </menu>

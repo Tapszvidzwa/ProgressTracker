@@ -32,6 +32,7 @@ public class ProjectMembersActivity  extends AppCompatActivity{
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         displayMembers();
+        configureWindow();
     }
 
     private void initializeViews() {

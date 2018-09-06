@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.core.view.TintableBackgroundView;
 
 import static com.example.tapiwa.todoapp.home.MainActivity.switchToFragment;
 
@@ -21,6 +20,7 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     private static NavigationView navigationView;
     private static TextView emailAddress;
     private View header;
+    private FileHandler fileHandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
         header = navigationView.getHeaderView(0);
         emailAddress = header.findViewById(R.id.user_email);
         emailAddress.setText(MainActivity.auth.getCurrentUser().getEmail());
+        fileHandler = new FileHandler(getContext());
         return bottomNavigationSheet;
     }
 
@@ -36,8 +37,22 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupViews();
+        setupNumbersForNavView();
     }
 
+    private void setupNumbersForNavView() {
+        TextView view = (TextView) navigationView.getMenu().findItem(R.id.daily_tasks).getActionView();
+        view.setText(fileHandler.getNumTasksUncompleted(getString(R.string.DAILY_TASKS_FILE)));
+
+        TextView view2 = (TextView) navigationView.getMenu().findItem(R.id.weekly_tasks).getActionView();
+        view2.setText(fileHandler.getNumTasksUncompleted(getString(R.string.WEEKLY_TASKS_FILE)));
+
+        TextView view3 = (TextView) navigationView.getMenu().findItem(R.id.yearly_tasks).getActionView();
+        view3.setText(fileHandler.getNumTasksUncompleted(getString(R.string.YEARLY_TASKS_FILE)));
+
+        TextView view4 = (TextView) navigationView.getMenu().findItem(R.id.long_term_tasks).getActionView();
+        view4.setText(fileHandler.getNumTasksUncompleted(getString(R.string.LONG_TERM_PROJECTS_FILE)));
+    }
 
     private void setupViews() {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -50,10 +65,10 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
                     case R.id.weekly_tasks:
                         switchToFragment(MainActivity.FragmentName.WEEKLY_TASKS, null);
                         break;
-                    case R.id.yearly_goals:
+                    case R.id.yearly_tasks:
                         switchToFragment(MainActivity.FragmentName.YEARLY_TASKS, null);
                         break;
-                    case R.id.five_year_goals:
+                    case R.id.long_term_tasks:
                         switchToFragment(MainActivity.FragmentName.LONG_TERM_TASKS, null);
                         break;
                     case R.id.personal_projects:

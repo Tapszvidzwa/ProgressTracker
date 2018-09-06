@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:behavior_hideable="true"
+    android:background="@android:color/white"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <com.google.android.material.navigation.NavigationView
