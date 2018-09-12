@@ -1,6 +1,7 @@
 package com.example.tapiwa.todoapp.sharedProjects;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class SharedProjectsAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView projectTitle;
+        TextView projectTitle, completionPercentage;
     }
 
     @Override
@@ -64,6 +65,7 @@ public class SharedProjectsAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
             holder.projectTitle = row.findViewById(R.id.project_name);
+            holder.completionPercentage = row.findViewById(R.id.completion_percentage);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
@@ -80,6 +82,8 @@ public class SharedProjectsAdapter extends BaseAdapter {
                 SharedProjectModel projectModel = documentSnapshot.toObject(SharedProjectModel.class);
                 if(projectModel != null) {
                     viewHolder.projectTitle.setText(projectModel.getProjectTitle());
+                    viewHolder.completionPercentage.setText(projectModel.getPercentageCompleted());
+                    viewHolder.completionPercentage.setTextColor(Color.rgb(208, 35, 35));
                 } else {
                     viewHolder.projectTitle.setText("Could not load project name");
                 }

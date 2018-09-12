@@ -1,36 +1,39 @@
 
-Ysquid:S2696U"6Make the enclosing method "static" or remove this set.(´ã›¢ùÿÿÿÿ8ğ¹¬¯Ù,
-Rsquid:S1444?"/Make this "public static actionBar" field final(Îúïõüÿÿÿÿ8ğ¹¬¯Ù,
-"squid:ClassVariableVisibilityCheck?"UMake actionBar a static final constant or non-public and provide accessors if needed.(Îúïõüÿÿÿÿ8ğ¹¬¯Ù,
-Psquid:S1444B"2Make this "public static bottomAppBar" field final( ò˜ã8ğ¹¬¯Ù,
-Tsquid:S2696Y"6Make the enclosing method "static" or remove this set.(¹€èø8ğ¹¬¯Ù,
-‘"squid:ClassVariableVisibilityCheckA"WMake fileHandler a static final constant or non-public and provide accessors if needed.(™æ×Üùÿÿÿÿ8ğ¹¬¯Ù,
-Tsquid:S2696P"6Make the enclosing method "static" or remove this set.(ôÓê•8ğ¹¬¯Ù,
-Ysquid:S2696R"6Make the enclosing method "static" or remove this set.(ì¹¤ÿÿÿÿÿ8ğ¹¬¯Ù,
-tsquid:S00116G"PRename this field "Utils" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ˆß›ûÿÿÿÿ8ğ¹¬¯Ù,
-osquid:S1301š"KReplace this "switch" statement by "if" statements to increase readability.(ÕíÇ™ıÿÿÿÿ8ğ¹¬¯Ù,
-Ysquid:S2696V"6Make the enclosing method "static" or remove this set.(·Ë‚İüÿÿÿÿ8ğ¹¬¯Ù,
-Tsquid:S1444A"1Make this "public static fileHandler" field final(™æ×Üùÿÿÿÿ8ğ¹¬¯Ù,
-Rsquid:S1068F"/Remove this unused "progressBar" private field.(â˜ˆçøÿÿÿÿ8ğ¹¬¯Ù,
-nsquid:S1301|"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8ğ¹¬¯Ù,
-Tsquid:S2696^"6Make the enclosing method "static" or remove this set.(±ôÀ°8ğ¹¬¯Ù,
-Xsquid:S1444<"5Make this "public static visibleFragment" field final( ¯Ûúÿÿÿÿ8ğ¹¬¯Ù,
-‰"squid:ClassVariableVisibilityCheck="TMake activity a static final constant or non-public and provide accessors if needed.(æÄı8ğ¹¬¯Ù,
-Tsquid:S2696W"6Make the enclosing method "static" or remove this set.(ã—¼¬8ğ¹¬¯Ù,
-osquid:S1301®"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8ğ¹¬¯Ù,
-ˆ"squid:ClassVariableVisibilityCheck>"SMake toolbar a static final constant or non-public and provide accessors if needed.(Íç¶Å8ğ¹¬¯Ù,
-š"squid:ClassVariableVisibilityCheckE"eMake bottomSheetDialogFragment a static final constant or non-public and provide accessors if needed.(ÅÆâ“8ğ¹¬¯Ù,
-Ysquid:S2696O"6Make the enclosing method "static" or remove this set.(–¯Óèûÿÿÿÿ8ğ¹¬¯Ù,
-Tsquid:S2696X"6Make the enclosing method "static" or remove this set.(³É´ù8ğ¹¬¯Ù,
-…"squid:ClassVariableVisibilityCheckD"PMake auth a static final constant or non-public and provide accessors if needed.(ĞœÃĞ8ğ¹¬¯Ù,
-"squid:ClassVariableVisibilityCheck@"[Make fragmentManager a static final constant or non-public and provide accessors if needed.(§˜¤™8ğ¹¬¯Ù,
-"squid:ClassVariableVisibilityCheckB"XMake bottomAppBar a static final constant or non-public and provide accessors if needed.( ò˜ã8ğ¹¬¯Ù,
-]"squid:SwitchLastCaseIsDefaultCheck®""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8ğ¹¬¯Ù,
-Lsquid:S1444=".Make this "public static activity" field final(æÄı8ğ¹¬¯Ù,
-•"squid:ClassVariableVisibilityCheck<"[Make visibleFragment a static final constant or non-public and provide accessors if needed.( ¯Ûúÿÿÿÿ8ğ¹¬¯Ù,
-Ksquid:S1444>"-Make this "public static toolbar" field final(Íç¶Å8ğ¹¬¯Ù,
-\"squid:SwitchLastCaseIsDefaultCheck|""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8ğ¹¬¯Ù,
-Hsquid:S1444D"*Make this "public static auth" field final(ĞœÃĞ8ğ¹¬¯Ù,
-Ssquid:S1444@"5Make this "public static fragmentManager" field final(§˜¤™8ğ¹¬¯Ù,
-]squid:S1444E"?Make this "public static bottomSheetDialogFragment" field final(ÅÆâ“8ğ¹¬¯Ù,
-}squid:S1450F"ZRemove the "progressBar" field and declare it as a local variable in the relevant methods.(â˜ˆçøÿÿÿÿ8ğ¹¬¯Ù,
+\"squid:SwitchLastCaseIsDefaultCheckt""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8«Ù‹ªÜ,
+]"squid:SwitchLastCaseIsDefaultCheck ""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8«Ù‹ªÜ,
+Rsquid:S1068I"/Remove this unused "progressBar" private field.(â˜ˆçøÿÿÿÿ8«Ù‹ªÜ,
+}squid:S1450I"ZRemove the "progressBar" field and declare it as a local variable in the relevant methods.(â˜ˆçøÿÿÿÿ8«Ù‹ªÜ,
+Xsquid:S1444?"5Make this "public static visibleFragment" field final( ¯Ûúÿÿÿÿ8«Ù‹ªÜ,
+Lsquid:S1444@".Make this "public static activity" field final(æÄı8«Ù‹ªÜ,
+Ksquid:S1444A"-Make this "public static toolbar" field final(Íç¶Å8«Ù‹ªÜ,
+Rsquid:S1444B"/Make this "public static actionBar" field final(Îúïõüÿÿÿÿ8«Ù‹ªÜ,
+Ssquid:S1444C"5Make this "public static fragmentManager" field final(§˜¤™8«Ù‹ªÜ,
+Tsquid:S1444D"1Make this "public static fileHandler" field final(™æ×Üùÿÿÿÿ8«Ù‹ªÜ,
+Psquid:S1444E"2Make this "public static bottomAppBar" field final( ò˜ã8«Ù‹ªÜ,
+Hsquid:S1444G"*Make this "public static auth" field final(ĞœÃĞ8«Ù‹ªÜ,
+]squid:S1444H"?Make this "public static bottomSheetDialogFragment" field final(ÅÆâ“8«Ù‹ªÜ,
+Usquid:S1444K"2Make this "public static inputRequest" field final(îÓ³€ûÿÿÿÿ8«Ù‹ªÜ,
+nsquid:S1301t"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8«Ù‹ªÜ,
+osquid:S1301Œ"KReplace this "switch" statement by "if" statements to increase readability.(ÕíÇ™ıÿÿÿÿ8«Ù‹ªÜ,
+Ysquid:S2696S"6Make the enclosing method "static" or remove this set.(–¯Óèûÿÿÿÿ8«Ù‹ªÜ,
+Tsquid:S2696T"6Make the enclosing method "static" or remove this set.(ôÓê•8«Ù‹ªÜ,
+Ysquid:S2696V"6Make the enclosing method "static" or remove this set.(ì¹¤ÿÿÿÿÿ8«Ù‹ªÜ,
+Ysquid:S2696Y"6Make the enclosing method "static" or remove this set.(´ã›¢ùÿÿÿÿ8«Ù‹ªÜ,
+Ysquid:S2696Z"6Make the enclosing method "static" or remove this set.(·Ë‚İüÿÿÿÿ8«Ù‹ªÜ,
+Tsquid:S2696["6Make the enclosing method "static" or remove this set.(ã—¼¬8«Ù‹ªÜ,
+Tsquid:S2696\"6Make the enclosing method "static" or remove this set.(³É´ù8«Ù‹ªÜ,
+Tsquid:S2696]"6Make the enclosing method "static" or remove this set.(¹€èø8«Ù‹ªÜ,
+Tsquid:S2696a"6Make the enclosing method "static" or remove this set.(±ôÀ°8«Ù‹ªÜ,
+•"squid:ClassVariableVisibilityCheck?"[Make visibleFragment a static final constant or non-public and provide accessors if needed.( ¯Ûúÿÿÿÿ8«Ù‹ªÜ,
+‰"squid:ClassVariableVisibilityCheck@"TMake activity a static final constant or non-public and provide accessors if needed.(æÄı8«Ù‹ªÜ,
+ˆ"squid:ClassVariableVisibilityCheckA"SMake toolbar a static final constant or non-public and provide accessors if needed.(Íç¶Å8«Ù‹ªÜ,
+"squid:ClassVariableVisibilityCheckB"UMake actionBar a static final constant or non-public and provide accessors if needed.(Îúïõüÿÿÿÿ8«Ù‹ªÜ,
+"squid:ClassVariableVisibilityCheckC"[Make fragmentManager a static final constant or non-public and provide accessors if needed.(§˜¤™8«Ù‹ªÜ,
+‘"squid:ClassVariableVisibilityCheckD"WMake fileHandler a static final constant or non-public and provide accessors if needed.(™æ×Üùÿÿÿÿ8«Ù‹ªÜ,
+"squid:ClassVariableVisibilityCheckE"XMake bottomAppBar a static final constant or non-public and provide accessors if needed.( ò˜ã8«Ù‹ªÜ,
+…"squid:ClassVariableVisibilityCheckG"PMake auth a static final constant or non-public and provide accessors if needed.(ĞœÃĞ8«Ù‹ªÜ,
+š"squid:ClassVariableVisibilityCheckH"eMake bottomSheetDialogFragment a static final constant or non-public and provide accessors if needed.(ÅÆâ“8«Ù‹ªÜ,
+’"squid:ClassVariableVisibilityCheckK"XMake inputRequest a static final constant or non-public and provide accessors if needed.(îÓ³€ûÿÿÿÿ8«Ù‹ªÜ,
+tsquid:S00116J"PRename this field "Utils" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ˆß›ûÿÿÿÿ8«Ù‹ªÜ,
+‚squid:UselessImportCheck%"RRemove this unused import 'com.google.android.material.navigation.NavigationView'.(Û²òÿÿÿÿÿ8«Ù‹ªÜ,
+dsquid:UselessImportCheck"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ8«Ù‹ªÜ,

@@ -72,6 +72,12 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     @Override
+    public void onPause() {
+        sharedProjectModel.setPercentageCompleted();
+        super.onPause();
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();

@@ -187,3 +187,5 @@ A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
 }
 Mapp/src/main/java/com/example/tapiwa/todoapp/login/signIn/SignInActivity.java,a/c/acebab3921af7474e67e07e3f00d0cf39b97d62f
+S
+#app/src/main/res/layout/counter.xml,2/3/23ac4a16709e10e379253851ddd4d17ddfd5e2bb

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TodoApp</string>
+    <string name="app_name">Progress Tracker</string>
 
     //file namess
     <string name="DAILY_TASKS_FILE">daily_tasks.json</string>

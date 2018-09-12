@@ -68,26 +68,34 @@ public class SharedProjectModel implements Serializable {
     }
 
     public String getPercentageCompleted() {
-        if(percentageCompleted == null) {
+        try {
+            if (percentageCompleted == null) {
+                return "0%";
+            } else {
+                return percentageCompleted;
+            }
+        } catch (NullPointerException e) {
             return "0%";
-        } else {
-            return percentageCompleted;
         }
     }
 
     public void setPercentageCompleted() {
-        if(projectTasks.size() == 0) {
-            this.percentageCompleted = "0%";
-        } else {
-            double completed = 0;
-            for (int i = 0; i < projectTasks.size(); i++) {
-                if (projectTasks.get(i).getCompletionStatus().equals("completed")) {
-                    ++completed;
+        try {
+            if (projectTasks.size() == 0) {
+                this.percentageCompleted = "0%";
+            } else {
+                double completed = 0;
+                for (int i = 0; i < projectTasks.size(); i++) {
+                    if (projectTasks.get(i).getCompletionStatus().equals("completed")) {
+                        ++completed;
+                    }
                 }
+                DecimalFormat numberformat = new DecimalFormat("#");
+                double result = ((double) completed / projectTasks.size()) * 100;
+                this.percentageCompleted = numberformat.format(result) + "%";
             }
-            DecimalFormat numberformat = new DecimalFormat("#");
-            double result = ((double) completed / projectTasks.size()) * 100;
-            this.percentageCompleted = numberformat.format(result) + "%";
+        } catch (NullPointerException e) {
+            // no - op
         }
     }
 }
