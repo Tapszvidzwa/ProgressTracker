@@ -189,3 +189,9 @@ A
 Mapp/src/main/java/com/example/tapiwa/todoapp/login/signIn/SignInActivity.java,a/c/acebab3921af7474e67e07e3f00d0cf39b97d62f
 S
 #app/src/main/res/layout/counter.xml,2/3/23ac4a16709e10e379253851ddd4d17ddfd5e2bb
+€
+Papp/src/androidTest/java/com/example/tapiwa/todoapp/ExampleInstrumentedTest.java,b/0/b05b09d76ef18fb33453d574719e4c81f825dc5d
+>
+app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
+?
+settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233

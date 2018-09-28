@@ -1,0 +1,2 @@
+The application uses your email and password to help you authenticate whenever you logout and 
+try logging in the application again.

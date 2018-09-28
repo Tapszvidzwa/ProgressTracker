@@ -10,6 +10,7 @@ public class TaskList {
 
     LinkedList<Task> taskList;
     String name;
+    boolean trackProgress = true;
 
     public TaskList() {
     }
@@ -49,5 +50,13 @@ public class TaskList {
             }
         }
         return completed;
+    }
+
+    public void setTrackProgress(boolean b) {
+        this.trackProgress = b;
+    }
+
+    public boolean getTrackProgress() {
+       return trackProgress;
     }
 }
