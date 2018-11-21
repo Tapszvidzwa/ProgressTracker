@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerModel;
 import com.google.gson.Gson;
@@ -86,6 +87,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_task:
+                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
                 MainActivity.getInputForFragment(MainActivity.visibleFragment);
                 return true;
             case R.id.delete_task:

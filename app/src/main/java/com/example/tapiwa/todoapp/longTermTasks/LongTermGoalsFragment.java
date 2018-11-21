@@ -3,7 +3,10 @@ package com.example.tapiwa.todoapp.longTermTasks;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,7 +17,9 @@ import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.Utils.ProgressTracker;
+import com.example.tapiwa.todoapp.home.MainActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -35,6 +40,7 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
     private FileHandler fileHandler;
     private int uncompletedTasks;
     private static ProgressTracker progressTracker;
+    private int clickedTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +63,37 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
         super.onPause();
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.personal_project_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+          clickedTask = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.rename_task:
+                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                return true;
+            case R.id.delete_task:
+                 deleteTask(info.position);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
+
+    private void deleteTask(int clickedTask) {
+        tasksList.remove(clickedTask);
+        adapter.notifyDataSetChanged();
+    }
 
     public LongTermGoalsFragment() {
         // Required empty public constructor
@@ -117,6 +154,7 @@ public class LongTermGoalsFragment extends androidx.fragment.app.Fragment {
 
     private void initializeViews() {
         goalsList = tasksPageView.findViewById(R.id.five_year_goals_lstV);
+        registerForContextMenu(goalsList);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
