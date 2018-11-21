@@ -3,7 +3,10 @@ package com.example.tapiwa.todoapp.oneYearTasks;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,7 +17,9 @@ import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.Utils.ProgressTracker;
+import com.example.tapiwa.todoapp.home.MainActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -34,6 +39,7 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
     private View tasksPageView;
     private FileHandler fileHandler;
     private static ProgressTracker progressTracker;
+    private static int clickedTask;
 
     public YearlyGoalsFragment() {
         // Required empty public constructor
@@ -60,21 +66,59 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
         super.onPause();
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.personal_project_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+          clickedTask = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.rename_task:
+                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                return true;
+            case R.id.delete_task:
+                 deleteTask(info.position);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void deleteTask(int clickedTask) {
+        tasksList.remove(clickedTask);
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void renameTask(String newTitle) {
+        Task task = tasksList.get(clickedTask);
+        task.setTask(newTitle);
+        tasksList.set(clickedTask, task);
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void addTask(String task) {
+        Task newTask = new Task();
+        newTask.setTask(task);
+        newTask.setStatus("uncompleted");
+        tasksList.add(newTask);
+        goalsList.setAdapter(adapter);
+        updateProgressTracker();
+        adapter.notifyDataSetChanged();
+    }
+
     public static void updateProgressTracker() {
         TaskList list = new TaskList();
         list.setTaskList(tasksList);
         progressTracker.updateCounter(list);
     }
 
-    public static void addNewTask(String task) {
-        Task newTask = new Task();
-        newTask.setTask(task);
-        newTask.setStatus("uncompleted");
-        tasksList.add(newTask);
-        goalsList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        updateProgressTracker();
-    }
 
     private void saveTasks() {
         String tasksJson = convertTasksListToJsonString();
@@ -114,6 +158,7 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
 
     private void initializeViews() {
         goalsList = tasksPageView.findViewById(R.id.yearly_goals_lstV);
+        registerForContextMenu(goalsList);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
 
         goalsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

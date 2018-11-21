@@ -8,10 +8,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
     private Util Utils;
     public static InputRequests inputRequest = new InputRequests();
     private BackUp backUp;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -255,16 +260,32 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestingFragment) {
             case DAILY_TASKS:
-                DailyTasksFragment.addTask(input);
+                if (request == RENAME_PROJECT) {
+                    DailyTasksFragment.renameTask(input);
+                } else {
+                    DailyTasksFragment.addTask(input);
+                }
                 break;
             case WEEKLY_TASKS:
-                WeeklyTasksFragment.addNewTask(input);
+                if (request == RENAME_PROJECT) {
+                    WeeklyTasksFragment.renameTask(input);
+                } else {
+                   WeeklyTasksFragment.addTask(input);
+                }
                 break;
             case YEARLY_TASKS:
-                YearlyGoalsFragment.addNewTask(input);
+                if (request == RENAME_PROJECT) {
+                    YearlyGoalsFragment.renameTask(input);
+                } else {
+                    YearlyGoalsFragment.addTask(input);
+                }
                 break;
             case LONG_TERM_TASKS:
-                LongTermGoalsFragment.addNewTask(input);
+                if (request == RENAME_PROJECT) {
+                    DailyTasksFragment.renameTask(input);
+                } else {
+                    DailyTasksFragment.addTask(input);
+                }
                 break;
             case SHARED_PROJECTS:
                 if (request == RENAME_PROJECT) {

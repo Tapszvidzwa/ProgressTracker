@@ -236,6 +236,8 @@ public class DatabaseHandler {
                             updateSharedProjectInDb(context, sharedProject, projectReference.getProjectKey());
                         }
                     }
+                } else if(memberEmails == null || memberEmails.size() == 0) {
+                   deleteSharedProjectFromDb(projectReference);
                 }
             }
         });

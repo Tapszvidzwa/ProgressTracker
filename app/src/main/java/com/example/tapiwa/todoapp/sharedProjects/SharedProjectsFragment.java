@@ -38,6 +38,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
     private static ListView sharedProjectsListV;
     public static Activity activity;
     public static int clickedProject;
+    private ContextMenu menu;
 
     public SharedProjectsFragment() {
         // Required empty public constructor
@@ -59,6 +60,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.shared_projects_menu, menu);
+        this.menu = menu;
     }
 
     @Override
@@ -73,6 +75,9 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
                 return true;
             case R.id.exit_project:
                 exitFromProject();
+                break;
+            case R.id.delete_project:
+                deleteProject();
                 break;
             default:
                 return super.onContextItemSelected(item);
@@ -107,6 +112,10 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
                 MainActivity.switchToFragment(SINGLE_SHARED_PROJECT, bundle);
             }
         });
+    }
+
+    private void deleteProject() {
+        //TODO: implement delete project
     }
 
     private static void loadProjectsFromDb() {
