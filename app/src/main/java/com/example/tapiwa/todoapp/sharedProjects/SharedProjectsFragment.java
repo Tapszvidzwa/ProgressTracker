@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
 import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.home.MainActivity;
@@ -24,8 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
+
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
 import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
 
 
 public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
@@ -71,7 +71,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
         switch (item.getItemId()) {
             case R.id.rename_project:
                 MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
-                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, "");
                 return true;
             case R.id.exit_project:
                 exitFromProject();

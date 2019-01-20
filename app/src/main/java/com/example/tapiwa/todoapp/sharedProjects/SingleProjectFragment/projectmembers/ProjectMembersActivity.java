@@ -1,7 +1,5 @@
 package com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.projectmembers;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,14 +7,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
 
-public class ProjectMembersActivity  extends AppCompatActivity{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ProjectMembersActivity extends AppCompatActivity {
 
     private ListView listView;
     private Toolbar toolbar;

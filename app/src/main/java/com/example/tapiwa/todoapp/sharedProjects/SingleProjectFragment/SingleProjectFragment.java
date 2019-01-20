@@ -31,8 +31,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SHARED_PROJECTS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
 import static com.example.tapiwa.todoapp.Utils.Constants.SHARED_PROJECTS_DB_PATH;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
 
 public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
@@ -87,12 +88,13 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        clickedProject = info.position;
 
         switch (item.getItemId()) {
             case R.id.edit_task:
-                clickedProject = info.position;
+
                 MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_TASK);
-                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, tasksList.get(clickedProject).getTask());
                 return true;
             case R.id.delete_task:
                 deleteTask(info.position);
@@ -215,11 +217,11 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     public static void viewSharedProjectMembers() {
-            Intent intent = new Intent(MainActivity.activity, ProjectMembersActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("projectModel", sharedProjectModel);
-            intent.putExtras(bundle);
-            MainActivity.activity.startActivity(intent);
+        Intent intent = new Intent(MainActivity.activity, ProjectMembersActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("projectModel", sharedProjectModel);
+        intent.putExtras(bundle);
+        MainActivity.activity.startActivity(intent);
     }
 
     public static void saveProject() {
@@ -230,7 +232,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
     private void exitProject() {
         remoteDb.exitFromSharedProject(getContext(), projectReference);
-        MainActivity.switchToFragment(MainActivity.FragmentName.SHARED_PROJECTS, null);
+        MainActivity.switchToFragment(SHARED_PROJECTS, null);
     }
 
     private void deleteTask(int pos) {

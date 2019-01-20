@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectModel;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class PersonalProjectsContainerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if(personalProjectsList != null) {
+        if (personalProjectsList != null) {
             return personalProjectsList.size();
         } else {
             return 0;

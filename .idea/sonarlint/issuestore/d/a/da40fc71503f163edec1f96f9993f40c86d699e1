@@ -1,6 +1,2 @@
 
-rsquid:UselessImportCheck"IRemove this unused import 'com.example.tapiwa.todoapp.home.MainActivity'.(äæ»Š8€ÁÙÙ,
-\squid:UselessImportCheck".Remove this unused import 'android.os.Bundle'.(°şÊóøÿÿÿÿ8€ÁÙÙ,
-gsquid:UselessImportCheck"9Remove this unused import 'com.example.tapiwa.todoapp.R'.(‡—·¢ÿÿÿÿÿ8€ÁÙÙ,
-{squid:UselessImportCheck"RRemove this unused import 'com.google.android.material.bottomappbar.BottomAppBar'.(®ä·‚8ô°ÚÙ,
-csquid:S2094"BRemove this empty class, write its code or make it an "interface".(åÄ¨ƒùÿÿÿÿ8ô°ÚÙ,
+esquid:S2094"BRemove this empty class, write its code or make it an "interface".(åÄ¨ƒùÿÿÿÿ8ô°ÚÙ,

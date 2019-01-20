@@ -26,7 +26,7 @@ public class SyncHelper extends AsyncTask<Void, Integer, Void> {
     protected Void doInBackground(Void... voids) {
         fileHandler.createFiles();
         backUp.runSyncLocalFiles();
-        while(!backUp.isSyncCompleted()) {
+        while (!backUp.isSyncCompleted()) {
             //wait for sync to finish
         }
         return null;

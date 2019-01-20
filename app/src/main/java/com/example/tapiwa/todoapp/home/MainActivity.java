@@ -8,36 +8,32 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tapiwa.todoapp.FragmentFactory.FragmentName;
+import com.example.tapiwa.todoapp.FragmentFactory.TasksFragmentFactory;
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Utils.BackUp;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.Utils.InputRequests;
 import com.example.tapiwa.todoapp.Utils.Util;
-import com.example.tapiwa.todoapp.dailyTasks.DailyTasksFragment;
 import com.example.tapiwa.todoapp.login.signIn.SignInActivity;
-import com.example.tapiwa.todoapp.longTermTasks.LongTermGoalsFragment;
-import com.example.tapiwa.todoapp.oneYearTasks.YearlyGoalsFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectsFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SingleProjectFragment;
-import com.example.tapiwa.todoapp.weeklyTasks.WeeklyTasksFragment;
+import com.example.tapiwa.todoapp.tasksDaily.DailyTasksFragment;
+import com.example.tapiwa.todoapp.tasksWeekly.WeeklyTasksFragment;
+import com.example.tapiwa.todoapp.tasksYearly.YearlyGoalsFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AlertDialog;
@@ -47,19 +43,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import es.dmoral.toasty.Toasty;
 
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.DAILY_TASKS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.LONG_TERM_TASKS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.PERSONAL_PROJECT;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.PERSONAL_PROJECTS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SHARED_PROJECTS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.WEEKLY_TASKS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.YEARLY_TASKS;
 import static com.example.tapiwa.todoapp.Utils.InputRequests.InputRequestType.ADD_GROUP_MEMBER;
 import static com.example.tapiwa.todoapp.Utils.InputRequests.InputRequestType.CREATE_NEW_PROJECT;
 import static com.example.tapiwa.todoapp.Utils.InputRequests.InputRequestType.CREATE_NEW_TASK;
 import static com.example.tapiwa.todoapp.Utils.InputRequests.InputRequestType.RENAME_PROJECT;
 import static com.example.tapiwa.todoapp.Utils.InputRequests.InputRequestType.RENAME_TASK;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.DAILY_TASKS;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.LONG_TERM_TASKS;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.PERSONAL_PROJECT;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.PERSONAL_PROJECTS;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SHARED_PROJECTS;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.SINGLE_SHARED_PROJECT;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.WEEKLY_TASKS;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.YEARLY_TASKS;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     private Util Utils;
     public static InputRequests inputRequest = new InputRequests();
     private BackUp backUp;
-
 
 
     @Override
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         updateUpNavigationIcon();
         updateBottomBarMenu();
         initializeFab();
-        switchToFragment(DAILY_TASKS, null);
+        switchToFragment(DAILY_TASKS, new Bundle());
         updateToolBarName();
         configureWindow();
     }
@@ -135,9 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAppropriateFragment() {
         if (visibleFragment == SINGLE_SHARED_PROJECT) {
-            switchToFragment(SHARED_PROJECTS, null);
+            switchToFragment(SHARED_PROJECTS, new Bundle());
         } else if (visibleFragment == PERSONAL_PROJECT) {
-            switchToFragment(PERSONAL_PROJECTS, null);
+            switchToFragment(PERSONAL_PROJECTS, new Bundle());
         }
     }
 
@@ -165,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.add_member:
                         inputRequest.setInputRequest(ADD_GROUP_MEMBER);
-                        MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                        MainActivity.getInputForFragment(MainActivity.visibleFragment, "");
                         break;
                     case R.id.sign_out:
                         signOut();
@@ -204,24 +200,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void getInputForFragment(final FragmentName requestingFragment) {
+    public static void getInputForFragment(final FragmentName requestingFragment, String content) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(getAppropriatePrompt());
 
         int maxLength = 200;
-        final EditText givenTitle = new EditText(activity.getApplicationContext());
-        givenTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
-        givenTitle.setInputType(InputType.TYPE_CLASS_TEXT);
-        givenTitle.setTextColor(Color.BLACK);
-        givenTitle.setVisibility(View.VISIBLE);
-        builder.setView(givenTitle);
+        final EditText newTaskContent = new EditText(activity.getApplicationContext());
+        newTaskContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+        newTaskContent.setInputType(InputType.TYPE_CLASS_TEXT);
+        newTaskContent.setTextColor(Color.BLACK);
+        newTaskContent.setVisibility(View.VISIBLE);
+        newTaskContent.setText(content);
+        builder.setView(newTaskContent);
+
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (givenTitle.getText().toString().length() > 0) {
-                    sendInputToVisibleFragment(requestingFragment, givenTitle.getText().toString());
+                if (newTaskContent.getText().toString().length() > 0) {
+                    sendInputToVisibleFragment(requestingFragment, newTaskContent.getText().toString());
                 } else {
                     Toasty.info(activity.getApplicationContext(),
                             "Please provide a task description",
@@ -270,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                 if (request == RENAME_PROJECT) {
                     WeeklyTasksFragment.renameTask(input);
                 } else {
-                   WeeklyTasksFragment.addTask(input);
+                    WeeklyTasksFragment.addTask(input);
                 }
                 break;
             case YEARLY_TASKS:
@@ -328,8 +326,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static void switchToFragment(FragmentName fragmentName, Bundle bundle) {
         visibleFragment = fragmentName;
-        androidx.fragment.app.Fragment fragment = getFragment(fragmentName);
-        fragment.setArguments(bundle);
+        TasksFragmentFactory fragmentsFactory = new TasksFragmentFactory();
+        //Todo: do we really need the method call below
+        fragmentsFactory.onCreate();
+        androidx.fragment.app.Fragment fragment = fragmentsFactory.getFragment(fragmentName);
+        mergeFragmentBundles(fragment, bundle);
 
         fragmentManager
                 .beginTransaction()
@@ -339,6 +340,15 @@ public class MainActivity extends AppCompatActivity {
         updateToolBarName();
         updateUpNavigationIcon();
         updateBottomBarMenu();
+    }
+
+    public static void mergeFragmentBundles(Fragment fragment, Bundle bundle) {
+        Bundle fragmentBundle = fragment.getArguments();
+        if (fragmentBundle == null) {
+            fragmentBundle = new Bundle();
+        }
+        fragmentBundle.putAll(bundle);
+        fragment.setArguments(fragmentBundle);
     }
 
     public static void updateToolBarName() {
@@ -368,32 +378,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static Fragment getFragment(FragmentName fragmentName) {
-
-        switch (fragmentName) {
-            case PERSONAL_PROJECTS:
-                return new PersonalProjectsContainerFragment();
-            case SHARED_PROJECTS:
-                return new SharedProjectsFragment();
-            case LONG_TERM_TASKS:
-                return new LongTermGoalsFragment();
-            case YEARLY_TASKS:
-                return new YearlyGoalsFragment();
-            case WEEKLY_TASKS:
-                return new WeeklyTasksFragment();
-            case DAILY_TASKS:
-                return new DailyTasksFragment();
-            case SINGLE_SHARED_PROJECT:
-                return new SingleProjectFragment();
-            case PERSONAL_PROJECT:
-                return new PersonalProjectFragment();
-            case BOTTOM_SHEET_MENU:
-                return new BottomNavigationDrawerFragment();
-            default:
-                return new DailyTasksFragment();
-        }
-    }
-
     private void initializeFab() {
         getInputFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -401,39 +385,39 @@ public class MainActivity extends AppCompatActivity {
                 switch (visibleFragment) {
                     case DAILY_TASKS:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(DAILY_TASKS);
+                        getInputForFragment(DAILY_TASKS, "");
                         break;
                     case WEEKLY_TASKS:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(WEEKLY_TASKS);
+                        getInputForFragment(WEEKLY_TASKS, "");
                         break;
                     case YEARLY_TASKS:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(YEARLY_TASKS);
+                        getInputForFragment(YEARLY_TASKS, "");
                         break;
                     case LONG_TERM_TASKS:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(LONG_TERM_TASKS);
+                        getInputForFragment(LONG_TERM_TASKS, "");
                         break;
                     case SHARED_PROJECTS:
                         inputRequest.setInputRequest(CREATE_NEW_PROJECT);
-                        getInputForFragment(SHARED_PROJECTS);
+                        getInputForFragment(SHARED_PROJECTS, "");
                         break;
                     case SINGLE_SHARED_PROJECT:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(SINGLE_SHARED_PROJECT);
+                        getInputForFragment(SINGLE_SHARED_PROJECT, "");
                         break;
                     case PERSONAL_PROJECT:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(PERSONAL_PROJECT);
+                        getInputForFragment(PERSONAL_PROJECT, "");
                         break;
                     case PERSONAL_PROJECTS:
                         inputRequest.setInputRequest(CREATE_NEW_PROJECT);
-                        getInputForFragment(PERSONAL_PROJECTS);
+                        getInputForFragment(PERSONAL_PROJECTS, "");
                         break;
                     default:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(DAILY_TASKS);
+                        getInputForFragment(DAILY_TASKS, "");
                 }
             }
         });
@@ -441,11 +425,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static void closeBottomSheet() {
         bottomSheetDialogFragment.dismiss();
-    }
-
-    public enum FragmentName {
-        DAILY_TASKS, WEEKLY_TASKS, MONTHLY_TASKS, YEARLY_TASKS, LONG_TERM_TASKS,
-        PERSONAL_PROJECTS, SHARED_PROJECTS, SINGLE_SHARED_PROJECT, PERSONAL_PROJECT, BOTTOM_SHEET_MENU
     }
 
     private void signOut() {

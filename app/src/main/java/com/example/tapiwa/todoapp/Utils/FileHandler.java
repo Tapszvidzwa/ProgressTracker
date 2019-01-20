@@ -11,7 +11,6 @@ import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProje
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerModel;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -75,8 +74,8 @@ public class FileHandler {
                 }
             }
         } catch (Exception e) {
-                Toasty.error(context, context.getString(R.string.failed_file_loading), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+            Toasty.error(context, context.getString(R.string.failed_file_loading), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         } finally {
             try {
                 if (br != null) {
@@ -99,11 +98,11 @@ public class FileHandler {
     }
 
     public void createFiles() {
-       saveFile(context.getString(R.string.DAILY_TASKS_FILE), createExampleTask());
-       saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), createExampleTask());
-       saveFile(context.getString(R.string.YEARLY_TASKS_FILE), createExampleTask());
-       saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), createExampleTask());
-       saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), createEmptyPersonalProjectFolder());
+        saveFile(context.getString(R.string.DAILY_TASKS_FILE), createExampleTask());
+        saveFile(context.getString(R.string.WEEKLY_TASKS_FILE), createExampleTask());
+        saveFile(context.getString(R.string.YEARLY_TASKS_FILE), createExampleTask());
+        saveFile(context.getString(R.string.LONG_TERM_PROJECTS_FILE), createExampleTask());
+        saveFile(context.getString(R.string.PERSONAL_PROJECTS_FILE), createEmptyPersonalProjectFolder());
     }
 
     private String createEmptyPersonalProjectFolder() {
@@ -136,7 +135,7 @@ public class FileHandler {
         JSONObject tasksJson = readFile(filename);
         Gson gson = new Gson();
         TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
-        if(list.getNumCompletedTasks() == 0) {
+        if (list.getNumCompletedTasks() == 0) {
             return "";
         } else {
             return String.valueOf(list.getNumCompletedTasks());
@@ -144,13 +143,13 @@ public class FileHandler {
     }
 
     public String getNumTasksUncompleted(String filename) {
-        if(filename.equals(context.getString(R.string.PERSONAL_PROJECTS_FILE))) {
+        if (filename.equals(context.getString(R.string.PERSONAL_PROJECTS_FILE))) {
             return getNumUncompletedPersonalProjects();
         }
         JSONObject tasksJson = readFile(filename);
         Gson gson = new Gson();
         TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
-        if(list.getNumUncompletedTasks() == 0) {
+        if (list.getNumUncompletedTasks() == 0) {
             return "";
         } else {
             return String.valueOf(list.getNumUncompletedTasks());
@@ -162,7 +161,7 @@ public class FileHandler {
         Gson gson = new Gson();
         PersonalProjectsContainerModel list = gson.fromJson(tasksJson.toString(), PersonalProjectsContainerModel.class);
 
-        if(list.getNumUncompletedProjects().equals("0")) {
+        if (list.getNumUncompletedProjects().equals("0")) {
             return "";
         } else {
             return list.getNumUncompletedProjects();

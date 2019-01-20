@@ -6,8 +6,6 @@ import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.TaskList;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
 public class ProgressTracker {
 
     private Context context;

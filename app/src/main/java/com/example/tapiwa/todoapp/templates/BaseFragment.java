@@ -1,8 +1,6 @@
-package com.example.tapiwa.todoapp.oneYearTasks;
+package com.example.tapiwa.todoapp.templates;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -27,37 +25,38 @@ import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import androidx.appcompat.app.AlertDialog;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
+public abstract class BaseFragment extends androidx.fragment.app.Fragment {
 
     private static ListView goalsList;
+    private static View tasksPageView;
     private static LinkedList<Task> tasksList;
     private static TaskAdapter adapter;
-    private View tasksPageView;
-    private FileHandler fileHandler;
+    private static FileHandler fileHandler;
     private static ProgressTracker progressTracker;
     private static int clickedTask;
+    private String filename;
 
-    public YearlyGoalsFragment() {
-        // Required empty public constructor
+    public BaseFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        tasksPageView = inflater.inflate(R.layout.fragment_yearly_tasks, container, false);
+        Bundle bundle = getArguments();
+        setFileName(bundle.getString("filename"));
+        tasksPageView = inflater.inflate(R.layout.template_tasks_list, container, false);
         initializeViews();
-        initializeVariables();
+        initializeDependencies();
         return tasksPageView;
     }
 
     @Override
     public void onResume() {
-        super.onResume();
         retrieveSavedTasks();
+        super.onResume();
     }
 
     @Override
@@ -76,24 +75,23 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-          clickedTask = info.position;
+        clickedTask = info.position;
 
         switch (item.getItemId()) {
             case R.id.rename_task:
                 MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
-                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, tasksList.get(clickedTask).getTask());
                 return true;
             case R.id.delete_task:
-                 deleteTask(info.position);
+                deleteTask(info.position);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
-    private void deleteTask(int clickedTask) {
-        tasksList.remove(clickedTask);
-        adapter.notifyDataSetChanged();
+    public void setFileName(String filename) {
+        this.filename = filename;
     }
 
     public static void renameTask(String newTitle) {
@@ -103,34 +101,50 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    public static void addTask(String task) {
+    private final void deleteTask(int clickedTask) {
+        tasksList.remove(clickedTask);
+        adapter.notifyDataSetChanged();
+    }
+
+    public final static void addTask(String task) {
         Task newTask = new Task();
         newTask.setTask(task);
         newTask.setStatus("uncompleted");
         tasksList.add(newTask);
-        goalsList.setAdapter(adapter);
         updateProgressTracker();
         adapter.notifyDataSetChanged();
     }
 
-    public static void updateProgressTracker() {
+    public final static void updateProgressTracker() {
         TaskList list = new TaskList();
         list.setTaskList(tasksList);
         progressTracker.updateCounter(list);
     }
 
-
-    private void saveTasks() {
+    public final void saveTasks() {
         String tasksJson = convertTasksListToJsonString();
-        fileHandler.saveFile(getString(R.string.YEARLY_TASKS_FILE), tasksJson);
+        fileHandler.saveFile(filename, tasksJson);
     }
 
-    private void retrieveSavedTasks() {
-        JSONObject tasksJson = fileHandler.readFile(getString(R.string.YEARLY_TASKS_FILE));
+    private final void retrieveSavedTasks() {
+        JSONObject tasksJson = fileHandler.readFile(filename);
         populateTaskList(tasksJson);
     }
 
-    private void populateTaskList(JSONObject tasksJson) {
+    private final String convertTasksListToJsonString() {
+        Gson gson = new Gson();
+        TaskList list = new TaskList();
+        list.setTaskList(tasksList);
+        return gson.toJson(list);
+    }
+
+    private final void initializeDependencies() {
+        tasksList = new LinkedList<>();
+        fileHandler = new FileHandler(getContext());
+        progressTracker = new ProgressTracker(getContext(), filename);
+    }
+
+    private final void populateTaskList(JSONObject tasksJson) {
         if (tasksJson != null) {
             Gson gson = new Gson();
             TaskList list = gson.fromJson(tasksJson.toString(), TaskList.class);
@@ -143,21 +157,8 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
         }
     }
 
-    private String convertTasksListToJsonString() {
-        Gson gson = new Gson();
-        TaskList list = new TaskList();
-        list.setTaskList(tasksList);
-        return gson.toJson(list);
-    }
-
-    private void initializeVariables() {
-        tasksList = new LinkedList<>();
-        fileHandler = new FileHandler(getContext());
-        progressTracker = new ProgressTracker(getContext(), getString(R.string.YEARLY_TASKS_FILE));
-    }
-
-    private void initializeViews() {
-        goalsList = tasksPageView.findViewById(R.id.yearly_goals_lstV);
+    private final void initializeViews() {
+        goalsList = tasksPageView.findViewById(R.id.goals_lstV);
         registerForContextMenu(goalsList);
         adapter = new TaskAdapter(getActivity().getApplicationContext(), R.layout.item_goal_list, tasksList);
 
@@ -173,18 +174,11 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
 
                     if (checkTasksCompletion()) {
                         final SweetAlertDialog dg = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-                        dg.setTitleText(getString(R.string.congratulations)).setContentText(getString(R.string.congratulatory_msg));
+                        dg.setTitleText("Congratulations!").setContentText("Congratulations on finishing all your tasks");
                         dg.show();
-
-                        new CountDownTimer(2000, 1000) {
-                            public void onTick(long millisUntilFinished) {
-                            }
-
-                            public void onFinish() {
-                                permissionClearTasks();
-                            }
-                        }.start();
+                        tasksList.clear();
                     }
+
                 } else {
                     updatedTask.setStatus("uncompleted");
                     tasksList.set(i, updatedTask);
@@ -195,28 +189,7 @@ public class YearlyGoalsFragment extends androidx.fragment.app.Fragment {
         });
     }
 
-    public void permissionClearTasks() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage("Do you want to clear your completed tasks?");
-        alertDialogBuilder.setPositiveButton("yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        tasksList.clear();
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
-    private boolean checkTasksCompletion() {
+    private final boolean checkTasksCompletion() {
         Iterator iter = tasksList.iterator();
         while (iter.hasNext()) {
             Task task = (Task) iter.next();

@@ -7,13 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Sync.Sync;
 import com.example.tapiwa.todoapp.Utils.BackUp;
 import com.example.tapiwa.todoapp.Utils.Util;
-import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.login.CreateAccountActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SignInActivity extends AppCompatActivity {
     private Button signInBtn, signUpBtn;
@@ -56,7 +55,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private boolean isEmailAddressValid() {
-        if(emailAddress.getText().toString() == null || emailAddress.getText().toString().length()== 0) {
+        if (emailAddress.getText().toString() == null || emailAddress.getText().toString().length() == 0) {
             emailAddress.setError("Invalid email address");
             return false;
         }
@@ -64,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid() {
-        if(password.getText().toString() == null || password.getText().toString().length() == 0) {
+        if (password.getText().toString() == null || password.getText().toString().length() == 0) {
             password.setError("Invalid password");
             return false;
         }
@@ -75,7 +74,7 @@ public class SignInActivity extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isEmailAddressValid() && isPasswordValid()) {
+                if (isEmailAddressValid() && isPasswordValid()) {
                     login(emailAddress.getText().toString(), password.getText().toString());
                 }
             }
@@ -96,16 +95,16 @@ public class SignInActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task<AuthResult> task) {
-            if(task.isSuccessful()) {
-                Utils.nullifyFirstTimeUserStatus();
-                Intent intent = new Intent(SignInActivity.this, Sync.class);
-                startActivity(intent);
-                activity.finish();
-                progressBar.setVisibility(View.INVISIBLE);
-            } else {
-                Toast.makeText(getApplicationContext(), "You entered a wrong email/password", Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.INVISIBLE);
-            }
+                if (task.isSuccessful()) {
+                    Utils.nullifyFirstTimeUserStatus();
+                    Intent intent = new Intent(SignInActivity.this, Sync.class);
+                    startActivity(intent);
+                    activity.finish();
+                    progressBar.setVisibility(View.INVISIBLE);
+                } else {
+                    Toast.makeText(getApplicationContext(), "You entered a wrong email/password", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }

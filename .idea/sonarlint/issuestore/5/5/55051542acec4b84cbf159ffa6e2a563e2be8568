@@ -1,0 +1,18 @@
+
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(‰§‡Ïúÿÿÿÿ8†¤ò‚-
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(é”ê»8†¤ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(´¬Ø£ùÿÿÿÿ8†¤ò‚-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Æã¼ƒ8†¤ò‚-
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ıÿÿÿÿ8†¤ò‚-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÄÉî€8†¤ò‚-
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8†¤ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8†¤ò‚-
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚÃã²ıÿÿÿÿ8†¤ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ş§¿³úÿÿÿÿ8†¤ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8†¤ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8†¤ò‚-
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(›¡¡Ÿ8†¤ò‚-
+bsquid:UnusedPrivateMethod"9Remove this unused private "checkTasksCompletion" method.(•°€A8†¤ò‚-
+Isquid:S1068"-Remove this unused "goalsList" private field.(üÖÍÁ8‹¯—ò‚-
+tsquid:S1450"XRemove the "goalsList" field and declare it as a local variable in the relevant methods.(üÖÍÁ8‹¯—ò‚-
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚÃã²ıÿÿÿÿ8‹¯—ò‚-

@@ -1,13 +1,10 @@
 package com.example.tapiwa.todoapp.Sync;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Window;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.home.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 

@@ -1,14 +1,14 @@
 
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ŸèÐ¢úÿÿÿÿ8Úçó,
-Psquid:S1068"/Remove this unused "clickedTask" private field.(žÑÑÊúÿÿÿÿ8Úçó,
-{squid:S1450"ZRemove the "clickedTask" field and declare it as a local variable in the relevant methods.(žÑÑÊúÿÿÿÿ8Úçó,
-7squid:S3626"Remove this redundant jump.(ûÁÝ…8Úçó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8Úçó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8Úçó,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8Úçó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Õ¥Èúÿÿÿÿ8Úçó,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(•Ç®–8Úçó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8Úçó,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(îñë‡8Úçó,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Üçäšøÿÿÿÿ8Úçó,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ýÿÿÿÿ8Úçó,
+msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ŸèÐ¢úÿÿÿÿ8ÜÍ‚ò‚-
+Psquid:S1068"/Remove this unused "clickedTask" private field.(žÑÑÊúÿÿÿÿ8ÜÍ‚ò‚-
+{squid:S1450"ZRemove the "clickedTask" field and declare it as a local variable in the relevant methods.(žÑÑÊúÿÿÿÿ8ÜÍ‚ò‚-
+7squid:S3626"Remove this redundant jump.(ûÁÝ…8ÜÍ‚ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8ÜÍ‚ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8ÜÍ‚ò‚-
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8ÜÍ‚ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Õ¥Èúÿÿÿÿ8ÜÍ‚ò‚-
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(•Ç®–8ÜÍ‚ò‚-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8ÜÍ‚ò‚-
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(îñë‡8ÜÍ‚ò‚-
+|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Üçäšøÿÿÿÿ8ÜÍ‚ò‚-
+_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ýÿÿÿÿ8ÜÍ‚ò‚-

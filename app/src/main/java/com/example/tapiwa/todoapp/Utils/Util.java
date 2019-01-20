@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -124,7 +122,7 @@ public class Util {
     public boolean isReadyForBackUp() {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         int loginSessionsCount = sharedPref.getInt(activity.getString(R.string.login_sessions), 0);
-        if(loginSessionsCount >= NUM_SESSIONS_BEFORE_BACKUP) {
+        if (loginSessionsCount >= NUM_SESSIONS_BEFORE_BACKUP) {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putInt(activity.getString(R.string.login_sessions), 0);
             editor.commit();
@@ -134,22 +132,22 @@ public class Util {
         }
     }
 
-   public boolean isFirstTimeUser() {
-       SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-       return sharedPref.getBoolean(activity.getString(R.string.first_time_user), false);
-   }
+    public boolean isFirstTimeUser() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        return sharedPref.getBoolean(activity.getString(R.string.first_time_user), false);
+    }
 
-   public void setFirstTimeUser() {
+    public void setFirstTimeUser() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(activity.getString(R.string.first_time_user), true);
         editor.commit();
     }
 
-   public void nullifyFirstTimeUserStatus() {
-       SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-       SharedPreferences.Editor editor = sharedPref.edit();
-       editor.putBoolean(activity.getApplicationContext().getString(R.string.first_time_user), false);
-       editor.commit();
-   }
+    public void nullifyFirstTimeUserStatus() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(activity.getApplicationContext().getString(R.string.first_time_user), false);
+        editor.commit();
+    }
 }

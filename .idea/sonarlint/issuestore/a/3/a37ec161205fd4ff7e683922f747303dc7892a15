@@ -1,3 +1,3 @@
 
-¢squid:S1319"…The type of the "sharedProjectReferenceKeys" object should be an interface such as "List" rather than the implementation "ArrayList".(óÉ¿ï8ø·›Î,
-‹squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ïç­/8ø·›Î,
+squid:S1319W"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ïç­/8ø·›Î,
+¤squid:S1319["…The type of the "sharedProjectReferenceKeys" object should be an interface such as "List" rather than the implementation "ArrayList".(óÉ¿ï8ø·›Î,

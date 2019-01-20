@@ -1,31 +1,16 @@
 package com.example.tapiwa.todoapp.Utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.sharedProjects.SharedProjectModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
 
-import androidx.annotation.NonNull;
-import androidx.core.widget.ContentLoadingProgressBar;
-
 import static com.example.tapiwa.todoapp.Utils.Constants.BACKUP_PATH;
-import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
-import static com.example.tapiwa.todoapp.home.MainActivity.fileHandler;
 
 public class BackUp {
 
@@ -50,13 +35,13 @@ public class BackUp {
     }
 
     public void runBackupFiles() {
-            setDailyTasksJson(getLocalDailyTasksJson());
-            setWeeklyTasksJson(getLocalWeeklyTasksJson());
-            setLongTermTasksJson(getLocalLongTermTasksJson());
-            setPersonalProjectsJson(getLocalPersonalProjectsJson());
-            setOneYearTasksJson(getLocalOneYearTasksJson());
-            db = FirebaseFirestore.getInstance();
-            db.document(BACKUP_PATH + userId).set(this);
+        setDailyTasksJson(getLocalDailyTasksJson());
+        setWeeklyTasksJson(getLocalWeeklyTasksJson());
+        setLongTermTasksJson(getLocalLongTermTasksJson());
+        setPersonalProjectsJson(getLocalPersonalProjectsJson());
+        setOneYearTasksJson(getLocalOneYearTasksJson());
+        db = FirebaseFirestore.getInstance();
+        db.document(BACKUP_PATH + userId).set(this);
     }
 
     public void runSyncLocalFiles() {

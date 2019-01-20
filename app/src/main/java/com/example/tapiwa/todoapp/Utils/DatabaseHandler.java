@@ -112,7 +112,7 @@ public class DatabaseHandler {
                 }
                 projectTasks.add(task);
                 project.setProjectTasks(projectTasks);
-                updateSharedProjectInDb(context,project,projectKey);
+                updateSharedProjectInDb(context, project, projectKey);
             }
         });
     }
@@ -236,8 +236,8 @@ public class DatabaseHandler {
                             updateSharedProjectInDb(context, sharedProject, projectReference.getProjectKey());
                         }
                     }
-                } else if(memberEmails == null || memberEmails.size() == 0) {
-                   deleteSharedProjectFromDb(projectReference);
+                } else if (memberEmails == null || memberEmails.size() == 0) {
+                    deleteSharedProjectFromDb(projectReference);
                 }
             }
         });

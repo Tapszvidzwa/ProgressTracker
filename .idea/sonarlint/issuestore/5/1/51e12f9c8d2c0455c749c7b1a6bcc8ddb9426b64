@@ -1,11 +1,11 @@
 
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(½¾ÛÂùÿÿÿÿ8Œƒéœò,
-‘squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(öª®¤øÿÿÿÿ8Œƒéœò,
-“squid:S1319"wThe type of the "projectTasks" object should be an interface such as "List" rather than the implementation "ArrayList".(™±ÌÖ8¼óµ€Í,
-“squid:S1319"wThe type of the "memberEmails" object should be an interface such as "List" rather than the implementation "ArrayList".(ÁÌÙ”8‘Òº€Í,
-‘squid:S1319"vThe type of the "memberNames" object should be an interface such as "List" rather than the implementation "ArrayList".(Ù±©p8Œƒéœò,
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ž©Ç¤üÿÿÿÿ8¼óµ€Í,
-‘squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Øüœüÿÿÿÿÿ8‘Òº€Í,
-Œsquid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ßÈÆó8¼óµ€Í,
-vsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8¼óµ€Í,
-Jsquid:S1905")Remove this unnecessary cast to "double".(±ÞÏáýÿÿÿÿ8Œƒéœò,
+xsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8¼óµ€Í,
+Lsquid:S1905^")Remove this unnecessary cast to "double".(±ÞÏáýÿÿÿÿ8Œƒéœò,
+“squid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Øüœüÿÿÿÿÿ8‘Òº€Í,
+•squid:S1319"wThe type of the "memberEmails" object should be an interface such as "List" rather than the implementation "ArrayList".(ÁÌÙ”8‘Òº€Í,
+Žsquid:S1319."pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ßÈÆó8¼óµ€Í,
+“squid:S1319>"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(öª®¤øÿÿÿÿ8Œƒéœò,
+¤squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ž©Ç¤üÿÿÿÿ8¼óµ€Í,
+•squid:S13192"wThe type of the "projectTasks" object should be an interface such as "List" rather than the implementation "ArrayList".(™±ÌÖ8¼óµ€Í,
+asquid:S1155T">Use isEmpty() to check whether the collection is empty or not.(½¾ÛÂùÿÿÿÿ8Œƒéœò,
+“squid:S1319B"vThe type of the "memberNames" object should be an interface such as "List" rather than the implementation "ArrayList".(Ù±©p8Œƒéœò,

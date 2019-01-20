@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.Constants;
 import com.example.tapiwa.todoapp.Utils.FileHandler;
 import com.example.tapiwa.todoapp.home.MainActivity;
 import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectModel;
@@ -20,7 +19,8 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.util.LinkedList;
-import static com.example.tapiwa.todoapp.home.MainActivity.FragmentName.PERSONAL_PROJECT;
+
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.PERSONAL_PROJECT;
 
 public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fragment {
 
@@ -60,7 +60,7 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
 
         switch (item.getItemId()) {
             case R.id.rename_project:
-                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                MainActivity.getInputForFragment(MainActivity.visibleFragment, personalProjectsList.get(clickedProject).getProjectTitle());
                 return true;
             case R.id.delete_project:
                 deleteProject(info.position);
@@ -136,7 +136,7 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
             personalProjectsContainerModel = gson.fromJson(tasksJson.toString(),
                     PersonalProjectsContainerModel.class);
             try {
-                if(personalProjectsContainerModel.getProjects() != null) {
+                if (personalProjectsContainerModel.getProjects() != null) {
                     personalProjectsList = personalProjectsContainerModel.getProjects();
                 } else {
                     personalProjectsList = new LinkedList<>();

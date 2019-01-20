@@ -9,13 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
+
 import static com.example.tapiwa.todoapp.Utils.Constants.SHARED_PROJECTS_DB_PATH;
 
 
@@ -80,7 +80,7 @@ public class SharedProjectsAdapter extends BaseAdapter {
             @Override
             public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 SharedProjectModel projectModel = documentSnapshot.toObject(SharedProjectModel.class);
-                if(projectModel != null) {
+                if (projectModel != null) {
                     viewHolder.projectTitle.setText(projectModel.getProjectTitle());
                     viewHolder.completionPercentage.setText(projectModel.getPercentageCompleted());
                     viewHolder.completionPercentage.setTextColor(Color.rgb(208, 35, 35));

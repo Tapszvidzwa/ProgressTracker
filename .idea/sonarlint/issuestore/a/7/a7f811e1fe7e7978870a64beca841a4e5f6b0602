@@ -1,4 +1,4 @@
 
-Psquid:S1066"/Merge this if statement with the enclosing one.(°Ğ»Èüÿÿÿÿ8¸ÆÙ§Î,
-vsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8“­Ç§Î,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(½•‡ñ8“­Ç§Î,
+Ÿsquid:S1186	"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(½•‡ñ8“­Ç§Î,
+Rsquid:S1066"/Merge this if statement with the enclosing one.(°Ğ»Èüÿÿÿÿ8¸ÆÙ§Î,
+xsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8“­Ç§Î,

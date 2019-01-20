@@ -13,6 +13,12 @@ import com.example.tapiwa.todoapp.Utils.ProgressTracker;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.DAILY_TASKS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.LONG_TERM_TASKS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.PERSONAL_PROJECTS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SHARED_PROJECTS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.WEEKLY_TASKS;
+import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.YEARLY_TASKS;
 import static com.example.tapiwa.todoapp.home.MainActivity.switchToFragment;
 
 public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
@@ -86,25 +92,25 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.daily_tasks:
-                        switchToFragment(MainActivity.FragmentName.DAILY_TASKS, null);
+                        switchToFragment(DAILY_TASKS, new Bundle());
                         break;
                     case R.id.weekly_tasks:
-                        switchToFragment(MainActivity.FragmentName.WEEKLY_TASKS, null);
+                        switchToFragment(WEEKLY_TASKS, new Bundle());
                         break;
                     case R.id.yearly_tasks:
-                        switchToFragment(MainActivity.FragmentName.YEARLY_TASKS, null);
+                        switchToFragment(YEARLY_TASKS, new Bundle());
                         break;
                     case R.id.long_term_tasks:
-                        switchToFragment(MainActivity.FragmentName.LONG_TERM_TASKS, null);
+                        switchToFragment(LONG_TERM_TASKS, new Bundle());
                         break;
                     case R.id.personal_projects:
-                        switchToFragment(MainActivity.FragmentName.PERSONAL_PROJECTS, null);
+                        switchToFragment(PERSONAL_PROJECTS, new Bundle());
                         break;
                     case R.id.shared_projects:
-                        switchToFragment(MainActivity.FragmentName.SHARED_PROJECTS, null);
+                        switchToFragment(SHARED_PROJECTS, new Bundle());
                         break;
                     default:
-                        switchToFragment(MainActivity.FragmentName.DAILY_TASKS, null);
+                        switchToFragment(DAILY_TASKS, new Bundle());
                 }
                 menuItem.setChecked(true);
                 MainActivity.closeBottomSheet();

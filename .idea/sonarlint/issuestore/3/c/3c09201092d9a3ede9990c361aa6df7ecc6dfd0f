@@ -1,25 +1,24 @@
 
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¤Ä£Õÿÿÿÿÿ8œÕò,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(£ªµúÿÿÿÿ8ôÂº Ù,
-psquid:UselessImportCheck"GRemove this unused import 'com.example.tapiwa.todoapp.Utils.Constants'.(—ß•8ˆŠ» Ù,
-tsquid:S1450"SRemove the "menu" field and declare it as a local variable in the relevant methods.(‘Òˆ¸ùÿÿÿÿ8şßÏò,
-–"squid:ClassVariableVisibilityCheck"^Make sharedProjectsList a static final constant or non-public and provide accessors if needed.(İ®ŒØşÿÿÿÿ8ôÂº Ù,
-vsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8ôÂº Ù,
-Jsquid:S1444".Make this "public static mAdapter" field final(·Àøò8ôÂº Ù,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(†ëª×8ôÂº Ù,
-Jsquid:S1444".Make this "public static activity" field final(æÄı8ôÂº Ù,
-’"squid:ClassVariableVisibilityCheck"ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8ôÂº Ù,
-Ssquid:S1135"2Complete the task associated to this TODO comment.(ˆ ú¢üÿÿÿÿ8ò‘Åò,
-Ysquid:S1444"8Make this "public static sharedProjectsList" field final(İ®ŒØşÿÿÿÿ8ôÂº Ù,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¹Ôİï8ôÂº Ù,
-Isquid:S2386"-Make member "sharedProjectsList" "protected".(¾Ñ€º8ôÂº Ù,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(†Õúšÿÿÿÿÿ8ôÂº Ù,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(¾Ñ€º8ôÂº Ù,
-Usquid:S1444"4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8ôÂº Ù,
-‡"squid:ClassVariableVisibilityCheck"TMake activity a static final constant or non-public and provide accessors if needed.(æÄı8ôÂº Ù,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ÚˆÉ8ôÂº Ù,
-Ksquid:S00108")Either remove or fill this block of code.(‰•’şÿÿÿÿ8ôÂº Ù,
-squid:S1319"}The type of the "sharedProjectsList" object should be an interface such as "List" rather than the implementation "ArrayList".(İ®ŒØşÿÿÿÿ8ôÂº Ù,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(“·öø8œÕò,
-‡"squid:ClassVariableVisibilityCheck"TMake mAdapter a static final constant or non-public and provide accessors if needed.(·Àøò8ôÂº Ù,
-Isquid:S1068"(Remove this unused "menu" private field.(‘Òˆ¸ùÿÿÿÿ8³™Ùó,
+Tsquid:S2696\"6Make the enclosing method "static" or remove this set.(“·öø8ÊÕ·ºô,
+Lsquid:S1444#".Make this "public static mAdapter" field final(·Àøò8ÊÕ·ºô,
+Wsquid:S1444("4Make this "public static clickedProject" field final(¬ªó¾şÿÿÿÿ8ÊÕ·ºô,
+Tsquid:S2696Z"6Make the enclosing method "static" or remove this set.(¾Ñ€º8ÊÕ·ºô,
+xsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ìôï8ÊÕ·ºô,
+Ssquid:S2696E"6Make the enclosing method "static" or remove this set.(ÚˆÉ8ÊÕ·ºô,
+Ysquid:S26963"6Make the enclosing method "static" or remove this set.(†Õúšÿÿÿÿÿ8ÊÕ·ºô,
+ squid:S1319$"}The type of the "sharedProjectsList" object should be an interface such as "List" rather than the implementation "ArrayList".(İ®ŒØşÿÿÿÿ8ÊÕ·ºô,
+Ysquid:S2696Y"6Make the enclosing method "static" or remove this set.(£ªµúÿÿÿÿ8ÊÕ·ºô,
+Lsquid:S1444'".Make this "public static activity" field final(æÄı8ÊÕ·ºô,
+‰"squid:ClassVariableVisibilityCheck#"TMake mAdapter a static final constant or non-public and provide accessors if needed.(·Àøò8ÊÕ·ºô,
+Ksquid:S2386Z"-Make member "sharedProjectsList" "protected".(¾Ñ€º8ÊÕ·ºô,
+”"squid:ClassVariableVisibilityCheck("ZMake clickedProject a static final constant or non-public and provide accessors if needed.(¬ªó¾şÿÿÿÿ8ÊÕ·ºô,
+Usquid:S1135v"2Complete the task associated to this TODO comment.(ˆ ú¢üÿÿÿÿ8ÊÕ·ºô,
+Tsquid:S2696`"6Make the enclosing method "static" or remove this set.(¹Ôİï8ÊÕ·ºô,
+Ysquid:S2696["6Make the enclosing method "static" or remove this set.(¤Ä£Õÿÿÿÿÿ8ÊÕ·ºô,
+vsquid:S1450)"SRemove the "menu" field and declare it as a local variable in the relevant methods.(‘Òˆ¸ùÿÿÿÿ8ÊÕ·ºô,
+[squid:S1444$"8Make this "public static sharedProjectsList" field final(İ®ŒØşÿÿÿÿ8ÊÕ·ºô,
+Ksquid:S1068)"(Remove this unused "menu" private field.(‘Òˆ¸ùÿÿÿÿ8ÊÕ·ºô,
+˜"squid:ClassVariableVisibilityCheck$"^Make sharedProjectsList a static final constant or non-public and provide accessors if needed.(İ®ŒØşÿÿÿÿ8ÊÕ·ºô,
+‰"squid:ClassVariableVisibilityCheck'"TMake activity a static final constant or non-public and provide accessors if needed.(æÄı8ÊÕ·ºô,
+Tsquid:S2696a"6Make the enclosing method "static" or remove this set.(†ëª×8ÊÕ·ºô,
+Nsquid:S00108‡")Either remove or fill this block of code.(‰•’şÿÿÿÿ8ÊÕ·ºô,

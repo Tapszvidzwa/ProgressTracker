@@ -1,27 +1,10 @@
 
-ksquid:S1192"JDefine a constant instead of duplicating this literal "completed" 3 times.(À’øÿÿÿÿ8éşÚó,
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ŸèĞ¢úÿÿÿÿ8éşÚó,
-xsquid:S3008"WRename this field "CURRENT_DATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æšªùÿÿÿÿ8éşÚó,
-Msquid:S1068",Remove this unused "activity" private field.(‰€Ôßûÿÿÿÿ8éşÚó,
-Fsquid:S1444"*Make this "public static date" field final(£ˆ«‚8éşÚó,
-7squid:S3626"Remove this redundant jump.(ûÁİ…8éşÚó,
-7squid:S3626"Remove this redundant jump.(ûÁİ…8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(´¬Ø£ùÿÿÿÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Ä´Ëøÿÿÿÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ş§¿³úÿÿÿÿ8éşÚó,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8éşÚó,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(›¡¡Ÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¯Ó¢ìşÿÿÿÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8éşÚó,
-Qsquid:S2696"6Make the enclosing method "static" or remove this set.(ƒÎ¼"8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(åÂ÷‚ûÿÿÿÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(åÙ›øÿÿÿÿ8éşÚó,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8éşÚó,
-ƒ"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(£ˆ«‚8éşÚó,
-Esquid:S1481")Remove this unused "auth" local variable.(çÌÈ“8éşÚó,
-Tsquid:S1854"8Remove this useless assignment to local variable "auth".(çÌÈ“8éşÚó,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(äƒš8éşÚó,
-•squid:UselessImportCheck"lRemove this unused import 'com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectTask'.(ãÌ°Ü8éşÚó,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ıÿÿÿÿ8éşÚó,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(¸¬ÆÏşÿÿÿÿ8éşÚó,
+Zsquid:UselessImportCheck"1Remove this unused import 'java.text.DateFormat'.(÷Œá¼8ãÙ…¾ô,
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(äƒš8¸Ş¤ºô,
+gsquid:UselessImportCheck"9Remove this unused import 'com.example.tapiwa.todoapp.R'.(‡—·¢ÿÿÿÿÿ8ãÙ…¾ô,
+psquid:UselessImportCheck"BRemove this unused import 'com.google.firebase.auth.FirebaseAuth'.(İÄğöûÿÿÿÿ8ãÙ…¾ô,
+asquid:UselessImportCheck"8Remove this unused import 'android.view.LayoutInflater'.(À¯ÑÇ8ãÙ…¾ô,
+\squid:UselessImportCheck".Remove this unused import 'android.view.View'.(Ø½­äşÿÿÿÿ8ãÙ…¾ô,
+\squid:UselessImportCheck".Remove this unused import 'android.os.Bundle'.(°şÊóøÿÿÿÿ8ãÙ…¾ô,
+\squid:UselessImportCheck"3Remove this unused import 'android.view.ViewGroup'.(‹îá8ãÙ…¾ô,
+¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(—ÜØ×şÿÿÿÿ8‚İú½ô,
