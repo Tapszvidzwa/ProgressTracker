@@ -31,26 +31,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tasks_type_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:text="@string/daily_tasks_fragment_title"
-        android:textColor="@color/colorAnnounce"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/percentage_completed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="4dp"
-        android:text="20%"
-        android:textColor="@android:color/black"
-        android:textSize="22sp" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

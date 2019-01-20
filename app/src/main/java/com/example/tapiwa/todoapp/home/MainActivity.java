@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton getInputFab;
     public static FirebaseAuth auth;
     public static BottomSheetDialogFragment bottomSheetDialogFragment;
-    private ProgressBar progressBar;
     private Util Utils;
     public static InputRequests inputRequest = new InputRequests();
     private BackUp backUp;
@@ -85,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         bottomAppBar = findViewById(R.id.bar);
-        progressBar = findViewById(R.id.loading_progress_bar);
         getInputFab = findViewById(R.id.fab);
         visibleFragment = DAILY_TASKS;
         fragmentManager = getSupportFragmentManager();
@@ -327,8 +325,6 @@ public class MainActivity extends AppCompatActivity {
     public static void switchToFragment(FragmentName fragmentName, Bundle bundle) {
         visibleFragment = fragmentName;
         TasksFragmentFactory fragmentsFactory = new TasksFragmentFactory();
-        //Todo: do we really need the method call below
-        fragmentsFactory.onCreate();
         androidx.fragment.app.Fragment fragment = fragmentsFactory.getFragment(fragmentName);
         mergeFragmentBundles(fragment, bundle);
 
@@ -432,4 +428,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+
+
+        super.onBackPressed();
+    }
 }

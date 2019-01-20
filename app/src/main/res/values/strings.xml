@@ -27,8 +27,8 @@
     <string name="weekly_tasks_fragment_title">Weekly Goals</string>
     <string name="yearly_tasks_fragment_title">Yearly Goals</string>
     <string name="long_term_goals_title">Long Term Goals</string>
-    <string name="personal_projects_fragment_title">Personal Projects</string>
-    <string name="shared_projects_fragment_title">Shared Projects</string>
+    <string name="personal_projects_fragment_title">Custom Projects</string>
+    <string name="shared_projects_fragment_title">Group Projects</string>
 
     //Miscellaneous
     <string name="completed_by">Completed by </string>
