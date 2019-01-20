@@ -6,6 +6,6 @@
             android:title="Delete Task" />
         <item
             android:id="@+id/rename_task"
-            android:title="Rename Task" />
+            android:title="Edit Task" />
     </group>
 </menu>
