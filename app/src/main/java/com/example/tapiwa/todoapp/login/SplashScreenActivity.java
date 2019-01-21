@@ -9,7 +9,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.navigation.NavigationController;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -55,7 +55,7 @@ public class SplashScreenActivity extends Activity {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
 
                             if (user != null) {
-                                Intent openFrontPage = new Intent(SplashScreenActivity.this, MainActivity.class);
+                                Intent openFrontPage = new Intent(SplashScreenActivity.this, NavigationController.class);
                                 startActivity(openFrontPage);
                                 thisActivity.finish();
                             } else {

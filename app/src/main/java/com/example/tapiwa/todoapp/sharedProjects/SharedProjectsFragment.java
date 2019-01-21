@@ -12,9 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.DatabaseHandler;
-import com.example.tapiwa.todoapp.Utils.InputRequests;
-import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.utils.DatabaseHandler;
+import com.example.tapiwa.todoapp.utils.InputRequests;
+import com.example.tapiwa.todoapp.navigation.NavigationController;
 import com.example.tapiwa.todoapp.login.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,8 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
-import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
+import static com.example.tapiwa.todoapp.utils.Constants.USERS_DB_PATH;
 
 
 public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
@@ -70,8 +70,8 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_project:
-                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, "");
+                NavigationController.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
+                NavigationController.getInputForFragment(NavigationController.visibleFragment, "");
                 return true;
             case R.id.exit_project:
                 exitFromProject();
@@ -109,7 +109,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
                 SharedProjectReference projectReference = sharedProjectsList.get(i);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("projectReference", projectReference);
-                MainActivity.switchToFragment(SINGLE_SHARED_PROJECT, bundle);
+                NavigationController.switchToFragment(SINGLE_SHARED_PROJECT, bundle);
             }
         });
     }
@@ -141,7 +141,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
 
     public static void addProject(final String projectName) {
         remoteDb.addNewSharedProject(
-                MainActivity.activity.getApplicationContext(),
+                NavigationController.activity.getApplicationContext(),
                 projectName);
         loadProjectsFromDb();
         mAdapter.notifyDataSetChanged();

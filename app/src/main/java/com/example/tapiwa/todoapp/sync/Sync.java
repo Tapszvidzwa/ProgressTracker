@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.Sync;
+package com.example.tapiwa.todoapp.sync;
 
 import android.app.Activity;
 import android.os.Bundle;

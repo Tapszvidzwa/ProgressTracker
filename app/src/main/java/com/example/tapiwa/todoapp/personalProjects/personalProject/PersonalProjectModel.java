@@ -1,11 +1,11 @@
 package com.example.tapiwa.todoapp.personalProjects.personalProject;
 
-import com.example.tapiwa.todoapp.Utils.Util;
+import com.example.tapiwa.todoapp.utils.Util;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.PERSONAL_PROJECT_KEY_SIZE;
+import static com.example.tapiwa.todoapp.utils.Constants.PERSONAL_PROJECT_KEY_SIZE;
 
 public class PersonalProjectModel {
 

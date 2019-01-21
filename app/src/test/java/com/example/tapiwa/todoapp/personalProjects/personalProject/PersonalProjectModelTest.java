@@ -1,6 +1,6 @@
 package com.example.tapiwa.todoapp.personalProjects.personalProject;
 
-import com.example.tapiwa.todoapp.Utils.Constants;
+import com.example.tapiwa.todoapp.utils.Constants;
 
 import org.junit.Test;
 

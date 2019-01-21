@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.Utils;
+package com.example.tapiwa.todoapp.utils;
 
 import android.content.Context;
 import android.widget.Toast;

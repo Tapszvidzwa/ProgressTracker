@@ -9,9 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Sync.Sync;
-import com.example.tapiwa.todoapp.Utils.BackUp;
-import com.example.tapiwa.todoapp.Utils.Util;
+import com.example.tapiwa.todoapp.sync.Sync;
+import com.example.tapiwa.todoapp.utils.BackUp;
+import com.example.tapiwa.todoapp.utils.Util;
 import com.example.tapiwa.todoapp.login.CreateAccountActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

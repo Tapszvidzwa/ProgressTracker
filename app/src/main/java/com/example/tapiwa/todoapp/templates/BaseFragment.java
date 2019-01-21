@@ -14,10 +14,10 @@ import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
 import com.example.tapiwa.todoapp.TaskAdapter;
 import com.example.tapiwa.todoapp.TaskList;
-import com.example.tapiwa.todoapp.Utils.FileHandler;
-import com.example.tapiwa.todoapp.Utils.InputRequests;
-import com.example.tapiwa.todoapp.Utils.ProgressTracker;
-import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.utils.FileHandler;
+import com.example.tapiwa.todoapp.utils.InputRequests;
+import com.example.tapiwa.todoapp.utils.ProgressTracker;
+import com.example.tapiwa.todoapp.navigation.NavigationController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -79,8 +79,8 @@ public abstract class BaseFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_task:
-                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
-                MainActivity.getInputForFragment(MainActivity.visibleFragment, tasksList.get(clickedTask).getTask());
+                NavigationController.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
+                NavigationController.getInputForFragment(NavigationController.visibleFragment, tasksList.get(clickedTask).getTask());
                 return true;
             case R.id.delete_task:
                 deleteTask(info.position);

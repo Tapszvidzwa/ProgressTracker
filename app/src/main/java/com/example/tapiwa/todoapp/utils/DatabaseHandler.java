@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.Utils;
+package com.example.tapiwa.todoapp.utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -20,8 +20,8 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.SHARED_PROJECTS_DB_PATH;
-import static com.example.tapiwa.todoapp.Utils.Constants.USERS_DB_PATH;
+import static com.example.tapiwa.todoapp.utils.Constants.SHARED_PROJECTS_DB_PATH;
+import static com.example.tapiwa.todoapp.utils.Constants.USERS_DB_PATH;
 
 public class DatabaseHandler {
 

@@ -1,9 +1,9 @@
-package com.example.tapiwa.todoapp.FragmentFactory;
+package com.example.tapiwa.todoapp.fragmentFactory;
 
 import android.app.Application;
 import android.os.Bundle;
 
-import com.example.tapiwa.todoapp.home.BottomNavigationDrawerFragment;
+import com.example.tapiwa.todoapp.navigation.BottomNavigationDrawerFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalProject.PersonalProjectFragment;
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerFragment;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectsFragment;

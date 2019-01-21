@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.SHARED_PROJECTS_DB_PATH;
+import static com.example.tapiwa.todoapp.utils.Constants.SHARED_PROJECTS_DB_PATH;
 
 
 public class SharedProjectsAdapter extends BaseAdapter {

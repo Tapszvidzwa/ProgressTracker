@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.Utils;
+package com.example.tapiwa.todoapp.utils;
 
 import android.content.Context;
 
@@ -10,7 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.BACKUP_PATH;
+import static com.example.tapiwa.todoapp.utils.Constants.BACKUP_PATH;
 
 public class BackUp {
 

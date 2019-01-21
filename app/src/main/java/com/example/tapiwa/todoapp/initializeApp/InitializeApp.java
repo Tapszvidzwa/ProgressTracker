@@ -1,9 +1,9 @@
-package com.example.tapiwa.todoapp.InitializeApp;
+package com.example.tapiwa.todoapp.initializeApp;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.tapiwa.todoapp.Utils.FileHandler;
+import com.example.tapiwa.todoapp.utils.FileHandler;
 
 public class InitializeApp extends AsyncTask<Boolean, Integer, Boolean> {
 

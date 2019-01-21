@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.FragmentFactory;
+package com.example.tapiwa.todoapp.fragmentFactory;
 
 public enum FragmentName {
     DAILY_TASKS, WEEKLY_TASKS, MONTHLY_TASKS, YEARLY_TASKS, LONG_TERM_TASKS,

@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.home;
+package com.example.tapiwa.todoapp.navigation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,18 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.FileHandler;
-import com.example.tapiwa.todoapp.Utils.ProgressTracker;
+import com.example.tapiwa.todoapp.utils.FileHandler;
+import com.example.tapiwa.todoapp.utils.ProgressTracker;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.DAILY_TASKS;
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.LONG_TERM_TASKS;
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.PERSONAL_PROJECTS;
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.SHARED_PROJECTS;
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.WEEKLY_TASKS;
-import static com.example.tapiwa.todoapp.FragmentFactory.FragmentName.YEARLY_TASKS;
-import static com.example.tapiwa.todoapp.home.MainActivity.switchToFragment;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.DAILY_TASKS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.LONG_TERM_TASKS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.PERSONAL_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SHARED_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.WEEKLY_TASKS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.YEARLY_TASKS;
+import static com.example.tapiwa.todoapp.navigation.NavigationController.switchToFragment;
 
 public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
 
@@ -37,7 +37,7 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
         navigationView = bottomNavigationSheet.findViewById(R.id.navigation_view);
         header = navigationView.getHeaderView(0);
         emailAddress = header.findViewById(R.id.user_email);
-        emailAddress.setText(MainActivity.auth.getCurrentUser().getEmail());
+        emailAddress.setText(NavigationController.auth.getCurrentUser().getEmail());
         fileHandler = new FileHandler(getContext());
         progressTracker = new ProgressTracker(getContext(), null);
         return bottomNavigationSheet;
@@ -113,7 +113,7 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
                         switchToFragment(DAILY_TASKS, new Bundle());
                 }
                 menuItem.setChecked(true);
-                MainActivity.closeBottomSheet();
+                NavigationController.closeBottomSheet();
                 return false;
             }
         });

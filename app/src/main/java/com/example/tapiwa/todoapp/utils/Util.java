@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.Utils;
+package com.example.tapiwa.todoapp.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,7 @@ import com.example.tapiwa.todoapp.R;
 import java.util.Calendar;
 import java.util.Random;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.NUM_SESSIONS_BEFORE_BACKUP;
+import static com.example.tapiwa.todoapp.utils.Constants.NUM_SESSIONS_BEFORE_BACKUP;
 
 public class Util {
 

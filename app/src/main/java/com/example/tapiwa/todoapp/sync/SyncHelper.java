@@ -1,13 +1,13 @@
-package com.example.tapiwa.todoapp.Sync;
+package com.example.tapiwa.todoapp.sync;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.example.tapiwa.todoapp.Utils.BackUp;
-import com.example.tapiwa.todoapp.Utils.FileHandler;
-import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.utils.BackUp;
+import com.example.tapiwa.todoapp.utils.FileHandler;
+import com.example.tapiwa.todoapp.navigation.NavigationController;
 
 public class SyncHelper extends AsyncTask<Void, Integer, Void> {
 
@@ -34,7 +34,7 @@ public class SyncHelper extends AsyncTask<Void, Integer, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, NavigationController.class);
         activity.startActivity(intent);
         activity.finish();
         super.onPostExecute(aVoid);

@@ -1,4 +1,4 @@
-package com.example.tapiwa.todoapp.Utils;
+package com.example.tapiwa.todoapp.utils;
 
 public class InputRequests {
 
