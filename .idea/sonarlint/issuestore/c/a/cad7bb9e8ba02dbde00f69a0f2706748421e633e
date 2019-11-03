@@ -1,4 +1,4 @@
 
-¢squid:S1319"€The type of the "personalProjectsList" object should be an interface such as "List" rather than the implementation "LinkedList".(®É¥€şÿÿÿÿ8ùã‹‹Ø,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(óÏàÚ8ùã‹‹Ø,
-Ysquid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ùã‹‹Ø,
+Rsquid:S1659"1Declare "percentageCompleted" on a separate line.(²¹ØÈùÿÿÿÿ8ìÀ££ƒ-
+¢squid:S1319"€The type of the "personalProjectsList" object should be an interface such as "List" rather than the implementation "LinkedList".(®É¥€şÿÿÿÿ8ìÀ££ƒ-
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(óÏàÚ8ìÀ££ƒ-

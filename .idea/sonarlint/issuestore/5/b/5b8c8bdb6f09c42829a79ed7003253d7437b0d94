@@ -1,14 +1,0 @@
-
-msquid:S1192"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ט׀¢תÿÿÿÿ8¹חיף,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(‏§¿³תÿÿÿÿ8¹חיף,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(״Û¹¿8¹חיף,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(× ײץ8¹חיף,
-Rsquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üכ8¹חיף,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ֻÚֻüÿÿÿÿ8¹חיף,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(מסכ‡8¹חיף,
-7squid:S3626"Remove this redundant jump.(ûֱÝ…8¹חיף,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(°ֹ´תÿÿÿÿ8¹חיף,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‏•ג¡8¹חיף,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(‰״€¿‎ÿÿÿÿ8¹חיף,
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ֻÚֻüÿÿÿÿ8¹חיף,
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ִ¯ֹ8ן״ךף,

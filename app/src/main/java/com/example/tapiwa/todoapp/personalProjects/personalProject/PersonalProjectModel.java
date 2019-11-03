@@ -1,11 +1,11 @@
 package com.example.tapiwa.todoapp.personalProjects.personalProject;
 
-import com.example.tapiwa.todoapp.Utils.Util;
+import com.example.tapiwa.todoapp.utils.Util;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static com.example.tapiwa.todoapp.Utils.Constants.PERSONAL_PROJECT_KEY_SIZE;
+import static com.example.tapiwa.todoapp.utils.Constants.PERSONAL_PROJECT_KEY_SIZE;
 
 public class PersonalProjectModel {
 
@@ -88,12 +88,12 @@ public class PersonalProjectModel {
     }
 
     public String getNumUncompletedTasks() {
-        if(projectTasks.size() == 0) {
+        if (projectTasks.size() == 0) {
             return "";
         } else {
             int num_uncompleted = 0;
-            for(int i = 0; i < projectTasks.size(); i++) {
-                if(projectTasks.get(i).equals("uncompleted")) {
+            for (int i = 0; i < projectTasks.size(); i++) {
+                if (projectTasks.get(i).equals("uncompleted")) {
                     ++num_uncompleted;
                 }
             }
@@ -102,13 +102,13 @@ public class PersonalProjectModel {
     }
 
     public boolean isProjectComplete() {
-        if(projectTasks == null) {
+        if (projectTasks == null) {
             return false;
         } else if (projectTasks.size() == 0) {
             return false;
         } else {
-            for(int i = 0; i < projectTasks.size(); i++) {
-                if(projectTasks.get(i).getCompletionStatus().equals("uncompleted")) {
+            for (int i = 0; i < projectTasks.size(); i++) {
+                if (projectTasks.get(i).getCompletionStatus().equals("uncompleted")) {
                     return false;
                 }
             }

@@ -5,18 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.Util;
-import com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-public class ProjectMembersAdapter  extends BaseAdapter {
+public class ProjectMembersAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
@@ -55,8 +50,8 @@ public class ProjectMembersAdapter  extends BaseAdapter {
         String name, email;
 
         try {
-             name = names.get(position);
-             email = emails.get(position);
+            name = names.get(position);
+            email = emails.get(position);
         } catch (NullPointerException e) {
             name = "Group member";
             email = emails.get(position);

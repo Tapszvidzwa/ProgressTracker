@@ -1,7 +1,7 @@
 
-nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ÒÆ•8ÛÉ²¾à,
-’squid:S1319"qThe return type of this method should be an interface such as "List" rather than the implementation "LinkedList".(Ü¶•šüÿÿÿÿ8ÛÉ²¾à,
-wsquid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(ˆö‘ªøÿÿÿÿ8àú â,
-squid:S1319"tThe type of the "taskList" object should be an interface such as "List" rather than the implementation "LinkedList".(‹İ˜8ÛÉ²¾à,
-3squid:S1700"Rename field "taskList"(ó¾Ø8ÛÉ²¾à,
 squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(òÖ‰á8ÛÉ²¾à,
+squid:S1319"tThe type of the "taskList" object should be an interface such as "List" rather than the implementation "LinkedList".(‹İ˜8ÛÉ²¾à,
+’squid:S1319"qThe return type of this method should be an interface such as "List" rather than the implementation "LinkedList".(Ü¶•šüÿÿÿÿ8ÛÉ²¾à,
+nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ÒÆ•8ÛÉ²¾à,
+wsquid:S2159"VRemove this call to "equals"; comparisons between unrelated types always return false.(ˆö‘ªøÿÿÿÿ8àú â,
+3squid:S1700"Rename field "taskList"(ó¾Ø8ÛÉ²¾à,

@@ -14,10 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.Utils.Constants;
-import com.example.tapiwa.todoapp.Utils.FileHandler;
-import com.example.tapiwa.todoapp.Utils.InputRequests;
-import com.example.tapiwa.todoapp.home.MainActivity;
+import com.example.tapiwa.todoapp.utils.FileHandler;
+import com.example.tapiwa.todoapp.utils.InputRequests;
+import com.example.tapiwa.todoapp.navigation.NavigationController;
 import com.example.tapiwa.todoapp.personalProjects.personalprojectcontainer.PersonalProjectsContainerModel;
 import com.google.gson.Gson;
 
@@ -35,7 +34,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
     public static ImageView restingDude;
     public static TextView noGoalsText, date;
-    private static ArrayList<PersonalProjectTask> personalProjectTasksList;
+    private static ArrayList<PersonalProjectTask> tasksList;
     private static PersonalProjectAdapter adapter;
     private ListView tasksListV;
     private View personalProjectsPageView;
@@ -87,8 +86,8 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
         switch (item.getItemId()) {
             case R.id.rename_task:
-                MainActivity.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
-                MainActivity.getInputForFragment(MainActivity.visibleFragment);
+                NavigationController.inputRequest.setInputRequest(InputRequests.InputRequestType.RENAME_PROJECT);
+                NavigationController.getInputForFragment(NavigationController.visibleFragment, tasksList.get(clickedProject).getTask());
                 return true;
             case R.id.delete_task:
                 deleteTask(info.position);
@@ -104,7 +103,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     private void deleteTask(int pos) {
-        personalProjectTasksList.remove(pos);
+        tasksList.remove(pos);
         adapter.notifyDataSetChanged();
     }
 
@@ -117,19 +116,19 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         }
         personalProjectModel = personalProjectsContainerModel.getPersonalProject(projectKey);
         populateTasksList();
-        MainActivity.toolbar.setTitle(personalProjectModel.getProjectTitle());
+        NavigationController.toolbar.setTitle(personalProjectModel.getProjectTitle());
     }
 
     private void populateTasksList() {
         try {
-            if(personalProjectModel.getProjectTasks() != null && personalProjectModel != null) {
-                personalProjectTasksList = personalProjectModel.getProjectTasks();
+            if (personalProjectModel.getProjectTasks() != null && personalProjectModel != null) {
+                tasksList = personalProjectModel.getProjectTasks();
             } else {
-                personalProjectTasksList = new ArrayList<>();
+                tasksList = new ArrayList<>();
             }
             adapter = new PersonalProjectAdapter(getActivity().getApplicationContext(),
                     R.layout.item_goal_list,
-                    personalProjectTasksList);
+                    tasksList);
             tasksListV.setAdapter(adapter);
         } catch (NullPointerException e) {
             //no - op
@@ -137,7 +136,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     private void saveTasks() {
-        personalProjectModel.setProjectTasks(personalProjectTasksList);
+        personalProjectModel.setProjectTasks(tasksList);
         personalProjectModel.setPercentageCompleted();
         personalProjectsContainerModel.updateProject(personalProjectModel);
         String personalProjectsJson = convertPersonalProjectsContainerToJson();
@@ -154,15 +153,15 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         newTask.setTask(task);
         newTask.setDefaultCompletionStatus();
         newTask.setDateLastModified(Long.toString(System.currentTimeMillis()));
-        personalProjectTasksList.add(newTask);
+        tasksList.add(newTask);
         adapter.notifyDataSetChanged();
     }
 
     public static void renameTask(String newTitle) {
-        PersonalProjectTask task = personalProjectTasksList.get(clickedProject);
+        PersonalProjectTask task = tasksList.get(clickedProject);
         task.setTask(newTitle);
         task.setDateLastModified(Long.toString(System.currentTimeMillis()));
-        personalProjectTasksList.set(clickedProject, task);
+        tasksList.set(clickedProject, task);
         adapter.notifyDataSetChanged();
     }
 
@@ -171,7 +170,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         Bundle args = getArguments();
         PROJECT_KEY = args.getString("projectKey");
         fileHandler = new FileHandler(getActivity().getApplicationContext());
-        personalProjectTasksList = new ArrayList<>();
+        tasksList = new ArrayList<>();
     }
 
     private void initializeViews() {
@@ -189,11 +188,11 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
         tasksListV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PersonalProjectTask updatedTask = personalProjectTasksList.get(i);
+                PersonalProjectTask updatedTask = tasksList.get(i);
 
                 if (!updatedTask.getCompletionStatus().equals("completed")) {
                     updatedTask.setCompletionStatus("completed");
-                    personalProjectTasksList.set(i, updatedTask);
+                    tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
 
                     if (checkTasksCompletion()) {
@@ -204,7 +203,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
                 } else {
                     updatedTask.setCompletionStatus("uncompleted");
-                    personalProjectTasksList.set(i, updatedTask);
+                    tasksList.set(i, updatedTask);
                     adapter.notifyDataSetChanged();
                 }
                 calculatePercentage();
@@ -222,13 +221,13 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
 
     private void calculatePercentage() {
         percentageTxtV.setTextColor(Color.rgb(208, 35, 35));
-        if (personalProjectTasksList != null) {
-            if (personalProjectTasksList.size() == 0) {
+        if (tasksList != null) {
+            if (tasksList.size() == 0) {
                 percentageTxtV.setText(Integer.toString(0) + "%");
                 return;
             } else {
                 int completedTasks = countCompletedTasks();
-                double result = ((double) completedTasks / personalProjectTasksList.size()) * 100;
+                double result = ((double) completedTasks / tasksList.size()) * 100;
                 DecimalFormat numFormat = new DecimalFormat("#");
                 String newPercentage = numFormat.format(result) + "%";
                 percentageTxtV.setText(newPercentage);
@@ -239,7 +238,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     private boolean checkTasksCompletion() {
-        Iterator iter = personalProjectTasksList.iterator();
+        Iterator iter = tasksList.iterator();
         while (iter.hasNext()) {
             PersonalProjectTask task = (PersonalProjectTask) iter.next();
             if (task.getCompletionStatus().equals("uncompleted")) {
@@ -250,7 +249,7 @@ public class PersonalProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     private int countCompletedTasks() {
-        Iterator iter = personalProjectTasksList.iterator();
+        Iterator iter = tasksList.iterator();
         int i = 0;
 
         while (iter.hasNext()) {

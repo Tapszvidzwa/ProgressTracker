@@ -5,10 +5,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by tapiwa on 10/23/17.
- */
-
 public class CompletionBar {
 
     int total;

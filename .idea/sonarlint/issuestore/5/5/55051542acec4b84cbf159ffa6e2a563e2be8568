@@ -1,0 +1,14 @@
+
+vsquid:ModifiersOrderCheckv"EReorder the modifiers to comply with the Java Language Specification.(æŞ˜—ûÿÿÿÿ8¹Ó‰‡-
+Zsquid:S2696™"6Make the enclosing method "static" or remove this set.(°É´šúÿÿÿÿ8¹Ó‰‡-
+Tsquid:S26962"6Make the enclosing method "static" or remove this set.(ó¾Üø8¹Ó‰‡-
+Ysquid:S2696N"6Make the enclosing method "static" or remove this set.(ş§¿³úÿÿÿÿ8¹Ó‰‡-
+Zsquid:S2696š"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8¹Ó‰‡-
+qsquid:ModifiersOrderCheckm"EReorder the modifiers to comply with the Java Language Specification.(İ…’Ÿ8¹Ó‰‡-
+Usquid:S2696"6Make the enclosing method "static" or remove this set.(›¡¡Ÿ8¹Ó‰‡-
+Zsquid:S2696£"6Make the enclosing method "static" or remove this set.(ËÚËüÿÿÿÿ8¹Ó‰‡-
+Usquid:S2696"6Make the enclosing method "static" or remove this set.(’†Üë8¹Ó‰‡-
+osquid:S1192p"LDefine a constant instead of duplicating this literal "uncompleted" 3 times.(ŸèĞ¢úÿÿÿÿ8¹Ó‰‡-
+bsquid:S1155˜">Use isEmpty() to check whether the collection is empty or not.(‰Ø€¿ıÿÿÿÿ8¹Ó‰‡-
+Zsquid:S2696"6Make the enclosing method "static" or remove this set.(‰§‡Ïúÿÿÿÿ8¹Ó‰‡-
+Zsquid:S2696¡"6Make the enclosing method "static" or remove this set.(åÙ›øÿÿÿÿ8¹Ó‰‡-

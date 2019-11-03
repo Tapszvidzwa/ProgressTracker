@@ -1,6 +1,42 @@
 
-rsquid:UselessImportCheck"IRemove this unused import 'com.example.tapiwa.todoapp.home.MainActivity'.(äæ»Š8€ÁÙÙ,
-\squid:UselessImportCheck".Remove this unused import 'android.os.Bundle'.(°şÊóøÿÿÿÿ8€ÁÙÙ,
-gsquid:UselessImportCheck"9Remove this unused import 'com.example.tapiwa.todoapp.R'.(‡—·¢ÿÿÿÿÿ8€ÁÙÙ,
-{squid:UselessImportCheck"RRemove this unused import 'com.google.android.material.bottomappbar.BottomAppBar'.(®ä·‚8ô°ÚÙ,
-csquid:S2094"BRemove this empty class, write its code or make it an "interface".(åÄ¨ƒùÿÿÿÿ8ô°ÚÙ,
+Ysquid:S2696W"6Make the enclosing method "static" or remove this set.(´ã›¢ùÿÿÿÿ8Ù´‡‡-
+Ssquid:S1444J"5Make this "public static NAVIGATION_ROOT" field final(ùìŠ8Ù´‡‡-
+’"squid:ClassVariableVisibilityCheckH"XMake inputRequest a static final constant or non-public and provide accessors if needed.(îÓ³€ûÿÿÿÿ8Ù´‡‡-
+Ksquid:S1444?"-Make this "public static toolbar" field final(Íç¶Å8Ù´‡‡-
+Ysquid:S2696U"6Make the enclosing method "static" or remove this set.(ì¹¤ÿÿÿÿÿ8Ù´‡‡-
+"squid:ClassVariableVisibilityCheck@"UMake actionBar a static final constant or non-public and provide accessors if needed.(Îúïõüÿÿÿÿ8Ù´‡‡-
+xsquid:S3008J"ZRename this field "NAVIGATION_ROOT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùìŠ8Ù´‡‡-
+\"squid:SwitchLastCaseIsDefaultCheckr""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8Ù´‡‡-
+msquid:HiddenFieldCheckä"CRename "fragmentManager" which hides the field declared at line 65.(âÏ²¹8Ù´‡‡-
+•"squid:ClassVariableVisibilityCheck="[Make visibleFragment a static final constant or non-public and provide accessors if needed.( ¯Ûúÿÿÿÿ8Ù´‡‡-
+Usquid:S1444H"2Make this "public static inputRequest" field final(îÓ³€ûÿÿÿÿ8Ù´‡‡-
+Hsquid:S1444E"*Make this "public static auth" field final(ĞœÃĞ8Ù´‡‡-
+Tsquid:S2696S"6Make the enclosing method "static" or remove this set.(ôÓê•8Ù´‡‡-
+Ysquid:S2696X"6Make the enclosing method "static" or remove this set.(·Ë‚İüÿÿÿÿ8Ù´‡‡-
+]squid:S1444F"?Make this "public static bottomSheetDialogFragment" field final(ÅÆâ“8Ù´‡‡-
+Tsquid:S2696Z"6Make the enclosing method "static" or remove this set.(³É´ù8Ù´‡‡-
+nsquid:S1301r"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8Ù´‡‡-
+‘"squid:ClassVariableVisibilityCheckB"WMake fileHandler a static final constant or non-public and provide accessors if needed.(™æ×Üùÿÿÿÿ8Ù´‡‡-
+vsquid:S3776û"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(õş«öüÿÿÿÿ8Ù´‡‡-
+š"squid:ClassVariableVisibilityCheckF"eMake bottomSheetDialogFragment a static final constant or non-public and provide accessors if needed.(ÅÆâ“8Ù´‡‡-
+]"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8Ù´‡‡-
+Psquid:S1444C"2Make this "public static bottomAppBar" field final( ò˜ã8Ù´‡‡-
+‰"squid:ClassVariableVisibilityCheck>"TMake activity a static final constant or non-public and provide accessors if needed.(æÄı8Ù´‡‡-
+asquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8Øñ™İ-
+…"squid:ClassVariableVisibilityCheckE"PMake auth a static final constant or non-public and provide accessors if needed.(ĞœÃĞ8Ù´‡‡-
+Tsquid:S1444B"1Make this "public static fileHandler" field final(™æ×Üùÿÿÿÿ8Ù´‡‡-
+Xsquid:S1444="5Make this "public static visibleFragment" field final( ¯Ûúÿÿÿÿ8Ù´‡‡-
+Ysquid:S2696R"6Make the enclosing method "static" or remove this set.(–¯Óèûÿÿÿÿ8Ù´‡‡-
+ˆ"squid:ClassVariableVisibilityCheck?"SMake toolbar a static final constant or non-public and provide accessors if needed.(Íç¶Å8Ù´‡‡-
+Lsquid:S1444>".Make this "public static activity" field final(æÄı8Ù´‡‡-
+Tsquid:S2696["6Make the enclosing method "static" or remove this set.(¹€èø8Ù´‡‡-
+Tsquid:S2696_"6Make the enclosing method "static" or remove this set.(±ôÀ°8Ù´‡‡-
+osquid:S1301Š"KReplace this "switch" statement by "if" statements to increase readability.(ÕíÇ™ıÿÿÿÿ8Ù´‡‡-
+Tsquid:S2696Y"6Make the enclosing method "static" or remove this set.(ã—¼¬8Ù´‡‡-
+Ssquid:S1444A"5Make this "public static fragmentManager" field final(§˜¤™8Ù´‡‡-
+"squid:ClassVariableVisibilityCheckA"[Make fragmentManager a static final constant or non-public and provide accessors if needed.(§˜¤™8Ù´‡‡-
+"squid:ClassVariableVisibilityCheckC"XMake bottomAppBar a static final constant or non-public and provide accessors if needed.( ò˜ã8Ù´‡‡-
+Rsquid:S1444@"/Make this "public static actionBar" field final(Îúïõüÿÿÿÿ8Ù´‡‡-
+tsquid:S00116G"PRename this field "Utils" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ˆß›ûÿÿÿÿ8Ù´‡‡-
+"squid:ClassVariableVisibilityCheckJ"[Make NAVIGATION_ROOT a static final constant or non-public and provide accessors if needed.(ùìŠ8Ù´‡‡-
+Qsquid:S1135İ"2Complete the task associated to this TODO comment.(÷ñ´«8¹ëò™İ-

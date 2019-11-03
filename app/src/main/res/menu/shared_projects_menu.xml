@@ -3,7 +3,7 @@
     <group android:menuCategory="container">
         <item
             android:id="@+id/rename_project"
-            android:title="Rename Project" />
+            android:title="Edit Project" />
         <item
             android:id="@+id/exit_project"
             android:title="Exit Project" />

@@ -1,0 +1,9 @@
+
+Ksquid:S1068"/Remove this unused "fileHandler" private field.(Õë¤µ8¯›¢¢ƒ-
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ï‰ˆ¬8¯›¢¢ƒ-
+wsquid:S1450"[Remove the "emailAddress" field and declare it as a local variable in the relevant methods.(³ù—¹8¯›¢¢ƒ-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(¦ôâùÿÿÿÿ8¯›¢¢ƒ-
+vsquid:S1450"URemove the "header" field and declare it as a local variable in the relevant methods.(ò» šüÿÿÿÿ8¯›¢¢ƒ-
+…squid:S1450"dRemove the "bottomNavigationSheet" field and declare it as a local variable in the relevant methods.(Æ±†÷úÿÿÿÿ8¯›¢¢ƒ-
+vsquid:S1450"ZRemove the "fileHandler" field and declare it as a local variable in the relevant methods.(Õë¤µ8¯›¢¢ƒ-
+Wsquid:S2696"6Make the enclosing method "static" or remove this set.(Øî›×üÿÿÿÿ8¯›¢¢ƒ-

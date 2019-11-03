@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/daily_tasks"
@@ -34,13 +35,14 @@
             app:actionLayout="@layout/counter"
             android:icon="@drawable/ic_single_person"
             app:showAsAction="always"
-            android:title="Personal Projects" />
+            android:title="Custom Projects" />
 
         <item
             android:id="@+id/shared_projects"
             app:actionLayout="@layout/counter"
             android:icon="@drawable/ic_network"
             app:showAsAction="always"
-            android:title="Shared Projects" />
+            android:title="Group Projects" />
     </group>
+
 </menu>

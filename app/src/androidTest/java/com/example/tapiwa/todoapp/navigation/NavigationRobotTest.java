@@ -1,8 +1,6 @@
 package com.example.tapiwa.todoapp.navigation;
 
 
-import com.example.tapiwa.todoapp.home.MainActivity;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +14,7 @@ import androidx.test.runner.AndroidJUnit4;
 public class NavigationRobotTest {
 
     @Rule
-    public final ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
+    public final ActivityTestRule<NavigationController> mActivityRule = new ActivityTestRule<>(NavigationController.class);
 
     @Test
     public void openBottomFragment() {

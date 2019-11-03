@@ -1,11 +1,3 @@
 
-Ksquid:S2447O"-Null is returned but a "Boolean" is expected.(¥¹ï8·øŒ‹Ø,
-Wsquid:S3400E"9Remove this method and declare a constant for this value.(”·³›8·øŒ‹Ø,
-lsquid:UnusedPrivateMethodH";Remove this unused private "getSharedProjectsCount" method.(½”ùÌøÿÿÿÿ8·øŒ‹Ø,
-squid:UselessImportCheck"nRemove this unused import 'com.example.tapiwa.todoapp.sharedProjects.SingleProjectFragment.SharedProjectTask'.(ˆ—£Æÿÿÿÿÿ8·øŒ‹Ø,
-msquid:UselessImportCheck"BRemove this unused import 'com.example.tapiwa.todoapp.Utils.Util'.(¹‰¨Ö8·øŒ‹Ø,
-Wsquid:S3400I"9Remove this method and declare a constant for this value.(”·³›8·øŒ‹Ø,
-hsquid:UselessImportCheck">Remove this unused import 'android.content.SharedPreferences'.(íÎÉr8ş“ÿÀÙ,
+Ksquid:S2447"-Null is returned but a "Boolean" is expected.(¥¹ï8·øŒ‹Ø,
 ~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.( ‰ª†ÿÿÿÿÿ8·øŒ‹Ø,
-nsquid:UnusedPrivateMethodD"=Remove this unused private "getPersonalProjectsCount" method.(˜‡Ôíÿÿÿÿÿ8·øŒ‹Ø,
-lsquid:UselessImportCheck"ARemove this unused import 'android.preference.PreferenceManager'.(ìùÖõ8ş“ÿÀÙ,

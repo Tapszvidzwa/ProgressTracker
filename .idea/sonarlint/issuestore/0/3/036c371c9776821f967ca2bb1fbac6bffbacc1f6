@@ -1,13 +1,13 @@
 
-ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(Ϋθ®ώÿÿÿÿ8Τος,
-Esquid:S1444")Make this "public static TAG" field final(τφ†Ώ8µησ©Ξ,
-_squid:S1155">Use isEmpty() to check whether the collection is empty or not.(Όÿ°£ύÿÿÿÿ8Τος,
-Ssquid:S1135"2Complete the task associated to this TODO comment.(‰ΣΝϋÿÿÿÿ8«‡ªΞ,
-Ksquid:S1066"/Merge this if statement with the enclosing one.(·¤όι8µησ©Ξ,
-‚"squid:ClassVariableVisibilityCheck"OMake TAG a static final constant or non-public and provide accessors if needed.(τφ†Ώ8µησ©Ξ,
-7squid:S3626"Remove this redundant jump.(ϋΑέ…8µησ©Ξ,
-Jsquid:S1172".Remove this unused method parameter "context".(ρ½°τ8ΑϊΥ Ω,
-jsquid:S3008"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(τφ†Ώ8µησ©Ξ,
-Xsquid:S2589"7Remove this expression which always evaluates to "true"(Όÿ°£ύÿÿÿÿ8Τος,
-Qsquid:S1068"6Remove this unused "sharedProjectsList" private field.(υϋΚ\8µησ©Ξ,
-|squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(— «Δύÿÿÿÿ8µησ©Ξ,
+Ssquid:S1068 "6Remove this unused "sharedProjectsList" private field.(υϋΚ\8µησ©Ξ,
+:squid:S3626"Remove this redundant jump.(ϋΑέ…8µησ©Ξ,
+[squid:S2589ο"7Remove this expression which always evaluates to "true"(Όÿ°£ύÿÿÿÿ8Τος,
+~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(— «Δύÿÿÿÿ8µησ©Ξ,
+Usquid:S1135"2Complete the task associated to this TODO comment.(‰ΣΝϋÿÿÿÿ8«‡ªΞ,
+lsquid:S3008!"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(τφ†Ώ8µησ©Ξ,
+vsquid:S3776Κ"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(Ϋθ®ώÿÿÿÿ8Τος,
+Msquid:S1172…".Remove this unused method parameter "context".(ρ½°τ8ΑϊΥ Ω,
+Nsquid:S1066Τ"/Merge this if statement with the enclosing one.(·¤όι8µησ©Ξ,
+bsquid:S1155ο">Use isEmpty() to check whether the collection is empty or not.(Όÿ°£ύÿÿÿÿ8Τος,
+Gsquid:S1444!")Make this "public static TAG" field final(τφ†Ώ8µησ©Ξ,
+„"squid:ClassVariableVisibilityCheck!"OMake TAG a static final constant or non-public and provide accessors if needed.(τφ†Ώ8µησ©Ξ,

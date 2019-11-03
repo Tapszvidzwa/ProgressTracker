@@ -1,0 +1,13 @@
+
+lsquid:S3008 "NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôö†¿8µçó©Î,
+Usquid:S1135"2Complete the task associated to this TODO comment.(‰šÓÍûÿÿÿÿ8Œ«‡ªÎ,
+Msquid:S1172„".Remove this unused method parameter "context".(ñ½°ô8ÁúÕ Ù,
+vsquid:S3776È"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(Ûè®Œşÿÿÿÿ8ÔŸïò,
+Gsquid:S1444 ")Make this "public static TAG" field final(ôö†¿8µçó©Î,
+Nsquid:S1066Ò"/Merge this if statement with the enclosing one.(·¤üé8µçó©Î,
+:squid:S3626—"Remove this redundant jump.(ûÁİ…8µçó©Î,
+[squid:S2589í"7Remove this expression which always evaluates to "true"(¼ÿ°£ıÿÿÿÿ8ÔŸïò,
+„"squid:ClassVariableVisibilityCheck "OMake TAG a static final constant or non-public and provide accessors if needed.(ôö†¿8µçó©Î,
+bsquid:S1155í">Use isEmpty() to check whether the collection is empty or not.(¼ÿ°£ıÿÿÿÿ8ÔŸïò,
+Ssquid:S1068"6Remove this unused "sharedProjectsList" private field.(õûÊ\8µçó©Î,
+¥squid:S1186œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÁÂÛıÿÿÿÿ8ØÊî™İ-

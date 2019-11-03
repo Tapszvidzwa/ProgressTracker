@@ -1,0 +1,13 @@
+
+Msquid:S2093:"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8ØÅ Î,
+Zsquid:S2589?"7Remove this expression which always evaluates to "true"(¦†âÿøÿÿÿÿ8ØÅ Î,
+Fsquid:S1148I"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ô©ººô,
+Fsquid:S11483"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ØÅ Î,
+d
+squid:S899&"BDo something with the "boolean" value returned by "createNewFile".(Ğ’Íùÿÿÿÿ8ØÅ Î,
+9squid:S3626,"Remove this redundant jump.(ûÁİ…8ØÅ Î,
+€squid:S1488B"bImmediately return this expression instead of assigning it to the temporary variable "jsonObject".(Á’±¹8ØÅ Î,
+Msquid:S2093$"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8ØÅ Î,
+^
+squid:S899<"BDo something with the "boolean" value returned by "createNewFile".(‹ÔÃ^8ØÅ Î,
+Fsquid:S1148P"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ØÅ Î,
