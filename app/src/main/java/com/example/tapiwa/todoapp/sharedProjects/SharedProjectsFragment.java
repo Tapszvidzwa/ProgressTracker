@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_GROUP_PROJECT;
 import static com.example.tapiwa.todoapp.utils.Constants.USERS_DB_PATH;
 
 
@@ -109,7 +109,7 @@ public class SharedProjectsFragment extends androidx.fragment.app.Fragment {
                 SharedProjectReference projectReference = sharedProjectsList.get(i);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("projectReference", projectReference);
-                NavigationController.switchToFragment(SINGLE_SHARED_PROJECT, bundle);
+                NavigationController.switchToFragment(SINGLE_GROUP_PROJECT, bundle);
             }
         });
     }

@@ -31,8 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SHARED_PROJECTS;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.GROUP_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_GROUP_PROJECT;
 import static com.example.tapiwa.todoapp.utils.Constants.SHARED_PROJECTS_DB_PATH;
 
 public class SingleProjectFragment extends androidx.fragment.app.Fragment {
@@ -144,7 +144,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
     }
 
     private void initializeVariables() {
-        NavigationController.visibleFragment = SINGLE_SHARED_PROJECT;
+        NavigationController.visibleFragment = SINGLE_GROUP_PROJECT;
         Bundle args = getArguments();
         projectReference = (SharedProjectReference) args.getSerializable("projectReference");
         db = FirebaseFirestore.getInstance();
@@ -232,7 +232,7 @@ public class SingleProjectFragment extends androidx.fragment.app.Fragment {
 
     private void exitProject() {
         remoteDb.exitFromSharedProject(getContext(), projectReference);
-        NavigationController.switchToFragment(SHARED_PROJECTS, null);
+        NavigationController.switchToFragment(GROUP_PROJECTS, null);
     }
 
     private void deleteTask(int pos) {

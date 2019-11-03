@@ -1,7 +1,6 @@
 package com.example.tapiwa.todoapp.utils;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.R;
 import com.example.tapiwa.todoapp.Task;
@@ -20,8 +19,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import es.dmoral.toasty.Toasty;
 
 public class FileHandler {
 
@@ -44,7 +41,6 @@ public class FileHandler {
             fos.write(personalProjectsFileBytes);
             fos.flush();
         } catch (IOException e) {
-            Toasty.error(context, context.getString(R.string.failed_file_creation), Toast.LENGTH_SHORT).show();
             return;
         } finally {
             try {
@@ -74,7 +70,6 @@ public class FileHandler {
                 }
             }
         } catch (Exception e) {
-            Toasty.error(context, context.getString(R.string.failed_file_loading), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
             try {

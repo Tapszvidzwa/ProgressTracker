@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.LinkedList;
 
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.PERSONAL_PROJECT;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.CUSTOM_PROJECT;
 
 public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fragment {
 
@@ -167,6 +167,6 @@ public class PersonalProjectsContainerFragment extends androidx.fragment.app.Fra
     private void openProject(PersonalProjectModel chosenProject) {
         Bundle bundle = new Bundle();
         bundle.putString("projectKey", chosenProject.getProjectKey());
-        NavigationController.switchToFragment(PERSONAL_PROJECT, bundle);
+        NavigationController.switchToFragment(CUSTOM_PROJECT, bundle);
     }
 }

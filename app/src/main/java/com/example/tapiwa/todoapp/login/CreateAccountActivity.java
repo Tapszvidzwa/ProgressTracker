@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.example.tapiwa.todoapp.initializeApp.InitializeApp;
 import com.example.tapiwa.todoapp.R;
-import com.example.tapiwa.todoapp.utils.Util;
-import com.example.tapiwa.todoapp.navigation.NavigationController;
+import com.example.tapiwa.todoapp.initializeApp.InitializeApp;
 import com.example.tapiwa.todoapp.login.signIn.SignInActivity;
+import com.example.tapiwa.todoapp.navigation.NavigationController;
 import com.example.tapiwa.todoapp.sharedProjects.SharedProjectReference;
+import com.example.tapiwa.todoapp.utils.Util;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import es.dmoral.toasty.Toasty;
 
 import static com.example.tapiwa.todoapp.utils.Constants.USERS_DB_PATH;
 
@@ -217,7 +216,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 mProgressBar.setVisibility(View.INVISIBLE);
                 mBackground.getBackground().setAlpha(0);
-                Toasty.error(getApplicationContext(), "An error occured in signing up, try again");
             }
         });
     }

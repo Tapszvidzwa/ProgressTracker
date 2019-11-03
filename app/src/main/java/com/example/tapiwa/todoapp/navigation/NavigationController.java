@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tapiwa.todoapp.fragmentFactory.FragmentName;
-import com.example.tapiwa.todoapp.fragmentFactory.TasksFragmentFactory;
 import com.example.tapiwa.todoapp.R;
+import com.example.tapiwa.todoapp.fragmentFactory.TasksFragmentFactory;
 import com.example.tapiwa.todoapp.utils.BackUp;
 import com.example.tapiwa.todoapp.utils.FileHandler;
 import com.example.tapiwa.todoapp.utils.InputRequests;
@@ -40,14 +40,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import es.dmoral.toasty.Toasty;
 
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.DAILY_TASKS;
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.LONG_TERM_TASKS;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.PERSONAL_PROJECT;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.PERSONAL_PROJECTS;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SHARED_PROJECTS;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_SHARED_PROJECT;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.CUSTOM_PROJECT;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.CUSTOM_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.GROUP_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SINGLE_GROUP_PROJECT;
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.WEEKLY_TASKS;
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.YEARLY_TASKS;
 import static com.example.tapiwa.todoapp.utils.InputRequests.InputRequestType.ADD_GROUP_MEMBER;
@@ -72,6 +71,7 @@ public class NavigationController extends AppCompatActivity {
     private Util Utils;
     public static InputRequests inputRequest = new InputRequests();
     private BackUp backUp;
+    public static String NAVIGATION_ROOT = "group_projects_root";
 
 
     @Override
@@ -91,7 +91,6 @@ public class NavigationController extends AppCompatActivity {
         bottomSheetDialogFragment = new BottomNavigationDrawerFragment();
         Utils = new Util(this);
         backUp = new BackUp(getApplicationContext(), auth.getUid());
-        setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
         setupBottomAppBar();
@@ -127,16 +126,16 @@ public class NavigationController extends AppCompatActivity {
     }
 
     public void openAppropriateFragment() {
-        if (visibleFragment == SINGLE_SHARED_PROJECT) {
-            switchToFragment(SHARED_PROJECTS, new Bundle());
-        } else if (visibleFragment == PERSONAL_PROJECT) {
-            switchToFragment(PERSONAL_PROJECTS, new Bundle());
+        if (visibleFragment == SINGLE_GROUP_PROJECT) {
+            switchToFragment(GROUP_PROJECTS, new Bundle());
+        } else if (visibleFragment == CUSTOM_PROJECT) {
+            switchToFragment(CUSTOM_PROJECTS, new Bundle());
         }
     }
 
     public static void updateBottomBarMenu() {
         switch (visibleFragment) {
-            case SINGLE_SHARED_PROJECT:
+            case SINGLE_GROUP_PROJECT:
                 bottomAppBar.replaceMenu(R.menu.single_shared_project_toolbar_menu);
                 break;
             default:
@@ -183,11 +182,11 @@ public class NavigationController extends AppCompatActivity {
     public static void updateUpNavigationIcon() {
 
         switch (visibleFragment) {
-            case SINGLE_SHARED_PROJECT:
+            case SINGLE_GROUP_PROJECT:
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 actionBar.setDisplayShowHomeEnabled(true);
                 break;
-            case PERSONAL_PROJECT:
+            case CUSTOM_PROJECT:
                 actionBar.setDisplayShowHomeEnabled(true);
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 break;
@@ -218,9 +217,7 @@ public class NavigationController extends AppCompatActivity {
                 if (newTaskContent.getText().toString().length() > 0) {
                     sendInputToVisibleFragment(requestingFragment, newTaskContent.getText().toString());
                 } else {
-                    Toasty.info(activity.getApplicationContext(),
-                            "Please provide a task description",
-                            Toast.LENGTH_SHORT).show();
+                    //TODO, find a replacement for this toast description
                 }
                 dialog.dismiss();
             }
@@ -282,14 +279,14 @@ public class NavigationController extends AppCompatActivity {
                     DailyTasksFragment.addTask(input);
                 }
                 break;
-            case SHARED_PROJECTS:
+            case GROUP_PROJECTS:
                 if (request == RENAME_PROJECT) {
                     SharedProjectsFragment.renameProject(input);
                 } else {
                     SharedProjectsFragment.addProject(input);
                 }
                 break;
-            case PERSONAL_PROJECTS:
+            case CUSTOM_PROJECTS:
                 if (request == CREATE_NEW_PROJECT) {
                     PersonalProjectsContainerFragment.addProject(input);
                 }
@@ -297,7 +294,7 @@ public class NavigationController extends AppCompatActivity {
                     PersonalProjectsContainerFragment.renameProject(input);
                 }
                 break;
-            case SINGLE_SHARED_PROJECT:
+            case SINGLE_GROUP_PROJECT:
                 if (request == ADD_GROUP_MEMBER) {
                     SingleProjectFragment.addMember(input);
                 } else if (request == RENAME_TASK) {
@@ -306,7 +303,7 @@ public class NavigationController extends AppCompatActivity {
                     SingleProjectFragment.addTask(input);
                 }
                 break;
-            case PERSONAL_PROJECT:
+            case CUSTOM_PROJECT:
                 if (request == RENAME_TASK) {
                     PersonalProjectFragment.renameTask(input);
                 } else {
@@ -326,15 +323,39 @@ public class NavigationController extends AppCompatActivity {
         TasksFragmentFactory fragmentsFactory = new TasksFragmentFactory();
         androidx.fragment.app.Fragment fragment = fragmentsFactory.getFragment(fragmentName);
         mergeFragmentBundles(fragment, bundle);
-
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container_holder, fragment)
-                .commit();
-
+        changeFragment(fragmentName, fragment);
         updateToolBarName();
         updateUpNavigationIcon();
         updateBottomBarMenu();
+    }
+
+
+
+    public static void changeFragment(FragmentName fragmentName, Fragment fragment) {
+
+        if(fragmentName.equals(GROUP_PROJECTS)) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_holder, fragment)
+                    .addToBackStack(NAVIGATION_ROOT)
+                    .commit();
+        } else if(fragmentName.equals(CUSTOM_PROJECTS)) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_holder, fragment)
+                    .addToBackStack(NAVIGATION_ROOT)
+                    .commit();
+        } else {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container_holder, fragment)
+                    .commit();
+        }
+    }
+
+    public  void navigateUp() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(NAVIGATION_ROOT, 0);
     }
 
     public static void mergeFragmentBundles(Fragment fragment, Bundle bundle) {
@@ -349,10 +370,10 @@ public class NavigationController extends AppCompatActivity {
     public static void updateToolBarName() {
 
         switch (visibleFragment) {
-            case PERSONAL_PROJECTS:
+            case CUSTOM_PROJECTS:
                 toolbar.setTitle(activity.getString(R.string.personal_projects_fragment_title));
                 break;
-            case SHARED_PROJECTS:
+            case GROUP_PROJECTS:
                 toolbar.setTitle(activity.getString(R.string.shared_projects_fragment_title));
                 break;
             case LONG_TERM_TASKS:
@@ -394,21 +415,21 @@ public class NavigationController extends AppCompatActivity {
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
                         getInputForFragment(LONG_TERM_TASKS, "");
                         break;
-                    case SHARED_PROJECTS:
+                    case GROUP_PROJECTS:
                         inputRequest.setInputRequest(CREATE_NEW_PROJECT);
-                        getInputForFragment(SHARED_PROJECTS, "");
+                        getInputForFragment(GROUP_PROJECTS, "");
                         break;
-                    case SINGLE_SHARED_PROJECT:
+                    case SINGLE_GROUP_PROJECT:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(SINGLE_SHARED_PROJECT, "");
+                        getInputForFragment(SINGLE_GROUP_PROJECT, "");
                         break;
-                    case PERSONAL_PROJECT:
+                    case CUSTOM_PROJECT:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
-                        getInputForFragment(PERSONAL_PROJECT, "");
+                        getInputForFragment(CUSTOM_PROJECT, "");
                         break;
-                    case PERSONAL_PROJECTS:
+                    case CUSTOM_PROJECTS:
                         inputRequest.setInputRequest(CREATE_NEW_PROJECT);
-                        getInputForFragment(PERSONAL_PROJECTS, "");
+                        getInputForFragment(CUSTOM_PROJECTS, "");
                         break;
                     default:
                         inputRequest.setInputRequest(CREATE_NEW_TASK);
@@ -427,4 +448,9 @@ public class NavigationController extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        navigateUp();
+        super.onBackPressed();
+    }
 }

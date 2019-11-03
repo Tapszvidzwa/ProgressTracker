@@ -18,7 +18,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
 
 import static com.example.tapiwa.todoapp.utils.Constants.SHARED_PROJECTS_DB_PATH;
 import static com.example.tapiwa.todoapp.utils.Constants.USERS_DB_PATH;
@@ -155,7 +154,6 @@ public class DatabaseHandler {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(Exception e) {
-                Toasty.error(context, "Oops! something went wrong, please try again").show();
             }
         });
     }

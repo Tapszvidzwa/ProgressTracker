@@ -15,8 +15,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.DAILY_TASKS;
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.LONG_TERM_TASKS;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.PERSONAL_PROJECTS;
-import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.SHARED_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.CUSTOM_PROJECTS;
+import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.GROUP_PROJECTS;
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.WEEKLY_TASKS;
 import static com.example.tapiwa.todoapp.fragmentFactory.FragmentName.YEARLY_TASKS;
 import static com.example.tapiwa.todoapp.navigation.NavigationController.switchToFragment;
@@ -104,10 +104,10 @@ public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
                         switchToFragment(LONG_TERM_TASKS, new Bundle());
                         break;
                     case R.id.personal_projects:
-                        switchToFragment(PERSONAL_PROJECTS, new Bundle());
+                        switchToFragment(CUSTOM_PROJECTS, new Bundle());
                         break;
                     case R.id.shared_projects:
-                        switchToFragment(SHARED_PROJECTS, new Bundle());
+                        switchToFragment(GROUP_PROJECTS, new Bundle());
                         break;
                     default:
                         switchToFragment(DAILY_TASKS, new Bundle());
